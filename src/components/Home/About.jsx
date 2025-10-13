@@ -62,7 +62,7 @@ export default function About() {
           <div className="col-lg-6">
             <div className="heading-wrapper with-separator">
               <h2 className="h1">
-                Build your <span>SaaS landing page</span> using the DCode
+                Build your <span>SaaS landing page</span> using the Crm
               </h2>
             </div>
 
