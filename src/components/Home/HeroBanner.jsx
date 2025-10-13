@@ -20,7 +20,7 @@ export default function HeroBanner() {
               </div>
               <div className="col-lg-6">
                   <div className="image-wrapper full-width-img">
-                      <Image src="/images/dashboard-img-1.png" alt="" width={600} height={600} />
+                      <Image src="/images/dashboard-img-1.png" alt="" width={800} height={700} />
                   </div>
               </div>
           </div>

@@ -7,7 +7,7 @@ export default function Footer() {
                 <div className="container">
                     <div className="footer-logo">
                         {/* <Image src="/images/d-code-logo-light.svg" alt="crm logo" width={150} height={50}/> */}
-                        <Image src="/images/logo-w.png" alt="crm logo" width={150} height={50} />
+                        <Image src="/images/logo-w.png" alt="crm logo" width={150} height={80} style={{height:'auto'}} />
                     </div>
                     <div className="main-footer style-dark">
                         <div className="row">
@@ -44,7 +44,7 @@ export default function Footer() {
                                             <ul>
                                                 <li><a href="#">Trust & Safety</a></li>
                                                 <li><a href="#">Cookie Policy</a></li>
-                                                {/* <li><a href="#">Contact Us</a></li> */}
+                                                <li><a href="#">Book a Demo</a></li>
                                                 <li><a href="#">Privacy Policy</a></li>
                                                 <li><a href="#">Terms of Service</a></li>
                                             </ul>
@@ -62,7 +62,7 @@ export default function Footer() {
                                             <ul>
                                                 <li><a href="/">Home</a></li>
                                                 <li><a href="/about">About</a></li>
-                                                <li><a href="#1">Book a Demo</a></li>
+                                                <li><a href="/blogs">Blogs</a></li>
                                                 <li><a href="/contact">Contact Us</a></li>
                                                 <li><a href="/support">Support</a></li>
                                             </ul>

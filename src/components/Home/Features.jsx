@@ -77,7 +77,7 @@ export default function Features() {
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales dictum viverra. Nam gravida dignissim eros. Vivamus congue erat ante, volutpat dictum neque dignissim eget.</p>
                                 </div>
                                 <div className="btn-wrapper">
-                                    <a href="#" className="btn btn-primary">Discover More</a>
+                                    <a href="/about" className="btn btn-primary">Discover More</a>
                                 </div>
                             </div>
                         </div>

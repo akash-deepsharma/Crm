@@ -1,23 +1,44 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function About() {
-  // Counter target values
   const counters = [
     { title: "Total Downloads", target: 80 },
     { title: "Happy Users", target: 76 },
     { title: "Good Reviews", target: 37 },
   ];
 
-  // State to store live counter values
   const [counts, setCounts] = useState(counters.map(() => 0));
+  const [hasStarted, setHasStarted] = useState(false);
+  const counterRef = useRef(null);
 
+  // Start counter animation when visible
   useEffect(() => {
-    const duration = 2000;
-    const steps = 60; 
-    const interval = duration / steps;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !hasStarted) {
+          setHasStarted(true);
+        }
+      },
+      { threshold: 0.3 } // trigger when 30% of section is visible
+    );
 
+    if (counterRef.current) observer.observe(counterRef.current);
+
+    return () => {
+      if (counterRef.current) observer.unobserve(counterRef.current);
+    };
+  }, [hasStarted]);
+
+  // Run the counter animation when visible
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    const duration = 2000; // total animation time (2 sec)
+    const steps = 60;
+    const interval = duration / steps;
     const increments = counters.map((counter) => counter.target / steps);
 
     const counterInterval = setInterval(() => {
@@ -29,11 +50,13 @@ export default function About() {
       );
     }, interval);
 
+    setTimeout(() => clearInterval(counterInterval), duration + 100);
+
     return () => clearInterval(counterInterval);
-  }, []);
+  }, [hasStarted]);
 
   return (
-    <div className="about-section section-padding light-gradient-bg right-col-full">
+    <div className="about-section section-padding light-gradient-bg right-col-full"  ref={counterRef}>
       <div className="container">
         <div className="row clearfix">
           <div className="col-lg-6">

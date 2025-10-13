@@ -52,7 +52,7 @@ export default function Screenshot() {
                       src="/images/ss-1.jpg"
                       alt="Screenshot 1"
                       width={800}
-                      height={500}
+                      height={700}
                     />
                   </div>
                   <div className="item">
@@ -60,7 +60,7 @@ export default function Screenshot() {
                       src="/images/ss-2.jpg"
                       alt="Screenshot 2"
                       width={800}
-                      height={500}
+                      height={700}
                     />
                   </div>
                   <div className="item">
@@ -68,7 +68,7 @@ export default function Screenshot() {
                       src="/images/ss-3.jpg"
                       alt="Screenshot 3"
                       width={800}
-                      height={500}
+                      height={700}
                     />
                   </div>
                 </Slider>
