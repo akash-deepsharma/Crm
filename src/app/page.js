@@ -13,26 +13,16 @@ import { useEffect, useState } from "react";
 export default function Home() {
 
 
-    const [showHero, setShowHero] = useState(false);
-
-        useEffect(() => {
-          const timer = setTimeout(() => {
-            setShowHero(true);
-          }, 20000);
-
-          return () => clearTimeout(timer);
-        }, []);
-
 
   return (
     <> 
-               {showHero && <HeroBanner/>}
-                <Features/>
-                <About/>
-                <Screenshot/>
-                <Pricing/>
-                <Testimonials/>
-                <BlogHome/>
+      <HeroBanner/>
+      <Features/>
+      <About/>
+      <Screenshot/>
+      <Pricing/>
+      <Testimonials/>
+      <BlogHome/>
     </>
   );
 }
