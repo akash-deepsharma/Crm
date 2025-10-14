@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function Pricing() {
@@ -14,7 +15,7 @@ export default function Pricing() {
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis finibus mi id elit gravida, quis tincidunt purus fringilla. Aenean convallis a neque non pellentesque.</p>
                         </div>
                         <div className="btn-wrapper">
-                            <a href="/pricing" className="btn link-btn">Compare all features.</a>
+                            <Link href="/pricing" className="btn link-btn">Compare all features.</Link>
                         </div>
                     </div>
                     <div className="col-lg-8">
@@ -41,7 +42,7 @@ export default function Pricing() {
                                             <li className="disabled">Reports & Billing</li>
                                             <li>500Mb Storage</li>
                                         </ul>
-                                        <a href="#" className="btn btn-secondary">Purchase Now</a>
+                                        <Link href="#" className="btn btn-secondary">Purchase Now</Link>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +68,7 @@ export default function Pricing() {
                                             <li>Reports & Billing</li>
                                             <li>2Gb Storage per user</li>
                                         </ul>
-                                        <a href="#" className="btn btn-primary">Purchase Now</a>
+                                        <Link href="#" className="btn btn-primary">Purchase Now</Link>
                                     </div>
                                 </div>
                             </div>

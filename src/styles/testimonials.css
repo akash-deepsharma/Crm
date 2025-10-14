@@ -1,0 +1,15 @@
+.testimonial_sec .slick-slide>div {
+    padding: 2px;
+    margin:  0 8px 0 0; 
+}
+.testimonial_sec .slick-slide .card-carousel .card-body {
+   padding: 8px; 
+   /* height: 400px; */
+}
+.testimonial_sec .slick-slide .card-carousel .card-body .card-text {
+   display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  height: 110px;
+} 

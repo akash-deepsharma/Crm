@@ -112,98 +112,98 @@ export default function Header() {
                 <div className="container-fluid">
                     <div id="main-logo" className="logo-container">
                         <Link className="logo" href="/">
-                            {/* <Image src="images/d-code-logo-dark.svg" className="logo-dark" width={200} height={200}  alt="DCode"/>
-                            <Image src="images/d-code-logo-light.svg" className="logo-light" alt="DCode" width={200} height={200}/> */}
+                            {/* <Image src="images/d-code-logo-dark.svg" className="logo-dark" width={200} height={200}  alt="Crm"/>
+                            <Image src="images/d-code-logo-light.svg" className="logo-light" alt="Crm" width={200} height={200}/> */}
 
-                            <Image src="/images/logo-d.png" className="logo-dark" width={150} height={150}  alt="DCode"/>
-                            <Image src="/images/logo-d.png" className="logo-light" alt="DCode" width={150} height={150}/>
+                            <Image src="/images/logo-d.png" className="logo-dark" alt="Crm" width={150} height={150} />
+                            <Image src="/images/logo-d.png" className="logo-light" alt="Crm" width={150} height={150}/>
                         </Link>
                     </div>
                     <div className="menu-toggle-btn">
                         {/*  Mobile menu toggle */}
-                        <a className="navbar-toggle">
+                        <Link href="#" className="navbar-toggle">
                             <div className="burger-lines">
                             </div>
-                        </a>
+                        </Link>
                         {/* End mobile menu toggle */}
                     </div>
                     <div id="navigation" className="nav navbar-nav navbar-main">
                         <ul id="main-menu" className="menu-primary">
                             <li className="menu-item active">
-                                <a href="/">Home</a>
+                                <Link href="/">Home</Link>
                             </li>
                             <li className="menu-item">
-                                <a href="/about">About</a>                                
+                                <Link href="/about">About</Link>                                
                             </li>
                             <li className="menu-item">
-                                <a href="/services">Services</a>                                
+                                <Link href="/services">Services</Link>                                
                             </li>
                             <li className="menu-item">
-                                <a href="/blogs">Blogs</a>                                
+                                <Link href="/blogs">Blogs</Link>                                
                             </li>
                             <li className="menu-item">
-                                <a href="/contact">Contact</a>                                
+                                <Link href="/contact">Contact</Link>                                
                             </li>
                             {/* <li className="menu-item menu-item-has-children">
-                                <a href="#">Blogs</a>
+                                <Link href="#">Blogs</Link>
                                 <ul className="sub-menu">
                                     <li className="menu-item menu-item-has-children">
-                                        <a href="#">Blog Standard</a>
+                                        <Link href="#">Blog Standard</Link>
                                         <ul className="sub-menu">
                                             <li className="menu-item">
-                                                <a href="page-blog-grid-3-col.html">Blog Grid (3 Col)</a>
+                                                <Link href="page-blog-grid-3-col.html">Blog Grid (3 Col)</Link>
                                             </li>
                                             <li className="menu-item">
-                                                <a href="page-blog-grid-2-col.html">Blog Grid (2 Col)</a>
+                                                <Link href="page-blog-grid-2-col.html">Blog Grid (2 Col)</Link>
                                             </li>
                                             <li className="menu-item">
-                                                <a href="page-blog-with-sidebar.html">Blog with Sidebar</a>
+                                                <Link href="page-blog-with-sidebar.html">Blog with Sidebar</Link>
                                             </li>
                                         </ul>
                                     </li>
                                     <li className="menu-item">
-                                        <a href="page-blog-details.html">Blog Details</a>
+                                        <Link href="page-blog-details.html">Blog Details</Link>
                                     </li>
                                 </ul>
                             </li> */}
                            
                             <li className="menu-item menu-item-has-children mega-menu">
-                                <a href="#">About Dashboard</a>
+                                <Link href="#">About Dashboard</Link>
                                 <ul className="sub-menu mega-menu-inner">
                                     <li className="menu-item col-title">
-                                        <a href="services">Services</a>
+                                        <Link href="services">Services</Link>
                                         <ul className="sub-menu">
-                                            <li className="menu-item"><a href="#!">Services Software</a></li>
-                                            <li className="menu-item"><a href="#!">Services</a></li>
-                                            <li className="menu-item"><a href="#!">Services</a></li>
-                                            <li className="menu-item"><a href="#!">Services</a></li>
+                                            <li className="menu-item"><Link href="#!">Services Software</Link></li>
+                                            <li className="menu-item"><Link href="#!">Services</Link></li>
+                                            <li className="menu-item"><Link href="#!">Services</Link></li>
+                                            <li className="menu-item"><Link href="#!">Services</Link></li>
                                         </ul>
                                     </li>
                                     <li className="menu-item col-title">
-                                        <a href="#">Inner Pages</a>
+                                        <Link href="#">Inner Pages</Link>
                                         <ul className="sub-menu">
-                                            <li className="menu-item"><a href="/about">About Us</a></li>
-                                            <li className="menu-item"><a href="]services">Services</a></li>
-                                            <li className="menu-item"><a href="/contact">Contact Us</a></li>
-                                            <li className="menu-item"><a target="_blank" href="/signin">Login/Register</a></li>
+                                            <li className="menu-item"><Link href="/about">About Us</Link></li>
+                                            <li className="menu-item"><Link href="]services">Services</Link></li>
+                                            <li className="menu-item"><Link href="/contact">Contact Us</Link></li>
+                                            <li className="menu-item"><Link target="_blank" href="/signin">Login/Register</Link></li>
                                         </ul>
                                     </li>
                                     <li className="menu-item col-title">
-                                        <a href="#">Elements</a>
+                                        <Link href="#">Elements</Link>
                                         <ul className="sub-menu">
-                                            <li className="menu-item"><a href="#!">Project element 1</a></li>
-                                            <li className="menu-item"><a href="#!">Project element 2</a></li>
-                                            <li className="menu-item"><a href="#!">Project element 3</a></li>
-                                            <li className="menu-item"><a href="#!">Project element 4</a></li>
+                                            <li className="menu-item"><Link href="#!">Project element 1</Link></li>
+                                            <li className="menu-item"><Link href="#!">Project element 2</Link></li>
+                                            <li className="menu-item"><Link href="#!">Project element 3</Link></li>
+                                            <li className="menu-item"><Link href="#!">Project element 4</Link></li>
                                         </ul>
                                     </li>
                                     <li className="menu-item col-title">
-                                        <a href="#">Another Element</a>
+                                        <Link href="#">Another Element</Link>
                                         <ul className="sub-menu">
-                                            <li className="menu-item"><a href="#!">Element 1</a></li>
-                                            <li className="menu-item"><a href="#!">Element 2</a></li>
-                                            <li className="menu-item"><a href="#!"> Element 3</a></li>
-                                            <li className="menu-item"><a href="#!">Element 4</a></li>
+                                            <li className="menu-item"><Link href="#!">Element 1</Link></li>
+                                            <li className="menu-item"><Link href="#!">Element 2</Link></li>
+                                            <li className="menu-item"><Link href="#!"> Element 3</Link></li>
+                                            <li className="menu-item"><Link href="#!">Element 4</Link></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -212,13 +212,13 @@ export default function Header() {
                     </div>
                     <div className="navbar-right">
                         <div className="menu-button">
-                            <a href="#" target="_blank">
+                            <Link href="#" target="_blank">
                                 <div className="btn btn-outline-primary btn-light">sign in</div>
-                            </a>
+                            </Link>
                         </div>
                         <div className="search-option style-dark">
                             <div className="search-btn">
-                                <a href="#"><i className="fas fa-search"></i></a>
+                                <Link href="#"><i className="fas fa-search"></i></Link>
                             </div>
                         </div>
                     </div>

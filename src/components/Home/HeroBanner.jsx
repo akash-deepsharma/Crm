@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 export default function HeroBanner() {
@@ -14,8 +15,8 @@ export default function HeroBanner() {
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales dictum viverra. Nam gravida dignissim eros. Vivamus congue erat ante, volutpat dictum neque dignissim eget.</p>
                   </div>
                   <div className="btn-wrapper wow fadeInUp" data-wow-delay="0.4s">
-                      <a className="btn btn-primary" href="#">try to free</a>
-                      <a className="btn btn-outline-primary" href="#"><i className="fas fa-play-circle"></i>watch video</a>
+                      <Link className="btn btn-primary" href="#">try to free</Link>
+                      <Link className="btn btn-outline-primary" href="#"><i className="fas fa-play-circle"></i>watch video</Link>
                   </div>
               </div>
               <div className="col-lg-6">
