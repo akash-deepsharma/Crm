@@ -13,16 +13,15 @@ import { useEffect, useState } from "react";
 export default function Home() {
 
 
-
   return (
     <> 
-      <HeroBanner/>
-      <Features/>
-      <About/>
-      <Screenshot/>
-      <Pricing/>
-      <Testimonials/>
-      <BlogHome/>
+                <HeroBanner/>
+                <Features/>
+                <About/>
+                <Screenshot/>
+                <Pricing/>
+                <Testimonials/>
+                <BlogHome/>
     </>
   );
 }

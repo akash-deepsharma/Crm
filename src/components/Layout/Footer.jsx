@@ -9,7 +9,7 @@ export default function Footer() {
                     <div className="footer-logo">
                         {/* <Image src="/images/d-code-logo-light.svg" alt="crm logo" width={150} height={50}/> */}
                         <Link href="/"> 
-                            <Image src="/images/logo-w.png" alt="crm logo" width={150} height={80} style={{height:'auto'}} />
+                            <Image src="/images/logo-w.png" alt="crm logo" width={150} height={80} style={{height:'auto', width:'auto'}} />
                         </Link>
                     </div>
                     <div className="main-footer style-dark">
@@ -46,10 +46,10 @@ export default function Footer() {
                                         <div className="footer-nav">
                                             <ul>
                                                 <li><Link href="#">Trust & Safety</Link></li>
-                                                <li><Link href="#">Cookie Policy</Link></li>
-                                                <li><Link href="#">Book a Demo</Link></li>
-                                                <li><Link href="#">Privacy Policy</Link></li>
-                                                <li><Link href="#">Terms of Service</Link></li>
+                                                <li><Link href="/return-cancellation">Return &Cancellation</Link></li>
+                                                <li><Link href="/demo-crm">Book a Demo</Link></li>
+                                                <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+                                                <li><Link href="/terms-and-conditions">Terms of Service</Link></li>
                                             </ul>
                                         </div>
                                     </div>

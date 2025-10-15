@@ -3465,11 +3465,14 @@ ul.three-col li{
 .map-custom-embed{
 	display:block;
 	width:100%;  
+	margin-bottom: -180px;
+	position: relative;
+	z-index: -1;
 }
 .map-custom-embed iframe{
 	margin:0;
 	padding:0;
-	height: 550px;
+	height: 600px;
 	vertical-align: middle;
 	width:100%; 
 }

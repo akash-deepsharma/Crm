@@ -1,7 +1,14 @@
+import InnerPageBanner from '@/components/Common/InnerPageBanner';
 import React from 'react'
 
 export default function page() {
+  const bannerData = {
+    pageName: "Return & Cancellation",
+    pageTitle: "Our Return & Cancellation Policy",
+  };
   return (
-      <div>return-cancellation page</div>
+      <div>
+        <InnerPageBanner data={bannerData}/>
+      </div>
   )
 }
