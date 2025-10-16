@@ -19,23 +19,6 @@ export default function page() {
   const [loading, setLoading] = useState(true)  
   const [error, setError] = useState(null)      
 
-  useEffect(() => {
-    axios.get('https://dummyjson.com/c/5903-85cf-4d67-a386') 
-      .then((response) => {
-        setData(response.data)
-        setLoading(false)
-      })
-      .catch((err) => {
-        setError(err.message)
-        setLoading(false)
-      })
-  }, [])
-
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error}</p>
-
-console.log("data", data)
-
 
   return (
       <>
