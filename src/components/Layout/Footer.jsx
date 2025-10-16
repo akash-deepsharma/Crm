@@ -45,9 +45,9 @@ export default function Footer() {
                                     <div className="text-widget">
                                         <div className="footer-nav">
                                             <ul>
+                                                <li><Link href="/demo-crm">Free Demo</Link></li>
                                                 <li><Link href="#">Trust & Safety</Link></li>
                                                 <li><Link href="/return-cancellation">Return &Cancellation</Link></li>
-                                                <li><Link href="/demo-crm">Book a Demo</Link></li>
                                                 <li><Link href="/privacy-policy">Privacy Policy</Link></li>
                                                 <li><Link href="/terms-and-conditions">Terms of Service</Link></li>
                                             </ul>
@@ -81,9 +81,9 @@ export default function Footer() {
                                     <div className="text-widget">
                                         <div className="footer-nav">
                                             <ul>
-                                                <li><Link href="#">Documentation</Link></li>
-                                                <li><Link href="#">FAQ</Link></li>
-                                                <li><Link href="#">Press</Link></li>
+                                                <li><Link href="#">Login</Link></li>
+                                                <li><Link href="#">Pricing</Link></li>
+                                                <li><Link href="#">Book a Session</Link></li>
                                                 <li><Link href="#">Community</Link></li>
                                             </ul>
                                         </div>

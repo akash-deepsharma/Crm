@@ -137,7 +137,7 @@ export default function Header() {
             <li className="menu-item"><Link href="/blogs">Blogs</Link></li>
             <li className="menu-item"><Link href="/contact">Contact</Link></li>
             <li className="menu-item menu-item-has-children mega-menu">
-              <Link href="#">About Dashboard</Link>
+              <Link href="#">Quick View</Link>
               <ul className="sub-menu mega-menu-inner">
                 <li className="menu-item col-title">
                   <Link href="services">Services</Link>
@@ -154,23 +154,23 @@ export default function Header() {
                     <li className="menu-item"><Link href="/about">About Us</Link></li>
                     <li className="menu-item"><Link href="/services">Services</Link></li>
                     <li className="menu-item"><Link href="/contact">Contact Us</Link></li>
-                    <li className="menu-item"><Link target="_blank" href="/signin">Login/Register</Link></li>
+                    <li className="menu-item"><Link href="/login">Login/Register</Link></li>
                   </ul>
                 </li>
                 <li className="menu-item col-title">
                   <Link href="#">Elements</Link>
                   <ul className="sub-menu">
-                    <li className="menu-item"><Link href="#!">Project element 1</Link></li>
-                    <li className="menu-item"><Link href="#!">Project element 2</Link></li>
-                    <li className="menu-item"><Link href="#!">Project element 3</Link></li>
-                    <li className="menu-item"><Link href="#!">Project element 4</Link></li>
+                    <li className="menu-item"><Link href="#!">How Crm Works</Link></li>
+                    <li className="menu-item"><Link href="#!">Free Demo</Link></li>
+                    <li className="menu-item"><Link href="#!">Book a Session</Link></li>
+                    <li className="menu-item"><Link href="#!">Agent Or Seller </Link></li>
                   </ul>
                 </li>
                 <li className="menu-item col-title">
                   <Link href="#">Another Element</Link>
                   <ul className="sub-menu">
-                    <li className="menu-item"><Link href="#!">Element 1</Link></li>
-                    <li className="menu-item"><Link href="#!">Element 2</Link></li>
+                    <li className="menu-item"><Link href="#!">Support</Link></li>
+                    <li className="menu-item"><Link href="#!">Pricing</Link></li>
                     <li className="menu-item"><Link href="#!">Element 3</Link></li>
                     <li className="menu-item"><Link href="#!">Element 4</Link></li>
                   </ul>
@@ -182,7 +182,7 @@ export default function Header() {
         <div className="navbar-right">
           <div className="menu-button">
             <Link href="/login">
-              <div className="btn btn-outline-primary btn-light">sign in</div>
+              <div className="btn btn-outline-primary btn-light">sign in / sign up</div>
             </Link>
           </div>
           <div className="search-option style-dark">
