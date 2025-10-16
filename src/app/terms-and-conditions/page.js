@@ -1,23 +1,15 @@
 
-"use client"
 import InnerPageBanner from '@/components/Common/InnerPageBanner';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 export default function page() {
 
-
-  // fatch api data using axios and useState
      
 
   const bannerData = {
     pageName: "Terms and Conditions",
     pageTitle: "Welcome to Our Terms and Conditions",
-  };
-
-  const [data, setData] = useState([])  
-  const [loading, setLoading] = useState(true)  
-  const [error, setError] = useState(null)      
+  };    
 
 
   return (
@@ -31,7 +23,7 @@ export default function page() {
                   
                   <h3>Introduction</h3>
                   <p>
-                    Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [Your Company Name]'s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+                    Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern Your Company Name's relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
                   </p>
                   <h3>Use of the Website</h3>
                   <p>
@@ -43,11 +35,11 @@ export default function page() {
                   </p>
                   <h3>Limitation of Liability</h3>
                   <p>
-                    [Your Company Name] will not be liable for any damages arising out of or in connection with the use of this website. This includes, without limitation, direct loss, loss of business or profits, or indirect or consequential loss.
+                     will not be liable for any damages arising out of or in connection with the use of this website. This includes, without limitation, direct loss, loss of business or profits, or indirect or consequential loss.
                   </p>
                   <h3>Governing Law</h3>
                   <p>
-                    Your use of this website and any dispute arising out of such use of the website is subject to the laws of [Your Country/State].
+                    Your use of this website and any dispute arising out of such use of the website is subject to the laws of .
                   </p>
                 </div>
           </div>
