@@ -15,7 +15,7 @@ export async function getAllBlogs() {
 
 export async function getAllServices() {
   try {
-    const res = await fetch("https://api.techalphoniccrm.com/services");
+    const res = await fetch("https://dummyjson.com/posts");
     if (!res.ok) {
       console.error("Failed to fetch services:", res.status);
       return [];
