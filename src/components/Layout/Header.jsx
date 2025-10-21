@@ -20,7 +20,7 @@ export default function Header() {
           if (viewportWidth <= 992) {
             $(".navbar-right").appendTo("#navigation");
             if ($("#navigation .close-btn").length === 0) {
-              $('<span class="close-btn"></span>').prependTo("#navigation");
+              $('<span className="close-btn"></span>').prependTo("#navigation");
             }
           } else {
             $(".navbar-right").appendTo(".container-fluid");
@@ -55,7 +55,7 @@ export default function Header() {
         });
 
         $("#navigation ul li.menu-item-has-children > a").after(
-          '<span class="child-link"><i class="fas fa-chevron-down"></i></span>'
+          '<span className"child-link"><i className"fas fa-chevron-down"></i></span>'
         );
 
         $("span.child-link").click(function () {
@@ -129,13 +129,15 @@ export default function Header() {
         </div>
         <div id="navigation" className="nav navbar-nav navbar-main">
           <ul id="main-menu" className="menu-primary">
-            <li className={`menu-item ${pathname === '/' ? 'active' : ''}`}>
+            {/* <li className={`menu-item ${pathname === '/' ? 'active' : ''}`}>
               <Link href="/">Home</Link>
-            </li>
-            <li className="menu-item"><Link href="/about">About</Link></li>
-            <li className="menu-item"><Link href="/services">Services</Link></li>
-            <li className="menu-item"><Link href="/blogs">Blogs</Link></li>
-            <li className="menu-item"><Link href="/contact">Contact</Link></li>
+            </li> */}
+            <li className={`menu-item ${pathname === '/about' ? 'active' : ''}`}><Link href="/about">About</Link></li>
+            <li className={`menu-item ${pathname === '/features' ? 'active' : ''}`}><Link href="/features">Features</Link></li>
+            <li className="menu-item"><Link href="/contact">Book a Session</Link></li>
+            <li className="menu-item"><Link href="/pricing">Pricing</Link></li>
+            <li className="menu-item"><Link href="/contact">Demo</Link></li>
+            <li className="menu-item"><Link href="/contact">Free Trial</Link></li>
             <li className="menu-item menu-item-has-children mega-menu">
               <Link href="#">Quick View</Link>
               <ul className="sub-menu mega-menu-inner">
@@ -152,7 +154,7 @@ export default function Header() {
                   <Link href="#">Inner Pages</Link>
                   <ul className="sub-menu">
                     <li className="menu-item"><Link href="/about">About Us</Link></li>
-                    <li className="menu-item"><Link href="/services">Services</Link></li>
+                    <li className="menu-item"><Link href="/features">Features</Link></li>
                     <li className="menu-item"><Link href="/contact">Contact Us</Link></li>
                     <li className="menu-item"><Link href="/login">Login/Register</Link></li>
                   </ul>

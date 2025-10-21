@@ -84,7 +84,7 @@ export default function Footer() {
                                                 <li><Link href="#">Login</Link></li>
                                                 <li><Link href="#">Pricing</Link></li>
                                                 <li><Link href="#">Book a Session</Link></li>
-                                                <li><Link href="#">Community</Link></li>
+                                                <li><Link href="/agent">Becomer a saller</Link></li>
                                             </ul>
                                         </div>
                                     </div>

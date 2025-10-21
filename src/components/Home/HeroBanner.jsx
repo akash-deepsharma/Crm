@@ -9,10 +9,13 @@ export default function HeroBanner() {
           <div className="row align-items-center">
               <div className="col-lg-6">
                   <div className="heading-wrapper with-separator wow fadeInUp">
-                      <h1>Crm is the <span>biggest platform</span> for your growth.</h1>
+                      
+                      <h1>Transform Your <span>Business</span> with Next-Gen CRM Power.</h1>
                   </div>
                   <div className="text-wrapper wow fadeInUp" data-wow-delay="0.2s">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales dictum viverra. Nam gravida dignissim eros. Vivamus congue erat ante, volutpat dictum neque dignissim eget.</p>
+                      <p>CRM propels success by changing the way you interact with customers.
+Get real-time insights, seamless automation, and data-backed decision-making to spur business growth. Build better relations, better productivity, and elevate your business with Alpha Manpower
+.</p>
                   </div>
                   <div className="btn-wrapper wow fadeInUp" data-wow-delay="0.4s">
                       <Link className="btn btn-primary" href="#">try to free</Link>

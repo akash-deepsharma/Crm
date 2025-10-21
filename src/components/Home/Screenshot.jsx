@@ -24,13 +24,13 @@ export default function Screenshot() {
         <div className="row justify-content-center clearfix style-dark">
           <div className="col-lg-8">
             <div className="heading-wrapper text-center">
-              <h2 className="h1">Software Screen Shots</h2>
+              <h2 className="h1">See Alpha Manpower  CRM in Action</h2>
               <div className="lead-text">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                  finibus mi id elit gravida, quis tincidunt purus fringilla.
-                  Aenean convallis a neque non pellentesque.
+                  Take a glimpse into the intuitive and powerful interface of Alpha Manpower  CRM. Every screen is crafted for clarity, speed, and simplicity—so you can manage leads, track performance, and build lasting customer relationships with ease.
                 </p>
+                <p>Discover how smart design meets powerful functionality to make your workflow smoother and your business more connected.
+</p>
               </div>
             </div>
           </div>

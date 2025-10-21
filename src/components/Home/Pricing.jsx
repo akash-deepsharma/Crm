@@ -11,8 +11,8 @@ export default function Pricing() {
                             <h2 className="h1">Pricing Plans</h2>
                         </div>
                         <div className="text-wrapper">
-                            <h4>Begin leveraging your market data today.</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis finibus mi id elit gravida, quis tincidunt purus fringilla. Aenean convallis a neque non pellentesque.</p>
+                            <h4>Find the Right Alpha Manpower  CRM Plan for Your Business.</h4>
+                            <p>Power your growth with flexible CRM plans tailored to your needs. Whether you’re a startup or an enterprise, Alpha Manpower  CRM helps you manage customers, automate processes, and accelerate success—all in one place.</p>
                         </div>
                         <div className="btn-wrapper">
                             <Link href="/pricing" className="btn link-btn">Compare all features.</Link>
@@ -26,7 +26,7 @@ export default function Pricing() {
                                         <h3 className="card-title">Start-Up</h3>
                                         <div className="plan-cost-wrapper">
                                             <div className="plan-cost">
-                                                <span className="plan-cost-prefix">$</span>15
+                                                <span className="plan-cost-prefix">₹</span>1.5k
                                             </div>
                                             <div className="plan-validity">/ mo</div>
                                         </div>
@@ -52,7 +52,7 @@ export default function Pricing() {
                                         <h3 className="card-title">Advanced</h3>
                                         <div className="plan-cost-wrapper">
                                             <div className="plan-cost">
-                                                <span className="plan-cost-prefix">$</span>30
+                                                <span className="plan-cost-prefix">₹</span>3k
                                             </div>
                                             <div className="plan-validity">/ mo</div>
                                         </div>

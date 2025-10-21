@@ -17,8 +17,9 @@ export default function Features() {
                                                     <Image className="hover" src="images/default-color/icon-1-light.svg" alt="" width={100} height={100}/>
                                                 </div>
                                                 <div className="text">
-                                                    <h4>Clean Code</h4>    
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales</p>
+                                                    <h4>Streamlined Customer Management</h4>    
+                                                    <p>Poise every interaction with a clean CRM for great organization and optimization. Alpha Manpower eliminates the need for exhausting procedures required to manage customer data, track conversations, and develop relationships—all on one smart platform. 
+</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -31,8 +32,8 @@ export default function Features() {
                                                     <Image className="hover" src="images/default-color/icon-2-light.svg" alt="" width={100} height={100}/>
                                                 </div>
                                                 <div className="text">
-                                                    <h4>Easily customizable</h4>    
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales</p>
+                                                    <h4>Personalized to Your Business</h4>    
+                                                    <p>No two businesses are alike—and so should not be your CRM. Alpha Manpower  CRM fits into your workflow and enables you to customize your dashboards, modules, and automation according to your exact business model.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -45,8 +46,8 @@ export default function Features() {
                                                     <Image className="hover" src="images/default-color/icon-3-light.svg" alt="" width={100} height={100}/>
                                                 </div>
                                                 <div className="text">
-                                                    <h4>User Friendly</h4>    
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales</p>
+                                                    <h4>Seamless User Experience</h4>    
+                                                    <p>You enjoy a slick, modern UI built for your productivity. Sales, marketing, or support—Alpha Manpower  CRM makes sure your every action is simple, easy, and effective—because your team should focus on growth.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -59,7 +60,7 @@ export default function Features() {
                                                     <Image className="hover" src="images/default-color/icon-4-light.svg" alt="" width={100} height={100}/>
                                                 </div>
                                                 <div className="text">
-                                                    <h4>Fully secured</h4>    
+                                                    <h4>Data You Can Trust Will Protect</h4>    
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales</p>
                                                 </div>
                                             </div>
@@ -70,12 +71,12 @@ export default function Features() {
                             
                             <div className="col-lg-5">
                                 <div className="heading-wrapper with-separator">
-                                    <h2 className="h1">We offer Powerfull <span>features</span></h2>
+                                    <h2 className="h1">Transform Connections into  <span>Opportunities</span></h2>
                                 </div>
                                 
                                 <div className="text-wrapper">
-                                    <p className="lead-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales dictum viverra.</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales dictum viverra. Nam gravida dignissim eros. Vivamus congue erat ante, volutpat dictum neque dignissim eget.</p>
+                                    <p className="lead-text">At Alpha Manpower, we excel in more than relationship management:</p>
+                                    <p>we excel in defining lifetime relationships. A CRM that turns every customer engagement into meaningful engagement towards growth and success</p>
                                 </div>
                                 <div className="btn-wrapper">
                                     <Link href="/about" className="btn btn-primary">Discover More</Link>

@@ -3,8 +3,8 @@ import React from 'react'
 
 export default function page() {
   const bannerData = {
-    pageName: "Services",
-    pageTitle: "See What We Can Do For You",
+    pageName: "Features",
+    pageTitle: "Our Features That You Can Use In Your Business",
   };
   return (
       <>

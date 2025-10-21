@@ -28,10 +28,10 @@ export default function Testimonials() {
   const testimonials = [
     {
       id: 1,
-      name: "Smith Carle",
-      role: "Manager",
+      name: "Emily R.,",
+      role: "Sales Manager",
       message:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi veniam cumque maxime doloribus doloremque recusandae dolorem  consequuntur modi, sit blanditiis!",
+        "Alpha Manpower  CRM has completely transformed how we manage leads and track progress. The automation tools save us hours every week, and our sales have grown by 40% since we started using them.!",
       rating: 5,
     },
     {
@@ -39,7 +39,7 @@ export default function Testimonials() {
       name: "Darla John",
       role: "IT Manager",
       message:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil reiciendis earum pariatur.",
+        "We switched to Alpha Manpower  after trying multiple CRMs, and the difference is incredible. The interface is so easy to use, and the analytics dashboard gives us clear insights into every customer interaction.",
       rating: 5,
     },
     {
@@ -47,7 +47,7 @@ export default function Testimonials() {
       name: "Ken Lord",
       role: "Team Manager",
       message:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi veniam cumque.",
+        "What I love most about Alpha Manpower  CRM is how easily we could tailor it to our business needs. Their support team was responsive and guided us through every step of the setup process.",
       rating: 5,
     },
     {
@@ -67,12 +67,12 @@ export default function Testimonials() {
           <div className="col-lg-4 pt-lg-5">
             <div className="heading-wrapper pt-lg-5">
               <h2 className="h1">
-                What <span>Our Clients</span> Are Saying
+                What <span> Our Clients</span> are Saying
               </h2>
               <div className="lead-text">
                 <p>
-                  Lorem ipsum dolor sit amet Aenean convallis a neque non
-                  pellentesque.
+                  Our clients trust Alpha Manpower  CRM to simplify customer management, boost sales efficiency, and enhance team productivity. Here’s what they have to say about their experience with us:
+
                 </p>
               </div>
             </div>
