@@ -480,7 +480,7 @@ p:not(:empty){
 .form-group input[type="checkbox"]:checked::before {
     opacity: 1;
 }
-.form-control{
+.form-control,.form-select{
 	height: 48px;
 	padding: 0 15px;
 	font-size: 15px;
@@ -1484,7 +1484,7 @@ ul.support-details li strong{
 	color:var(--heading-text-color);
 }
 #accordion .panel-default .panel-title a::after {
-    font-family: 'Line Awesome Free';
+    font-family: 'FontAwesome';
     font-style: normal;
     font-size: 24px;
     content: "\f106";
@@ -2333,7 +2333,7 @@ ul.three-col li{
 	direction:ltr !important; 
 }
 .slick-prev::before, .slick-next::before {
-	font-family: 'Line Awesome Free';
+	font-family: 'FontAwesome';
 	font-weight: 900;
 	color:var(--heading-text-color);
 	font-size:36px; 
@@ -4489,7 +4489,7 @@ blockquote::before {
 	.st-tab-btn .nav-tabs{border:none; box-shadow:0 0 15px 5px rgba(0,0,0,0.06); -webkit-box-shadow:0 0 15px 5px rgba(0,0,0,0.06); display:none; background:var(--white-color);}
 	.st-tab-btn .nav-tabs .nav-item{margin:0; display:block; width: 100%;}
 	.st-tab-btn{margin:0;}
-	.select-filter:after{font-family: 'Line Awesome Free'; font-style: normal; font-size: 24px; content: "\f107"; color: var(--body-text-color); float: right; margin-top: -4px; font-weight: 900;}
+	.select-filter:after{font-family: 'FontAwesome'; font-style: normal; font-size: 24px; content: "\f107"; color: var(--body-text-color); float: right; margin-top: -4px; font-weight: 900;}
 	.vertical-tab .st-tab-btn .nav-tabs .nav-item .nav-link, .st-tab-btn .nav-tabs .nav-link{padding:15px; }
 	.vertical-tab .st-tab-btn .nav-tabs{display:none;}
 	.features-block.theme-three .inner-box {padding: 30px 15px;}

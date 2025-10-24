@@ -1,9 +1,22 @@
+"use client";
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
+import Request_Modal from '../Common/Request_Modal';
 
 export default function Footer() {
+        const [showModal, setShowModal] = useState(false);
+                
+                const handleOpenModal = (e) => {
+                    e.preventDefault();
+                    setShowModal(true);
+                };
+                
+                const handleCloseModal = () => {
+                    setShowModal(false);
+                };
   return (
+      <>
      <footer className="site-footer footer-theme-one">
                 <div className="container">
                     <div className="footer-logo">
@@ -83,7 +96,7 @@ export default function Footer() {
                                             <ul>
                                                 <li><Link href="#">Login</Link></li>
                                                 <li><Link href="#">Pricing</Link></li>
-                                                <li><Link href="#">Book a Session</Link></li>
+                                                <li><Link href="#" onClick={handleOpenModal} >Request A Demo</Link></li>
                                                 <li><Link href="/agent">Becomer a saller</Link></li>
                                             </ul>
                                         </div>
@@ -117,5 +130,8 @@ export default function Footer() {
                     </div>
                 </div>
             </footer>
+            {showModal && <Request_Modal onClose={handleCloseModal} />}
+
+            </>
   )
 }

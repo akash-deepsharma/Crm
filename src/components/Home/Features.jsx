@@ -61,7 +61,7 @@ export default function Features() {
                                                 </div>
                                                 <div className="text">
                                                     <h4>Data You Can Trust Will Protect</h4>    
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales</p>
+                                                    <p>We think your customer information deserves protection at the highest level. Alpha Manpower  CRM provides enterprise-grade security protocols to keep your data safe and encrypted and under your control at all times.</p>
                                                 </div>
                                             </div>
                                         </div>
