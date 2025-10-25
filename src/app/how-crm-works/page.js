@@ -16,7 +16,6 @@ export default function page() {
       "Streamlining your CRM workflow to manage leads, sales, and customer relationships with ease.",
   };
 
-  //  ✅ Load Bootstrap JS only on client (to avoid "document is not defined" error)
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);

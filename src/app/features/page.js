@@ -1,5 +1,6 @@
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import Subscriber from "@/components/Common/Subscriber";
+import Image from "next/image";
 import React from "react";
 
 export default function page() {
@@ -36,10 +37,10 @@ export default function page() {
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
-                        <img
+                        <Image
                           className="normal img-fluid"
-                          src="images/default-color/Data-Management-Services.png"
-                          alt=""
+                          src="/images/default-color/Data-Management-Services.png"
+                          alt="" width={200} height={200}
                         />
                       </div>
                       <h3 className="dc-features-title">
@@ -66,10 +67,10 @@ export default function page() {
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
-                        <img
+                        <Image
                           className="normal img-fluid"
-                          src="images/default-color/Data-Warehouse-Services.png"
-                          alt=""
+                          src="/images/default-color/Data-Warehouse-Services.png"
+                          alt=""  width={200} height={200}
                         />
                       </div>
                       <h3 className="dc-features-title">
@@ -96,10 +97,10 @@ export default function page() {
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
-                        <img
+                        <Image
                           className="normal img-fluid"
-                          src="images/default-color/Data-Quality-Assurance.png"
-                          alt=""
+                          src="/images/default-color/Data-Quality-Assurance.png"
+                          alt=""  width={200} height={200}
                         />
                       </div>
                       <h3 className="dc-features-title">
@@ -126,10 +127,10 @@ export default function page() {
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
-                        <img
+                        <Image
                           className="normal img-fluid"
-                          src="images/default-color/Data-Security.png"
-                          alt=""
+                          src="/images/default-color/Data-Security.png"
+                          alt=""  width={200} height={200}
                         />
                       </div>
                       <h3 className="dc-features-title">Data Security</h3>
@@ -152,10 +153,10 @@ export default function page() {
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
-                        <img
+                        <Image
                           className="normal img-fluid"
-                          src="images/default-color/Training-and-Onboarding.png"
-                          alt=""
+                          src="/images/default-color/Training-and-Onboarding.png"
+                          alt=""  width={200} height={200}
                         />
                       </div>
                       <h3 className="dc-features-title">
@@ -182,10 +183,10 @@ export default function page() {
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
-                        <img
+                        <Image
                           className="normal img-fluid"
-                          src="images/default-color/technology.png"
-                          alt=""
+                          src="/images/default-color/technology.png"
+                          alt=""  width={200} height={200}
                         />
                       </div>
                       <h3 className="dc-features-title">
