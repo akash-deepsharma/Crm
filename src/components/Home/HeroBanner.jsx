@@ -32,7 +32,7 @@ export default function HeroBanner() {
 Get real-time insights, seamless automation, and data-backed decision-making to spur business growth. Build better relations, better productivity, and elevate your business with Alpha Manpower.</p>
                   </div>
                   <div className="btn-wrapper wow fadeInUp" data-wow-delay="0.4s">
-                      <Link className="btn btn-primary" href="#">try to free</Link>
+                      <Link className="btn btn-primary" href="/login">try to free</Link>
                       <Link className="btn btn-outline-primary" onClick={handleOpenModal} href="#">
                       {/* <i className="fas fa-play-circle"></i> */}
                       Request Demo</Link>

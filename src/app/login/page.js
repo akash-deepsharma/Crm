@@ -86,7 +86,7 @@ export default function Page() {
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales dictum viverra.</p>
               </div>
               <div className="btn-wrapper">
-                <a className="btn btn-primary btn-light" href="#">Discover More</a>
+                <a className="btn btn-primary btn-light" href="/about">Discover More</a>
               </div>
             </div>
             <div className="st-tab-btn">

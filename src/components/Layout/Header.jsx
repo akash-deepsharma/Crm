@@ -1,8 +1,9 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import Request_Modal from '../Common/Request_Modal'
 
 export default function Header() {
   
@@ -113,7 +114,22 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
+
+
+      const [showModal, setShowModal] = useState(false);
+            
+            const handleOpenModal = (e) => {
+                e.preventDefault();
+                setShowModal(true);
+            };
+            
+            const handleCloseModal = () => {
+                setShowModal(false);
+            };
+
   return (
+    <>
+
     <header id="master-head" className="navbar menu-absolute menu-center">
       <div className="container-fluid">
         <div id="main-logo" className="logo-container">
@@ -134,10 +150,10 @@ export default function Header() {
             </li> */}
             <li className={`menu-item ${pathname === '/about' ? 'active' : ''}`}><Link href="/about">About</Link></li>
             <li className={`menu-item ${pathname === '/features' ? 'active' : ''}`}><Link href="/features">Features</Link></li>
-            <li className="menu-item"><Link href="/contact">Book a Session</Link></li>
+            <li className="menu-item"><Link href="/contact" onClick={handleOpenModal}>Book a Session</Link></li>
             <li className="menu-item"><Link href="/pricing">Pricing</Link></li>
             <li className="menu-item"><Link href="/contact">Demo</Link></li>
-            <li className="menu-item"><Link href="/contact">Free Trial</Link></li>
+            <li className="menu-item"><Link href="/login">Free Trial</Link></li>
             <li className="menu-item menu-item-has-children mega-menu">
               <Link href="#">Quick View</Link>
               <ul className="sub-menu mega-menu-inner">
@@ -162,17 +178,17 @@ export default function Header() {
                 <li className="menu-item col-title">
                   <Link href="#">Elements</Link>
                   <ul className="sub-menu">
-                    <li className="menu-item"><Link href="#!">How Crm Works</Link></li>
+                    <li className="menu-item"><Link href="/how-crm-works">How Crm Works</Link></li>
                     <li className="menu-item"><Link href="#!">Free Demo</Link></li>
-                    <li className="menu-item"><Link href="#!">Book a Session</Link></li>
-                    <li className="menu-item"><Link href="#!">Agent Or Seller </Link></li>
+                    <li className="menu-item"><Link href="#!" onClick={handleOpenModal} >Book a Session</Link></li>
+                    <li className="menu-item"><Link href="/agent">Agent Or Seller </Link></li>
                   </ul>
                 </li>
                 <li className="menu-item col-title">
                   <Link href="#">Another Element</Link>
                   <ul className="sub-menu">
                     <li className="menu-item"><Link href="#!">Support</Link></li>
-                    <li className="menu-item"><Link href="#!">Pricing</Link></li>
+                    <li className="menu-item"><Link href="/pricing">Pricing</Link></li>
                     <li className="menu-item"><Link href="#!">Element 3</Link></li>
                     <li className="menu-item"><Link href="#!">Element 4</Link></li>
                   </ul>
@@ -195,5 +211,7 @@ export default function Header() {
         </div>
       </div>
     </header>
+    {showModal && <Request_Modal onClose={handleCloseModal} />}
+    </>
   )
 }
