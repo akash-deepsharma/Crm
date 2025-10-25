@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 export default function Agent_Steps() {
@@ -18,7 +19,7 @@ export default function Agent_Steps() {
                 </div>
                 <div className='col-lg-5'>
                     <div className='step_img'>
-                        <img src="/images/agent_steps.svg" alt="" />
+                        <Image src="/images/agent_steps.svg" alt="" width={600} height={600} />
 
                     </div>
                 </div>

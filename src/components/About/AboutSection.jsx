@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -8,7 +9,7 @@ export default function AboutSection() {
         <div className="row">
           <div className="col-lg-6 wow fadeInLeft">
             <div className="image-wrapper">
-              <img src="images/default-color/user-interface-img.png" alt="" />
+              <Image src="/images/default-color/user-interface-img.png" alt=""  width={700} height={700} />
             </div>
           </div>
           <div className="col-lg-6">

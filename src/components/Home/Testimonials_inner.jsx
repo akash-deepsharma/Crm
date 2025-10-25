@@ -2,6 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Image from "next/image";
 
 export default function Testimonials_inner() {
   const settings = {
@@ -92,10 +93,11 @@ export default function Testimonials_inner() {
                       </div>
                       <div className="client-info-wrapper">
                         <div className="client-img">
-                          <img
-                            src="images/team-4-square.jpg"
+                          <Image
+                            src="/images/team-4-square.jpg"
                             alt="client"
                             className="img-fluid"
+                            width={600} height={600}
                           />
                         </div>
                         <div className="client-info">
@@ -106,30 +108,7 @@ export default function Testimonials_inner() {
                     </div>
                   ))}
 
-                  {/* <div className="item">
-                    <div className="testimonial-text">
-                      <blockquote>
-                        It's all good. I am really satisfied with software.
-                        Pericula expetendis has no, quo populo forensibus
-                        contentiones et, nibh error in per. Vis in tritani
-                        debitis delicatissimi, error omnesque invenire usu ex,
-                        qui illud nonumes ad.
-                      </blockquote>
-                    </div>
-                    <div className="client-info-wrapper">
-                      <div className="client-img">
-                        <img
-                          src="images/team-3-square.jpg"
-                          alt="client"
-                          className="img-fluid"
-                        />
-                      </div>
-                      <div className="client-info">
-                        <h5>Dan Kaul</h5>
-                        <p>IT Consultant</p>
-                      </div>
-                    </div>
-                  </div> */}
+                  
                 </Slider>
               </div>
             </div>

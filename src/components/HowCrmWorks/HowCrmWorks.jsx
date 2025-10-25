@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 export default function HowCrmWorks() {
@@ -24,11 +25,11 @@ export default function HowCrmWorks() {
             <div className="flexcardNumber flexcardNumberBlue">01</div>
             <h4 className=" flex-five flexcardTitle">Lead Capture</h4>
             <div className="five-card-img">
-              <img
-                src="images/default-color/scalability.png"
+              <Image
+                src="/images/default-color/scalability.png"
                 alt=""
-                className="img-fluid"
-              />
+                className="img-fluid" width={80} height={80}
+              /> 
             </div>
             <p className="flex-five flexcardText">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -40,10 +41,10 @@ export default function HowCrmWorks() {
             <div className="flexcardNumber flexcardNumberBlue">02</div>
             <h4 className="flex-five flexcardTitle">Lead Management</h4>
             <div className="five-card-img">
-              <img
-                src="images/default-color/user-interface.png"
+              <Image
+                src="/images/default-color/user-interface.png"
                 alt=""
-                className="img-fluid"
+                className="img-fluid"  width={80} height={80}
               />
             </div>
             <p className="flex-five text-center">
@@ -56,10 +57,10 @@ export default function HowCrmWorks() {
             <div className="flexcardNumber flexcardNumberBlue">03</div>
             <h4 className="flex-five flexcardTitle">Sales Pipeline</h4>
             <div className="five-card-img">
-              <img
-                src="images/default-color/cost-efficient.png"
+              <Image
+                src="/images/default-color/cost-efficient.png"
                 alt=""
-                className="img-fluid"
+                className="img-fluid"  width={80} height={80}
               />
             </div>
             <p className="flex-five flexcardText text-center">
@@ -72,10 +73,10 @@ export default function HowCrmWorks() {
             <div className="flexcardNumber flexcardNumberBlue">04</div>
             <h4 className="flex-five flexcardTitle">Follow-up Automation </h4>
             <div className="five-card-img">
-              <img
-                src="images/default-color/cost-efficient.png"
+              <Image
+                src="/images/default-color/cost-efficient.png"
                 alt=""
-                className="img-fluid"
+                className="img-fluid"  width={80} height={80}
               />
             </div>
             <p className="flex-five flexcardText text-center">
@@ -88,10 +89,10 @@ export default function HowCrmWorks() {
             <div className="flexcardNumber flexcardNumberBlue">05</div>
             <h4 className="flex-five flexcardTitle">Reports & Analytics</h4>
             <div className="five-card-img">
-              <img
-                src="images/default-color/cost-efficient.png"
+              <Image
+                src="/images/default-color/cost-efficient.png"
                 alt=""
-                className="img-fluid"
+                className="img-fluid"  width={80} height={80}
               />
             </div>
             <p className="flex-five flexcardText text-center">
@@ -104,10 +105,10 @@ export default function HowCrmWorks() {
             <div className="flexcardNumber flexcardNumberBlue">06</div>
             <h4 className="flex-five flexcardTitle">Customer Retention</h4>
             <div className="five-card-img">
-              <img
-                src="images/default-color/cost-efficient.png"
+              <Image
+                src="/images/default-color/cost-efficient.png"
                 alt=""
-                className="img-fluid"
+                className="img-fluid"  width={80} height={80}
               />
             </div>
             <p className="flex-five flexcardText text-center">

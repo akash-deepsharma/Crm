@@ -2,6 +2,7 @@ import React from "react";
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import BlogCard from "@/components/Blogs/BlogCard";
 import BlogSidebar from "@/components/Blogs/BlogSidebar";
+import Image from "next/image";
 
 export default function page({ params }) {
   const blogdata = [
@@ -188,11 +189,7 @@ export default function page({ params }) {
     <>
       <InnerPageBanner data={bannerData} />
 
-      {/* <div className="blog-area section-padding">
-        <div className="container">
-          <div className="blog-detail-body"  dangerouslySetInnerHTML={{ __html: blogItem.content }}/>
-        </div>
-      </div> */}
+     
 
       <div className="section-padding">
         <div className="container">
@@ -200,7 +197,7 @@ export default function page({ params }) {
             <div className="col-lg-8">
               <article className="post news-grid">
                 <div className="post-thumbnail">
-                  <img src="/images/large-thumb-3.jpg" alt="" />
+                  <Image src="/images/large-thumb-3.jpg" alt=""  width={1200} height={1200}/>
                 </div>
                 <div className="post-meta">
                   <span className="entry-meta entry-category">

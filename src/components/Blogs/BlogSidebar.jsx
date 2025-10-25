@@ -1,3 +1,5 @@
+import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 export default function BlogSidebar({blogdata}) {
@@ -15,7 +17,7 @@ export default function BlogSidebar({blogdata}) {
                       <a href={`/blogs/${item.slug}`}>
 
                         <div className="article-img">
-                          <img src={item.image} alt="" />
+                          <Image src={item.image} alt=""  width={400} height={400}/>
                         </div>
                         <div className="article-details">
                           <h4 className="entry-title">
@@ -37,36 +39,36 @@ export default function BlogSidebar({blogdata}) {
                   <div className="social-media-links">
                     <ul>
                       <li>
-                        <a
+                        <Link
                           target="_blank"
                           href="https://www.facebook.com"
                         >
                           <i className="fab fa-facebook-f"></i>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
+                        <Link
                           target="_blank"
                           href="https://www.instagram.com"
                         >
                           <i className="fab fa-instagram"></i>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
+                        <Link
                           target="_blank"
                           href="https://www.linkedin.com"
                         >
                           <i className="fab fa-linkedin-in"></i>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
+                        <Link
                           target="_blank"
                           href="https://twitter.com"
                         >
                           <i className="fab fa-twitter"></i>
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>

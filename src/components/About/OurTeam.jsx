@@ -40,7 +40,7 @@ export default function OurTeam() {
                                 <div className="st-team-member theme-one wow fadeInUp" data-wow-delay="0.2s">
                                     <div className="team-member-wrapper">
                                         <div className="st-team-image">
-                                            <img src="/images/team-4-rect.jpg" alt=""/>
+                                            <Image src="/images/team-4-rect.jpg" alt=""  width={700} height={700}/>
                                             <div className="team-social">
                                                 <Link href="#"><i className="fab fa-instagram"></i></Link>
                                                 <Link href="#"><i className="fab fa-linkedin-in"></i></Link>
@@ -57,7 +57,7 @@ export default function OurTeam() {
                                 <div className="st-team-member theme-one wow fadeInUp" data-wow-delay="0.4s">
                                     <div className="team-member-wrapper">
                                         <div className="st-team-image">
-                                            <img src="/images/team-5-rect.jpg" alt=""/>
+                                            <Image src="/images/team-5-rect.jpg" alt=""  width={700} height={700}/>
                                             <div className="team-social">
                                                 <Link href="#"><i className="fab fa-facebook-f"></i></Link>
                                                 <Link href="#"><i className="fab fa-twitter"></i></Link>
@@ -75,7 +75,7 @@ export default function OurTeam() {
                                 <div className="st-team-member theme-one wow fadeInUp" data-wow-delay="0.6s">
                                     <div className="team-member-wrapper">
                                         <div className="st-team-image">
-                                            <img src="/images/team-2-rect.jpg" alt=""/>
+                                            <Image src="/images/team-2-rect.jpg" alt="" width={700} height={700}/>
                                             <div className="team-social">
                                                 <Link href="#"><i className="fab fa-facebook-f"></i></Link>
                                                 <Link href="#"><i className="fab fa-twitter"></i></Link>

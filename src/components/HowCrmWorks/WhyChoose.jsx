@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 export default function WhyChoose() {
@@ -24,7 +25,7 @@ export default function WhyChoose() {
           <div className="col-lg-4">
             <div className="icon-box theme-two wow fadeInUp">
               <div className="icon">
-                <img src="images/default-color/icon-9.svg" alt="" />
+                <Image src="/images/default-color/icon-9.svg" alt="" width={80} height={80}/>
               </div>
               <div className="text">
                 <h4>Fast & Reliable</h4>
@@ -35,7 +36,7 @@ export default function WhyChoose() {
           <div className="col-lg-4">
             <div className="icon-box theme-two wow fadeInLeft">
               <div className="icon">
-                <img src="images/default-color/icon-8.svg" alt="" />
+                <Image src="/images/default-color/icon-8.svg" alt="" width={80} height={80}/>
               </div>
               <div className="text">
                 <h4>Team Collaboration</h4>
@@ -49,7 +50,7 @@ export default function WhyChoose() {
           <div className="col-lg-4">
             <div className="icon-box theme-two wow fadeInRight">
               <div className="icon">
-                <img src="images/default-color/icon-10.svg" alt="" />
+                <Image src="/images/default-color/icon-10.svg" alt="" width={80} height={80}/>
               </div>
               <div className="text">
                 <h4>Secure & Scalable</h4>

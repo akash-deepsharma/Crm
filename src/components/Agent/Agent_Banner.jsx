@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Agent_Modal from "../Common/Agent_Modal";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Agent_Banner() {
   const [showModal, setShowModal] = useState(false);
@@ -18,51 +20,51 @@ export default function Agent_Banner() {
     <>
       <div className="agent_banner section-padding">
         <div className="content-liner">
-          <img
+          <Image
             src="https://cdn.prod.website-files.com/610004329b339defd1cf0578/646632d2d6469e83d4c856b5_Coin%20left.svg"
-            alt=""
+            alt="" width={100} height={100}
             className="coin-left"
           />
-          <img
+          <Image
             src="https://cdn.prod.website-files.com/610004329b339defd1cf0578/646632d3d6469e83d4c856e6_Coin%20right.svg"
-            alt=""
+            alt="" width={100} height={100}
             className="coin-right"
           />
-          <img
+          <Image
             src="https://cdn.prod.website-files.com/610004329b339defd1cf0578/66fa663cb6d33c088760af9b_Underline.svg"
-            alt=""
+            alt="" width={180} height={180}
             className="underline"
           />
           <h1 className="h1">Partner with Guidde</h1>
 
           <div className="span affiliate-n">
-            <img
+            <Image
               src="https://cdn.prod.website-files.com/610004329b339defd1cf0578/646632d216916f25c3a8fd48_Lines%20left.svg"
               alt=""
-              className="lines-right-n"
+              className="lines-right-n"  width={60} height={60}
             />
-            <img
+            <Image
               src="https://cdn.prod.website-files.com/610004329b339defd1cf0578/646632d3fed35c222288967e_Lines%20right.svg"
               alt=""
-              className="lines-left-n"
+              className="lines-left-n" width={60} height={60}
             />
             <h4 className="white-txt-n center affiliate-c">
               Combine forces with Guidde and unlock new opportunities for growth
             </h4>
           </div>
 
-          <a
+          <Link
             href="#"
             onClick={handleOpenModal}
             className="button-tertiary-white stroke-buttons r-12 w-inline-block"
           >
             <div>Become an Agent</div>
-          </a>
+          </Link>
 
-          <img
+          <Image
             src="https://cdn.prod.website-files.com/610004329b339defd1cf0578/646632d3c84904467df096dd_Thumb%20up.svg"
             alt=""
-            className="thumb-up-n"
+            className="thumb-up-n"  width={60} height={60}
           />
         </div>
       </div>

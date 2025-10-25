@@ -39,10 +39,11 @@ export default function Screenshot() {
         <div className="row clearfix">
           <div className="col-lg-12">
             <div className="ss-wrapper text-center relative">
-              <img
+              <Image
                 className="laptop-img-bg mx-auto"
-                src="images/laptop-screen.png"
+                src="/images/laptop-screen.png"
                 alt="Laptop Background"
+                width={1400} height={1400}
               />
 
               <div className="screenshot-slider mt-5">
