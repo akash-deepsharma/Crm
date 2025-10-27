@@ -12,7 +12,7 @@ export default function page() {
     <>
       <InnerPageBanner data={bannerData} />
 
-      <div id="main-wrapper" className="page-wrapper wow fadeInUp bg-light">
+      <div id="main-wrapper" className="page-wrapper wow fadeInUp">
         <div className="service-section section-padding">
           <div className="container">
             <div className="row clearfix justify-content-center">

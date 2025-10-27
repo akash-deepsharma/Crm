@@ -8,6 +8,7 @@ import HeroBanner from "@/components/Home/HeroBanner";
 import Pricing from "@/components/Home/Pricing";
 import Screenshot from "@/components/Home/Screenshot";
 import Testimonials from "@/components/Home/Testimonials";
+import UserTypes from "@/components/Home/UserTypes";
 
 export default function Home() {
 
@@ -20,6 +21,7 @@ export default function Home() {
                 <Screenshot/>
                 <Pricing/>
                 <Testimonials/>
+                <UserTypes/>
                 <BlogHome/>
                 <Faq/>
     </>

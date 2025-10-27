@@ -152,18 +152,18 @@ export default function Header() {
             <li className={`menu-item ${pathname === '/features' ? 'active' : ''}`}><Link href="/features">Features</Link></li>
             <li className="menu-item"><Link href="/contact" onClick={handleOpenModal}>Book a Session</Link></li>
             <li className="menu-item"><Link href="/pricing">Pricing</Link></li>
-            <li className="menu-item"><Link href="/contact">Demo</Link></li>
+            {/* <li className="menu-item"><Link href="/contact">Demo</Link></li> */}
             <li className="menu-item"><Link href="/login">Free Trial</Link></li>
             <li className="menu-item menu-item-has-children mega-menu">
               <Link href="#">Quick View</Link>
               <ul className="sub-menu mega-menu-inner">
                 <li className="menu-item col-title">
-                  <Link href="services">Services</Link>
+                  <Link href="services">Features</Link>
                   <ul className="sub-menu">
-                    <li className="menu-item"><Link href="#!">Services Software</Link></li>
-                    <li className="menu-item"><Link href="#!">Services</Link></li>
-                    <li className="menu-item"><Link href="#!">Services</Link></li>
-                    <li className="menu-item"><Link href="#!">Services</Link></li>
+                    <li className="menu-item"><Link href="#!">Features Software</Link></li>
+                    <li className="menu-item"><Link href="#!">Features</Link></li>
+                    <li className="menu-item"><Link href="#!">Features</Link></li>
+                    <li className="menu-item"><Link href="#!">Features</Link></li>
                   </ul>
                 </li>
                 <li className="menu-item col-title">
@@ -187,9 +187,9 @@ export default function Header() {
                 <li className="menu-item col-title">
                   <Link href="#">Another Element</Link>
                   <ul className="sub-menu">
-                    <li className="menu-item"><Link href="#!">Support</Link></li>
+                    <li className="menu-item"><Link href="/support">Support</Link></li>
                     <li className="menu-item"><Link href="/pricing">Pricing</Link></li>
-                    <li className="menu-item"><Link href="#!">Element 3</Link></li>
+                    <li className="menu-item"><Link href="/blogs">Blog</Link></li>
                     <li className="menu-item"><Link href="#!">Element 4</Link></li>
                   </ul>
                 </li>

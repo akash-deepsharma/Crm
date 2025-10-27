@@ -18,7 +18,7 @@ export async function GET() {
     "pricing",
     "privacy-policy",
     "return-cancellation",
-    "services",
+    "features",
     "subscription",
     "support",
     "terms-and-conditions"

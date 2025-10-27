@@ -1,10 +1,14 @@
-import React from "react";
+import React, { use } from "react";
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import BlogCard from "@/components/Blogs/BlogCard";
 import BlogSidebar from "@/components/Blogs/BlogSidebar";
 import Image from "next/image";
+import { Base_url, Image_url } from "@/app/Config/config";
 
 export default function page({ params }) {
+  console.log( "base url ", Base_url , Image_url)
+
+  
   const blogdata = [
     {
       id: 1,
@@ -175,7 +179,7 @@ export default function page({ params }) {
     },
   ];
 
-  const { slug } = params;
+const { slug } = use(params);
   const blogItem = blogdata.find((item) => item.slug === slug);
 
   console.log(slug, "slug");
@@ -187,9 +191,8 @@ export default function page({ params }) {
 
   return (
     <>
-      <InnerPageBanner data={bannerData} />
 
-     
+      <InnerPageBanner data={bannerData} />
 
       <div className="section-padding">
         <div className="container">
