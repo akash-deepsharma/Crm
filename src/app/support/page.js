@@ -9,110 +9,15 @@ export default function page() {
     pageName: "Support",
     pageTitle: "Customer Support Services",
   };
-
-useEffect(() => {
-    // bootstrap JS (if needed)
-    import("bootstrap/dist/js/bootstrap.bundle.min.js");
-
-    const headerSelectorCandidates = [".site-header", ".navbar", "header", ".header", "#header"];
-    let headerSelector = headerSelectorCandidates.find(sel => document.querySelector(sel)) || null;
-
-    const getHeaderHeight = () => {
-      if (headerSelector) {
-        const el = document.querySelector(headerSelector);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          return rect.height;
-        }
-      }
-      return 100;
-    };
-
-    const scrollToElementWithOffset = (el, offset, smooth = true) => {
-      const elRect = el.getBoundingClientRect();
-      const absoluteElementTop = window.pageYOffset + elRect.top;
-      const targetY = Math.max(0, absoluteElementTop - offset);
-
-      window.scrollTo({
-        top: targetY,
-        behavior: smooth ? "smooth" : "auto",
-      });
-
-      const prevTabIndex = el.getAttribute("tabindex");
-      if (prevTabIndex === null) {
-        el.setAttribute("tabindex", "-1");
-        el.focus({ preventScroll: true });
-        window.setTimeout(() => el.removeAttribute("tabindex"), 1000);
-      } else {
-        el.focus({ preventScroll: true });
-      }
-    };
-
-    const handleHash = (rawHash, smooth = true) => {
-      if (!rawHash) return;
-      const id = rawHash.startsWith("#") ? rawHash.slice(1) : rawHash;
-      if (!id) return;
-
-      const target = document.getElementById(id);
-      if (!target) return;
-
-      const headerHeight = getHeaderHeight();
-      scrollToElementWithOffset(target, headerHeight, smooth);
-    };
-
-    const onDocumentClick = (e) => {
-      const a = e.target.closest && e.target.closest("a[href^='#']");
-      if (!a) return;
-      const href = a.getAttribute("href");
-      if (!href || href === "#") return;
-
-      e.preventDefault();
-
-      const id = href.startsWith("#") ? href : `#${href}`;
-      if (history.pushState) {
-        history.pushState(null, "", id);
-      } else {
-        location.hash = id;
-      }
-
-      handleHash(id, true);
-    };
-
-    const onInitialLoad = () => {
-      if (location.hash) {
-        setTimeout(() => handleHash(location.hash, false), 50);
-      }
-    };
-
-    const onHashChange = () => {
-      setTimeout(() => handleHash(location.hash, true), 10);
-    };
-
-    document.addEventListener("click", onDocumentClick);
-    window.addEventListener("hashchange", onHashChange);
-    onInitialLoad();
-
-    const headerObserver = new MutationObserver(() => {
-      headerSelector = headerSelectorCandidates.find(sel => document.querySelector(sel)) || headerSelector;
-    });
-    headerObserver.observe(document.documentElement, { childList: true, subtree: true });
-
-    return () => {
-      document.removeEventListener("click", onDocumentClick);
-      window.removeEventListener("hashchange", onHashChange);
-      headerObserver.disconnect();
-    };
-  }, []);
-    
+  useEffect(() => {
+      import("bootstrap/dist/js/bootstrap.bundle.min.js");
+    }, []);
     
   return (
       <div>
         <InnerPageBanner data={bannerData}/>
 
        <Support_items/>
-
-
-
 
    <div className="faq-section section-padding">
   <div className="container">
