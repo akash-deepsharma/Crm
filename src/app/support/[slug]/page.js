@@ -3,7 +3,7 @@ import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import Link from "next/link";
 import React, { use, useEffect } from "react";
 
-export default function SupportDetailPage({ params }) {
+export default function page({ params }) {
   const { slug } = use(params);
 
   // Define FAQ data by slug

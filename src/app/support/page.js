@@ -9,9 +9,6 @@ export default function page() {
     pageName: "Support",
     pageTitle: "Customer Support Services",
   };
-  // useEffect(() => {
-  //     import("bootstrap/dist/js/bootstrap.bundle.min.js");
-  //   }, []);
 
 useEffect(() => {
     // bootstrap JS (if needed)
