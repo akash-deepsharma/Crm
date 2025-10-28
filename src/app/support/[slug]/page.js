@@ -1,13 +1,9 @@
-"use client";
-import React, { useEffect, use } from "react";
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import Link from "next/link";
 
-export default function page({ params }) {
- // ✅ Unwrap the params Promise
-  const { slug } = use(params);
+export default async function page({ params }) {
+  const { slug } = params;
 
-  // Define FAQ data by slug
   const faqData = {
     "setting-options": {
       title: "Setting Options",
@@ -51,12 +47,6 @@ export default function page({ params }) {
   };
 
   const supportItem = faqData[slug];
-
-  useEffect(() => {
-    import("bootstrap/dist/js/bootstrap.bundle.min.js");
-    if (supportItem) document.title = `${supportItem.title} | Support`;
-  }, [slug, supportItem]);
-
   if (!supportItem) {
     return <div className="text-center py-5">Support topic not found.</div>;
   }
@@ -69,7 +59,6 @@ export default function page({ params }) {
   return (
     <div>
       <InnerPageBanner data={bannerData} />
-
       <div className="faq-section section-padding">
         <div className="container">
           <div className="row">
