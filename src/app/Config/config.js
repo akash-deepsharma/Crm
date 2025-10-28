@@ -1,5 +1,11 @@
+import axios from "axios";
 
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-
-export const Base_url = "https://paleturquoise-gorilla-338181.hostingersite.com/api/";
-export const Image_url = "https://paleturquoise-gorilla-338181.hostingersite.com/public/storage/";
+// ✅ axios instance
+export const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});

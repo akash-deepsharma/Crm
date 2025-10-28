@@ -1,187 +1,59 @@
-import React from "react";
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
-import BlogCard from "@/components/Blogs/BlogCard";
 import BlogSidebar from "@/components/Blogs/BlogSidebar";
 import Image from "next/image";
+import { getSingleBlog, getBlogs } from "@/ApiCall/blogApi";
+import { notFound } from "next/navigation";
 
-export default function page({ params }) {
-  const blogdata = [
-    {
-      id: 1,
-      category: "Software",
-      date: "August 11, 2020",
-      title:
-        "20 Questions You Should Always Ask About Security You Should Always Ask About Security Software Before Buying It.",
-      image: "/images/large-thumb-3.jpg",
-      slug: "20-Questions-You-Should-Always-Ask-About-Security-You-Should-Always-Ask-About-Security-Software-Before-Buying-It",
-      author: "Tech Alphonic Team",
-      tags: [
-        "Artificial Intelligence",
-        "Business",
-        "Automation",
-        "Machine Learning",
+export async function generateMetadata({ params }) {
+  const slug = params.slug;
+  const blog = await getSingleBlog(slug);
+
+  if (!blog || !blog.data) {
+    return {
+      title: "Blog Not Found | My Website",
+      description: "The requested blog post could not be found.",
+    };
+  }
+
+  const blogItem = blog.data;
+
+  return {
+    title: blogItem.meta_title || blogItem.title,
+    description: blogItem.meta_description || blogItem.excerpt || blogItem.title,
+    keywords: blogItem.meta_keywords || "blog, articles, news",
+    openGraph: {
+      title: blogItem.meta_title || blogItem.title,
+      description: blogItem.meta_description || blogItem.excerpt || "",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_MEDIA_PATH}/${blogItem.featured_image}`,
+          width: 1200,
+          height: 630,
+          alt: blogItem.title,
+        },
       ],
-      readTime: "6 min read",
-      content: `
-      <div className="blog-detail-content">
-  <p>
-    Artificial Intelligence (AI) has become a transformative force in modern business operations. 
-    From customer service automation to predictive analytics, AI is driving efficiency and innovation across industries.
-  </p>
-
-  <h3>1. Enhancing Decision-Making</h3>
-  <p>
-    Businesses are leveraging AI-driven data analytics to make faster and more accurate decisions. 
-    Machine learning algorithms analyze vast datasets to uncover hidden patterns, providing insights that improve strategy and forecasting.
-  </p>
-
-  <h3>2. Automating Routine Processes</h3>
-  <p>
-    AI-powered automation tools reduce human workload by handling repetitive tasks such as data entry, scheduling, and report generation. 
-    This allows teams to focus on creative and strategic activities that add more value.
-  </p>
-
-  <h3>3. Improving Customer Experience</h3>
-  <p>
-    Chatbots and virtual assistants powered by natural language processing (NLP) are redefining customer service. 
-    They provide instant responses, personalize interactions, and are available 24/7, leading to higher satisfaction levels.
-  </p>
-
-  <h3>4. Predicting Market Trends</h3>
-  <p>
-    Predictive analytics models can forecast demand, detect risks, and identify new market opportunities. 
-    Businesses can use these insights to stay ahead of competitors and make data-driven decisions.
-  </p>
-
-  <h3>Conclusion</h3>
-  <p>
-    AI continues to revolutionize business operations by improving efficiency, accuracy, and customer engagement. 
-    Companies that integrate AI strategically are setting themselves up for long-term success in a rapidly evolving digital world.
-  </p>
-</div>
-
-    `,
     },
-    {
-      id: 2,
-      category: "Technology",
-      date: "September 2, 2020",
-      title:
-        "How Artificial Intelligence Is Revolutionizing Modern Business Operations.",
-      image: "/images/large-thumb-2.jpg",
-      slug: "How-Artificial-Intelligence-Is-Revolutionizing-Modern-Business-Operations",
-      author: "Tech Alphonic Team",
-      tags: [
-        "Artificial Intelligence",
-        "Business",
-        "Automation",
-        "Machine Learning",
-      ],
-      readTime: "6 min read",
-      content: `
-      <div className="blog-detail-content">
-  <p>
-    Artificial Intelligence (AI) has become a transformative force in modern business operations. 
-    From customer service automation to predictive analytics, AI is driving efficiency and innovation across industries.
-  </p>
-
-  <h3>1. Enhancing Decision-Making</h3>
-  <p>
-    Businesses are leveraging AI-driven data analytics to make faster and more accurate decisions. 
-    Machine learning algorithms analyze vast datasets to uncover hidden patterns, providing insights that improve strategy and forecasting.
-  </p>
-
-  <h3>2. Automating Routine Processes</h3>
-  <p>
-    AI-powered automation tools reduce human workload by handling repetitive tasks such as data entry, scheduling, and report generation. 
-    This allows teams to focus on creative and strategic activities that add more value.
-  </p>
-
-  <h3>3. Improving Customer Experience</h3>
-  <p>
-    Chatbots and virtual assistants powered by natural language processing (NLP) are redefining customer service. 
-    They provide instant responses, personalize interactions, and are available 24/7, leading to higher satisfaction levels.
-  </p>
-
-  <h3>4. Predicting Market Trends</h3>
-  <p>
-    Predictive analytics models can forecast demand, detect risks, and identify new market opportunities. 
-    Businesses can use these insights to stay ahead of competitors and make data-driven decisions.
-  </p>
-
-  <h3>Conclusion</h3>
-  <p>
-    AI continues to revolutionize business operations by improving efficiency, accuracy, and customer engagement. 
-    Companies that integrate AI strategically are setting themselves up for long-term success in a rapidly evolving digital world.
-  </p>
-</div>
-
-    `,
+    twitter: {
+      card: "summary_large_image",
+      title: blogItem.meta_title || blogItem.title,
+      description: blogItem.meta_description || blogItem.excerpt || "",
+      images: [`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${blogItem.featured_image}`],
     },
-    {
-      id: 3,
-      category: "Development",
-      date: "October 10, 2020",
-      title: "10 Best Practices for Writing Clean and Scalable React Code.",
-      image: "/images/large-thumb-1.jpg",
-      slug: "10-Best-Practices-for-Writing-Clean-and-Scalable-React-Code",
-      author: "Tech Alphonic Team",
-      tags: [
-        "Artificial Intelligence",
-        "Business",
-        "Automation",
-        "Machine Learning",
-      ],
-      readTime: "6 min read",
-      content: `
-      <div className="blog-detail-content">
-  <p>
-    Artificial Intelligence (AI) has become a transformative force in modern business operations. 
-    From customer service automation to predictive analytics, AI is driving efficiency and innovation across industries.
-  </p>
+  };
+}
 
-  <h3>1. Enhancing Decision-Making</h3>
-  <p>
-    Businesses are leveraging AI-driven data analytics to make faster and more accurate decisions. 
-    Machine learning algorithms analyze vast datasets to uncover hidden patterns, providing insights that improve strategy and forecasting.
-  </p>
+export default async function Page({ params }) {
+  const slug = params.slug;
+  const blog = await getSingleBlog(slug);
 
-  <h3>2. Automating Routine Processes</h3>
-  <p>
-    AI-powered automation tools reduce human workload by handling repetitive tasks such as data entry, scheduling, and report generation. 
-    This allows teams to focus on creative and strategic activities that add more value.
-  </p>
+  if (!blog || !blog.data) return notFound();
 
-  <h3>3. Improving Customer Experience</h3>
-  <p>
-    Chatbots and virtual assistants powered by natural language processing (NLP) are redefining customer service. 
-    They provide instant responses, personalize interactions, and are available 24/7, leading to higher satisfaction levels.
-  </p>
-
-  <h3>4. Predicting Market Trends</h3>
-  <p>
-    Predictive analytics models can forecast demand, detect risks, and identify new market opportunities. 
-    Businesses can use these insights to stay ahead of competitors and make data-driven decisions.
-  </p>
-
-  <h3>Conclusion</h3>
-  <p>
-    AI continues to revolutionize business operations by improving efficiency, accuracy, and customer engagement. 
-    Companies that integrate AI strategically are setting themselves up for long-term success in a rapidly evolving digital world.
-  </p>
-</div>
-
-    `,
-    },
-  ];
-
-  const { slug } = params;
-  const blogItem = blogdata.find((item) => item.slug === slug);
-
-  console.log(slug, "slug");
+  const blogItem = blog.data;
+  const blogs = await getBlogs(); // For sidebar
 
   const bannerData = {
-    pageName: `${blogItem.title}`,
+    pageName: blogItem.title || "Blog Detail",
     pageTitle: "Latest News & Articles",
   };
 
@@ -189,28 +61,52 @@ export default function page({ params }) {
     <>
       <InnerPageBanner data={bannerData} />
 
-     
-
       <div className="section-padding">
         <div className="container">
           <div className="row clearfix">
+            {/* Blog Detail Section */}
             <div className="col-lg-8">
               <article className="post news-grid">
-                <div className="post-thumbnail">
-                  <Image src="/images/large-thumb-3.jpg" alt=""  width={1200} height={1200}/>
-                </div>
-                <div className="post-meta">
+                {blogItem.featured_image && (
+                  <div className="post-thumbnail">
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${blogItem.featured_image}`}
+                      alt={blogItem.title || "Blog Image"}
+                      width={1200}
+                      height={700}
+                      className="img-fluid rounded"
+                    />
+                  </div>
+                )}
+
+                <div className="post-meta mt-3">
                   <span className="entry-meta entry-category">
-                    <a href="#">{blogItem.category}</a>
+                    <a href="#">
+                      {blogItem.category?.name || "Uncategorized"}
+                    </a>
                   </span>
                   <span className="entry-meta entry-date">
-                    <a href="#">{blogItem.date}</a>
+                    <a href="#">
+                      {new Date(blogItem.created_at).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </a>
                   </span>
                 </div>
-                <div className="blog-detail-body"  dangerouslySetInnerHTML={{ __html: blogItem.content }}/>
+
+                <div
+                  className="blog-detail-body"
+                  dangerouslySetInnerHTML={{ __html: blogItem.content }}
+                />
               </article>
             </div>
-            <BlogSidebar blogdata={blogdata} />
+
+            {/* Sidebar Section */}
+            <div className="col-lg-4">
+              <BlogSidebar blogdata={blogs?.data || []} />
+            </div>
           </div>
         </div>
       </div>

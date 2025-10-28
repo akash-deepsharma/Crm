@@ -1,29 +1,35 @@
+
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 export default function BlogSidebar({blogdata}) {
-
+console.log( "blog data", blogdata)
   return (
-    <div className="col-lg-4">
               <div className="sidebar right-side">              
                 <div className="widget widget_recent_entries">
                   <div className="widget-title">
                     <h3 className="title">Recent Post</h3>
                   </div>
                   <ul className="st-recent-posts">
-                    {blogdata.slice(0,3).map((item)=>(
+                    {blogdata?.data.slice(0,3).map((item)=>(
                       <li className="rp-item" key={item.id}>
-                      <a href={`/blogs/${item.slug}`}>
+                      <a href={`/blogs/${item.slug}`} className='d-flex'>
 
                         <div className="article-img">
-                          <Image src={item.image} alt=""  width={400} height={400}/>
+                          <Image src={`${process?.env?.NEXT_PUBLIC_MEDIA_PATH}/${item?.featured_image}`} alt=""  width={400} height={400}/>
                         </div>
                         <div className="article-details">
                           <h4 className="entry-title">
                             {item.title}
                           </h4>
-                          <span className="rp-date">{item.date}</span>
+                          <span className="rp-date">
+                              {new Date(item?.created_at).toLocaleDateString("en-GB", {
+                                day: "2-digit",
+                                month: "short",
+                                year: "numeric",
+                              })}
+                          </span>
                         </div>
                       </a>
                     </li>
@@ -74,6 +80,5 @@ export default function BlogSidebar({blogdata}) {
                   </div>
                 </div>
               </div>
-            </div>
   )
 }
