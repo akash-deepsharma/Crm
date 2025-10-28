@@ -1,9 +1,10 @@
 "use client";
+import React, { useEffect, use } from "react";
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import Link from "next/link";
-import React, { use, useEffect } from "react";
 
 export default function page({ params }) {
+ // ✅ Unwrap the params Promise
   const { slug } = use(params);
 
   // Define FAQ data by slug
@@ -53,10 +54,8 @@ export default function page({ params }) {
 
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
-    if (supportItem) {
-      document.title = `${supportItem.title} | Support`;
-    }
-  }, [slug]);
+    if (supportItem) document.title = `${supportItem.title} | Support`;
+  }, [slug, supportItem]);
 
   if (!supportItem) {
     return <div className="text-center py-5">Support topic not found.</div>;
@@ -91,7 +90,7 @@ export default function page({ params }) {
                     </div>
                     <div
                       id={`collapse${i}`}
-                      className={`panel-collapse show`}
+                      className="panel-collapse show"
                       role="tabpanel"
                       aria-labelledby={`heading${i}`}
                     >
