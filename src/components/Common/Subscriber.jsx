@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
-import { requestPostApi } from "@/ApiCall/newsletterApi";
+import React, { useEffect, useState } from "react";
+import { getnewsletterData, requestPostApi } from "@/ApiCall/newsletterApi";
 
 export default function Subscriber() {
   const [formData, setFormData] = useState({ email: "" });
@@ -17,7 +17,7 @@ export default function Subscriber() {
     setLoading(true);
 
     try {
-      console.log("Submitting form data:", formData);
+      // console.log("Submitting form data:", formData);
       const response = await requestPostApi(formData);
 
       if (response.status === "success") {
@@ -36,6 +36,24 @@ export default function Subscriber() {
     }
   };
 
+
+const [dataNewsletter, setdataNewsletter] = useState([]);
+
+const dataNews = dataNewsletter[0]
+// console.log("datanewsletter", dataNews)
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getnewsletterData();
+      // console.log("✅ datanewsletter:", data);
+      if (data?.status === "success") {
+        setdataNewsletter(data.data || []);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <div className="subscribe-section section-padding pt-0">
       <div className="container">
@@ -43,7 +61,7 @@ export default function Subscriber() {
           <div className="col-lg-6">
             <div className="image-wrapper">
               <Image
-                src="/images/default-color/newsletter-img.png"
+                src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${dataNews?.image}`}
                 alt=""
                 className="img-fluid"
                 width={500}
@@ -54,13 +72,9 @@ export default function Subscriber() {
           <div className="col-lg-6">
             <div className="heading-wrapper with-separator">
               <h2 className="h1">
-                Subscribe to our <span>Newsletter</span>
+                {dataNews?.heading} <span>{dataNews?.sub_heading}</span>
               </h2>
-              <div className="lead-text">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                  finibus mi id elit gravida, quis tincidunt purus fringilla.
-                </p>
+              <div className="lead-text" dangerouslySetInnerHTML={{ __html: dataNews?.content }}>
               </div>
             </div>
             <div className="subscribe-form-wrapper">

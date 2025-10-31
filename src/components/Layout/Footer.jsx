@@ -11,7 +11,7 @@ export default async function Footer() {
     const ContactContent = await contactGetApi();
 
 const contactData = ContactContent?.data[0] || [];
-console.log("footer consolr ", contactData)
+// console.log("footer consolr ", contactData)
   return (
       <>
      <footer className="site-footer footer-theme-one">

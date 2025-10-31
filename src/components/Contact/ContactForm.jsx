@@ -47,6 +47,7 @@ export default function ContactForm({ onClose }) {
     }
   };
 
+
   return (
     <div className="contact-form">
       <form method="post" onSubmit={handleSubmit}>
