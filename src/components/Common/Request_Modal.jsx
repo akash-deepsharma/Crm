@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/components/RequestModal.css";
-import { requestPostApi } from "@/ApiCall/requestPostApi";
+import { requestPostApi, requestGetApi } from "@/ApiCall/requestPostApi";
 
 export default function Request_Modal({ onClose }) {
   const [formData, setFormData] = useState({
@@ -13,6 +13,7 @@ export default function Request_Modal({ onClose }) {
   });
 
   const [loading, setLoading] = useState(false);
+  const [demoRequests, setDemoRequests] = useState([]); // state for GET data
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -41,6 +42,19 @@ export default function Request_Modal({ onClose }) {
     }
   };
 
+ 
+  useEffect(() => {
+    async function fetchData() {
+      const data = await requestGetApi();
+      console.log("✅ First get data:", data);
+      if (data?.status === "success") {
+        setDemoRequests(data?.data || []);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <div className="modal request_modal show d-flex justify-content-center align-items-center bg-opacity-75 bg-dark">
       <div className="modal-dialog modal-xl modal-dialog-centered w-100 px-3">
@@ -60,13 +74,11 @@ export default function Request_Modal({ onClose }) {
                     <div className="about-section align-items-center h-100">
                       <div className="heading-wrapper with-separator">
                         <h2 className="h1">
-                          <span>Transform your Billing</span> with exceptional guidance
+                          <span>{demoRequests?.heading}</span> {demoRequests?.sub_heading}
                         </h2>
                       </div>
                       <div className="text-wrapper">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales dictum viverra. Nam gravida dignissim eros.
-                        </p>
+                        <p dangerouslySetInnerHTML={{ __html: demoRequests?.content }}></p>
                         <ul className="list-style-one">
                           <li>
                             <h2 className="h5">45,000+</h2>
@@ -174,6 +186,8 @@ export default function Request_Modal({ onClose }) {
                         {loading ? "Submitting..." : "Submit Application"}
                       </button>
                     </form>
+
+                   
                   </div>
                 </div>
               </div>

@@ -1,26 +1,22 @@
-"use client";
+// "use client";
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
-import Request_Modal from '../Common/Request_Modal';
+import React from 'react'
+import FooterActionsClient from './FooterActionsClient';
+import { contactGetApi } from '@/ApiCall/contactApi';
+import NewsletterFooter from './NewsletterFooter';
 
-export default function Footer() {
-        const [showModal, setShowModal] = useState(false);
-                
-                const handleOpenModal = (e) => {
-                    e.preventDefault();
-                    setShowModal(true);
-                };
-                
-                const handleCloseModal = () => {
-                    setShowModal(false);
-                };
+export default async function Footer() {
+
+    const ContactContent = await contactGetApi();
+
+const contactData = ContactContent?.data[0] || [];
+console.log("footer consolr ", contactData)
   return (
       <>
      <footer className="site-footer footer-theme-one">
                 <div className="container">
                     <div className="footer-logo">
-                        {/* <Image src="/images/d-code-logo-light.svg" alt="crm logo" width={150} height={50}/> */}
                         <Link href="/"> 
                             <Image src="/images/logo-w.png" alt="crm logo" width={150} height={80} style={{height:'auto', width:'auto'}} />
                         </Link>
@@ -35,9 +31,9 @@ export default function Footer() {
                                     <div className="text-widget">
                                         <div className="contact-info">
                                             <ul>
-                                                <li className="email-field"><Link href="mailto:;Support@crm.com">Support@crm.com</Link></li>
-                                                <li className="phone-field"><Link href="tel:- 9899184918">+91 9899184918 </Link></li>
-                                                <li className="address-field">C 203, SECTOR 63, <br />NOIDA, NEAR POLICE CHOWKI, G.B. NAGAR, U.P. 201301</li>
+                                                <li className="email-field"><Link href={`mailto:${contactData.email}`}>{contactData.email}</Link></li>
+                                                <li className="phone-field"><Link href={`tel:-${contactData.phone} }`}> {contactData.phone} </Link></li>
+                                                <li className="address-field">{contactData.address}</li>
                                             </ul>
                                         </div>
                                         <div className="social-media-links">
@@ -86,23 +82,8 @@ export default function Footer() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-2 col-md-4">
-                                <div className="widget">
-                                    <div className="widget-title">
-                                        <h3 className="title">Resources</h3>
-                                    </div>
-                                    <div className="text-widget">
-                                        <div className="footer-nav">
-                                            <ul>
-                                                <li><Link href="#">Login</Link></li>
-                                                <li><Link href="#">Pricing</Link></li>
-                                                <li><Link href="#" onClick={handleOpenModal} >Request A Demo</Link></li>
-                                                <li><Link href="/agent">Becomer a saller</Link></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                           <FooterActionsClient />
                             <div className="col-lg-3">
                                 <div className="widget">
                                     <div className="widget-title">
@@ -111,12 +92,7 @@ export default function Footer() {
                                     <div className="text-widget">
                                         <div className="newsletter-form">
                                             <p>Subscribe to our newsletter for regular updates</p>
-                                            <form method="post">
-                                                <div className="form-group">
-                                                    <input type="email" className="form-control" id="EmailInout" placeholder="Enter email address" required="" />
-                                                </div>
-                                                <input type="submit" className="btn btn-primary btn-light" value="Subscribe Now!"/>
-                                            </form>
+                                            <NewsletterFooter/>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +106,6 @@ export default function Footer() {
                     </div>
                 </div>
             </footer>
-            {showModal && <Request_Modal onClose={handleCloseModal} />}
 
             </>
   )

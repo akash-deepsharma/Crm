@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 
 export default function BlogSidebar({blogdata}) {
-console.log( "blog data", blogdata)
+// console.log( "blog data", blogdata)
   return (
               <div className="sidebar right-side">              
                 <div className="widget widget_recent_entries">

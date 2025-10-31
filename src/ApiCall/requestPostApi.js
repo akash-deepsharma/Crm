@@ -15,4 +15,18 @@ export async function requestPostApi(formData) {
   }
 }
 
+export async function requestGetApi() {
+  try {
+    const res = await apiClient.get(`/get-demorequest `);
+    console.log("✅ Request GET Response:", res.data);
+    return res.data;
+  } catch (error) {
+    console.error("❌ Error during GET /get-demorequest:", error.response?.data || error.message);
+    return {
+      status: "error",
+      message: error.response?.data?.message || "Something went wrong while fetching data.",
+    };
+  }
+}
+
 

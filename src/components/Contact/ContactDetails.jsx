@@ -1,7 +1,10 @@
 import React from "react";
 import ContactForm from "./ContactForm";
+import Link from "next/link";
 
-export default function ContactDetails() {
+export default function ContactDetails({data}) {
+const contactData = data.data[0] || [];
+
   return (
     <>
       <div className="about-section section-padding">
@@ -19,12 +22,12 @@ export default function ContactDetails() {
                   <div className="content">
                     <h4>Phone</h4>
                     <p>
-                      Our Sales Team available from Mon-Fri, 10:00 am to 6:00 pm
+                      {contactData?.phone_content}
                     </p>
                     <p>
-                      <a className="btn link-btn" href="tel:1234567890">
-                        (123) 456 7890
-                      </a>
+                      <Link className="btn link-btn" href={`tel:${contactData?.phone}`}>
+                        {contactData?.phone}
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -37,12 +40,12 @@ export default function ContactDetails() {
                   <div className="content">
                     <h4>Email</h4>
                     <p>
-                      Our Sales team will get back to in 48-h during standard business hours.
+                      {contactData?.email_content}
                     </p>
                     <p>
-                      <a className="btn link-btn" href="mailto:example@gmail.com">
-                        example@gmail.com
-                      </a>
+                      <Link className="btn link-btn" href={`mailto:${contactData?.email}`}>
+                        {contactData?.email}
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -50,17 +53,12 @@ export default function ContactDetails() {
             </div>
             <div className="col-lg-8">
               <div className="heading-wrapper with-separator">
-                <span className="sub-title">Get in touch</span>
+                <span className="sub-title">{contactData?.sub_heading}</span>
                 <h2 className="h1">
                   <span>Connect</span> with us
                 </h2>
               </div>
-              <div className="text-wrapper">
-                <p>
-                  Please contact us using the details below. For more
-                  information about our services, please visit the corresponding
-                  page on our web.
-                </p>
+              <div className="text-wrapper" dangerouslySetInnerHTML={{ __html: contactData.content }} >
               </div>
               <ContactForm />
             </div>
