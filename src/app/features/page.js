@@ -1,6 +1,7 @@
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import Subscriber from "@/components/Common/Subscriber";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function page() {
@@ -33,7 +34,7 @@ export default function page() {
             </div>
             <div className="row clearfix no-gutters dc-features-group mt-lg-5">
               <div className="col-lg-4 col-md-6 dc-features-item">
-                <a href="/features/slug-any">
+                <Link href="/features/slug-any">
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
@@ -60,10 +61,10 @@ export default function page() {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
               </div>
               <div className="col-lg-4 col-md-6 dc-features-item">
-                <a href="/features/slug-any">
+                <Link href="/features/slug-any">
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
@@ -90,10 +91,10 @@ export default function page() {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
               </div>
               <div className="col-lg-4 col-md-6 dc-features-item">
-                <a href="/features/slug-any">
+                <Link href="/features/slug-any">
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
@@ -120,10 +121,10 @@ export default function page() {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
               </div>
               <div className="col-lg-4 col-md-6 dc-features-item">
-                <a href="/features/slug-any">
+                <Link href="/features/slug-any">
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
@@ -146,10 +147,10 @@ export default function page() {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
               </div>
               <div className="col-lg-4 col-md-6 dc-features-item">
-                <a href="#">
+                <Link href="#">
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
@@ -176,10 +177,10 @@ export default function page() {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
               </div>
               <div className="col-lg-4 col-md-6 dc-features-item">
-                <a href="#">
+                <Link href="#">
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
@@ -206,7 +207,7 @@ export default function page() {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
