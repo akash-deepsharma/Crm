@@ -5,16 +5,6 @@ export const apiClient = axios.create({
 });
 
 
-export async function contactPostApi(formData) {
-  try {
-    const res = await apiClient.post(`/contact`, formData);
-    return res.data;
-  } catch (error) {
-    console.error("Error during  contact request submit:", error);
-    return { status: "error", message: "Something went wrong" };
-  }
-}
-
 export async function contactGetApi() {
   try {
     const res = await apiClient.get(`/contactpage `);
@@ -25,5 +15,14 @@ export async function contactGetApi() {
       status: "error",
       message: error.response?.data?.message || "Something went wrong while fetching data.",
     };
+  }
+}
+export async function contactPostApi(formData) {
+  try {
+    const res = await apiClient.post(`/contact`, formData);
+    return res.data;
+  } catch (error) {
+    console.error("Error during  contact request submit:", error);
+    return { status: "error", message: "Something went wrong" };
   }
 }

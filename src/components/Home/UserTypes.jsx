@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 export default function UserTypes() {
@@ -27,10 +28,10 @@ export default function UserTypes() {
             <div className="features-block theme-five wow fadeInLeft">
               <div className="inner-box">
                 <div className="icon">
-                  <img
+                  <Image
                     className="normal"
-                    src="images/default-color/gradient-icon-1.svg"
-                    alt=""
+                    src="/images/default-color/gradient-icon-1.svg"
+                    alt="" width={100} height={100}
                   />
                 </div>
                 <div className="text">
@@ -48,10 +49,10 @@ export default function UserTypes() {
             <div className="features-block theme-five wow fadeInLeft">
               <div className="inner-box">
                 <div className="icon">
-                  <img
+                  <Image
                     className="normal"
-                    src="images/default-color/gradient-icon-2.svg"
-                    alt=""
+                    src="/images/default-color/gradient-icon-2.svg"
+                    alt="" width={100} height={100}
                   />
                 </div>
                 <div className="text">
@@ -70,10 +71,10 @@ export default function UserTypes() {
             <div className="features-block theme-five wow fadeInLeft">
               <div className="inner-box">
                 <div className="icon">
-                  <img
+                  <Image
                     className="normal"
-                    src="images/default-color/gradient-icon-3.svg"
-                    alt=""
+                    src="/images/default-color/gradient-icon-3.svg"
+                    alt="" width={100} height={100}
                   />
                 </div>
                 <div className="text">
@@ -92,10 +93,10 @@ export default function UserTypes() {
             <div className="features-block theme-five wow fadeInRight">
               <div className="inner-box">
                 <div className="icon">
-                  <img
+                  <Image
                     className="normal"
-                    src="images/default-color/gradient-icon-1.svg"
-                    alt=""
+                    src="/images/default-color/gradient-icon-1.svg"
+                    alt="" width={100} height={100}
                   />
                 </div>
                 <div className="text">
@@ -114,10 +115,10 @@ export default function UserTypes() {
             <div className="features-block theme-five wow fadeInRight">
               <div className="inner-box">
                 <div className="icon">
-                  <img
+                  <Image
                     className="normal"
-                    src="images/default-color/gradient-icon-2.svg"
-                    alt=""
+                    src="/images/default-color/gradient-icon-2.svg"
+                    alt=""  width={100} height={100}
                   />
                 </div>
                 <div className="text">
@@ -136,10 +137,10 @@ export default function UserTypes() {
             <div className="features-block theme-five wow fadeInRight">
               <div className="inner-box">
                 <div className="icon">
-                  <img
+                  <Image
                     className="normal"
-                    src="images/default-color/gradient-icon-3.svg"
-                    alt=""
+                    src="/images/default-color/gradient-icon-3.svg"
+                    alt=""  width={100} height={100}
                   />
                 </div>
                 <div className="text">
@@ -153,7 +154,7 @@ export default function UserTypes() {
               </div>
             </div>
           </div>
-        </div>
+        </div>  
       </div>
     </div>
   )

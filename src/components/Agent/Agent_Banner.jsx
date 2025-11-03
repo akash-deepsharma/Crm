@@ -4,7 +4,7 @@ import Agent_Modal from "../Common/Agent_Modal";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Agent_Banner() {
+export default function Agent_Banner(banner_stepData) {
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = (e) => {
@@ -15,6 +15,7 @@ export default function Agent_Banner() {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+  const banner_data = banner_stepData?.data[0]
 
   return (
     <>
@@ -35,7 +36,7 @@ export default function Agent_Banner() {
             alt="" width={180} height={180}
             className="underline"
           />
-          <h1 className="h1">Partner with Guidde</h1>
+          <h1 className="h1">{banner_data?.heading}</h1>
 
           <div className="span affiliate-n">
             <Image
@@ -49,7 +50,7 @@ export default function Agent_Banner() {
               className="lines-left-n" width={60} height={60}
             />
             <h4 className="white-txt-n center affiliate-c">
-              Combine forces with Guidde and unlock new opportunities for growth
+              {banner_data.sub_heading}
             </h4>
           </div>
 
@@ -58,7 +59,7 @@ export default function Agent_Banner() {
             onClick={handleOpenModal}
             className="button-tertiary-white stroke-buttons r-12 w-inline-block"
           >
-            <div>Become an Agent</div>
+            <div>{banner_data.button_text}</div>
           </Link>
 
           <Image

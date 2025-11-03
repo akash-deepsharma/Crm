@@ -7,13 +7,12 @@ import "../../styles/components/login.css";
 export default function Page() {
   const [showOtpPopup, setShowOtpPopup] = useState(false);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  const [userExists, setUserExists] = useState(null); // null = not checked yet
+  const [userExists, setUserExists] = useState(null); 
   const [phoneEmail, setPhoneEmail] = useState("");
   const inputRefs = useRef([]);
 
   // ✅ Simulated API check for user existence
   const checkUserExists = async (value) => {
-    // Replace this with actual API call
     const existingUsers = ["user1@gmail.com", "9876543210"];
     return existingUsers.includes(value);
   };
@@ -29,7 +28,6 @@ export default function Page() {
       // Show OTP popup for new user
       setShowOtpPopup(true);
     }
-    // If exists, password field is already shown in form
   };
 
   const handleGoogleLogin = async () => {
@@ -41,18 +39,30 @@ export default function Page() {
     }
   };
 
-  // ✅ OTP input handling
+  // ✅ Handle OTP input
   const handleOtpChange = (e, index) => {
     const value = e.target.value.replace(/\D/g, "");
-    if (!value) return;
+
+    // ✅ If user pasted entire OTP
+    if (value.length > 1) {
+      const values = value.split("").slice(0, 6);
+      const newOtp = [...otp];
+      values.forEach((v, i) => (newOtp[i] = v));
+      setOtp(newOtp);
+      const lastIndex = Math.min(values.length - 1, 5);
+      inputRefs.current[lastIndex]?.focus();
+      return;
+    }
 
     const newOtp = [...otp];
     newOtp[index] = value.slice(-1);
     setOtp(newOtp);
 
-    if (index < 5) inputRefs.current[index + 1]?.focus();
+    // Move to next box
+    if (index < 5 && value) inputRefs.current[index + 1]?.focus();
   };
 
+  // ✅ Handle backspace/delete
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" || e.key === "Delete") {
       e.preventDefault();
@@ -63,10 +73,32 @@ export default function Page() {
     }
   };
 
+  // ✅ Handle paste anywhere in OTP
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const paste = e.clipboardData.getData("text").trim();
+    if (!/^\d{1,6}$/.test(paste)) return;
+
+    const values = paste.split("").slice(0, 6);
+    const newOtp = [...otp];
+    values.forEach((v, i) => (newOtp[i] = v));
+    setOtp(newOtp);
+
+    const lastIndex = Math.min(values.length - 1, 5);
+    inputRefs.current[lastIndex]?.focus();
+  };
+
+  // ✅ Close OTP Popup and clear OTP
+  const handleCloseOtpPopup = () => {
+    setShowOtpPopup(false);
+    setOtp(["", "", "", "", "", ""]); // Clear all OTP inputs
+  };
+
   return (
     <div>
       <div className="dc-signin theme-two" style={{ background: "none" }}>
         <div className="signin-wrapper">
+          {/* ✅ LEFT SIDE INTRO */}
           <div className="intro-box">
             <div className="intro-content style-dark">
               <Image
@@ -75,7 +107,7 @@ export default function Page() {
                 alt="Crm"
                 width={200}
                 height={200}
-                style={{filter:'invert(1) brightness(9.5)'}}
+                style={{ filter: "invert(1) brightness(9.5)" }}
               />
               <div className="heading-wrapper">
                 <h2 className="h1">
@@ -83,10 +115,15 @@ export default function Page() {
                 </h2>
               </div>
               <div className="text-wrapper">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales dictum viverra.</p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Aenean sodales dictum viverra.
+                </p>
               </div>
               <div className="btn-wrapper">
-                <a className="btn btn-primary btn-light" href="/about">Discover More</a>
+                <a className="btn btn-primary btn-light" href="/about">
+                  Discover More
+                </a>
               </div>
             </div>
             <div className="st-tab-btn">
@@ -100,6 +137,7 @@ export default function Page() {
             </div>
           </div>
 
+          {/* ✅ RIGHT SIDE FORM */}
           <div className="form-box">
             <div className="st-tab-content">
               <div className="tab-content">
@@ -128,12 +166,11 @@ export default function Page() {
                       </div>
                     )}
 
-                    
-                      <div className="form-group text-center">
-                        <a href="#" className="btn link-btn forgot-link">
-                          Forgot Password?
-                        </a>
-                      </div>
+                    <div className="form-group text-center">
+                      <a href="#" className="btn link-btn forgot-link">
+                        Forgot Password?
+                      </a>
+                    </div>
 
                     <div className="form-group">
                       <button type="submit" className="btn btn-primary btn-full">
@@ -141,7 +178,11 @@ export default function Page() {
                       </button>
                     </div>
 
-                    {!userExists && <div className="or"><span>or</span></div>}
+                    {!userExists && (
+                      <div className="or">
+                        <span>or</span>
+                      </div>
+                    )}
                   </form>
 
                   <div className="form-group">
@@ -153,6 +194,7 @@ export default function Page() {
                       Continue with Google
                     </button>
                   </div>
+
                   <div className="form-group">
                     <button className="btn btn-primary btn-full facebook-btn">
                       Continue with Facebook
@@ -165,17 +207,24 @@ export default function Page() {
         </div>
       </div>
 
-      {/* ✅ OTP Popup */}
+      {/* ✅ OTP POPUP */}
       {showOtpPopup && (
         <div className="otp-overlay">
           <div className="otp-box">
+            <button
+              onClick={handleCloseOtpPopup}
+              className="btn otp-close px-0"
+            >
+              <i className="fa fa-times"></i>
+            </button>
+
             <h3 className="otp-title">OTP VERIFICATION</h3>
             <p className="otp-info">
               An OTP has been sent to <span>{phoneEmail}</span>
             </p>
             <p className="otp-msg">Please enter OTP to verify</p>
 
-            <div className="otp-inputs">
+            <div className="otp-inputs" onPaste={handlePaste}>
               {otp.map((digit, index) => (
                 <input
                   key={index}
@@ -189,12 +238,15 @@ export default function Page() {
                 />
               ))}
             </div>
-            <button
-              onClick={() => setShowOtpPopup(false)}
-              className="btn otp-close px-0"
-            >
-              <i className="fa fa-times"></i>
-            </button>
+
+            <div className="d-flex justify-content-center mt-4">
+              <button
+                className="btn btn-primary "
+                onClick={() => alert(`Entered OTP: ${otp.join("")}`)}
+              >
+                Verify OTP
+              </button>
+            </div>
           </div>
         </div>
       )}

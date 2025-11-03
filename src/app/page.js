@@ -1,5 +1,6 @@
 
 "use client";
+import { getFAQData } from "@/ApiCall/pagesApi";
 import BlogHome from "@/components/Blogs/BlogHome";
 import Faq from "@/components/Common/Faq";
 import About from "@/components/Home/About";
@@ -12,6 +13,7 @@ import UserTypes from "@/components/Home/UserTypes";
 
 export default function Home() {
 
+    
 
   return (
     <> 

@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 export default function BlogCard( data) {
    const blogData = data
-   console.log("blogData", blogData)
+//    console.log("blogData", blogData)
 
   return (
     <div className="article-block category-software">

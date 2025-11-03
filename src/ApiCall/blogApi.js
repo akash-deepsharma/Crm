@@ -7,7 +7,7 @@ export const apiClient = axios.create({
 export async function getBlogs(page = 1, perPage = 10) {
   try {
     const res = await apiClient.get("/blogs", { params: { page, per_page: perPage } });
-    console.log("resdata form Api " , res)
+    // console.log("resdata form Api " , res)
     return res.data;
   } catch (error) {
     console.error("Error fetching blogs:", error);

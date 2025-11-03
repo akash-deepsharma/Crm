@@ -99,36 +99,40 @@ export default function Agent_Modal({ onClose }) {
     }
   };
 
-  // ✅ Submit Form (only if verified)
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+// ✅ Submit Form (only if verified)
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!emailVerified || !phoneVerified) {
-      alert("Please verify your Email and Phone before submitting.");
-      return;
-    }
+  if (!emailVerified || !phoneVerified) {
+    alert("Please verify your Email and Phone before submitting.");
+    return;
+  }
 
-    const formattedData = {
-      full_name: formData.name,
-      email: formData.email,
-      phone_number: formData.phone,
-      location: formData.location,
-      message: formData.message,
-    };
-
-    try {
-      const res = await agentPostApi(formattedData);
-      if (res.status === true) {
-        alert("✅ Agent request submitted successfully!");
-        onClose();
-      } else {
-        alert(res.message || "⚠️ Something went wrong.");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("❌ Failed to submit agent form.");
-    }
+  const formattedData = {
+    full_name: formData.name,
+    email: formData.email,
+    phone_number: formData.phone,
+    location: formData.location,
+    message: formData.message,
   };
+
+  try {
+    const res = await agentPostApi(formattedData);
+
+    if (res.status === true || res.status === "true") {
+      alert("✅ Agent request submitted successfully!");
+      onClose();
+    } else if (res.status === false || res.status === "false") {
+      alert(res.message || "⚠️ Request failed. Please try again.");
+    } else {
+      alert("⚠️ Unexpected response from server.");
+    }
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    alert("❌ Failed to submit agent form.");
+  }
+};
+
 
   return (
     <>

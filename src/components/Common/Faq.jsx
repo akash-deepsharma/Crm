@@ -1,12 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getFaq } from "@/ApiCall/faqApi";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export default function Faq() {
+   const slug = "home-page";
+  const [faqData, setFaqData] = useState([]);
+
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
-  
+
+  // Fetch FAQ data
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getFaq(slug);
+      // console.log("✅ First Faq data:", data);
+      if (data?.status === "success") {
+        setFaqData(data.faq || []);
+      }
+    }
+    fetchData();
+  }, []);
+  // console.log("faq data " , faqData)
+
+
   return (
     <div className="faq-section section-padding">
       <div className="container">
@@ -27,59 +45,39 @@ export default function Faq() {
               aria-multiselectable="true"
             >
               {/* Panel 1 */}
-              <div className="panel panel-default">
-                <div className="panel-heading" role="tab" id="heading0">
-                  <h3 className="panel-title">
-                    <a
-                      className="collapsed"
-                      role="button"
-                      title=""
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapse0"
-                      aria-expanded="false"
-                      aria-controls="collapse0"
-                    >
-                      How can I install/upgrade Dummy Content?
-                    </a>
-                  </h3>
-                </div>
-                <div
-                  id="collapse0"
-                  className="panel-collapse collapse"
-                  role="tabpanel"
-                  aria-labelledby="heading0"
-                  data-bs-parent="#accordion"
-                >
-                  <div className="panel-body">
-                    <p>
-                      Nunc scelerisque bibendum felis eu aliquet. Quisque et
-                      neque in diam feugiat dapibus laoreet vitae risus. Aliquam
-                      in mauris ante. Nullam porta, metus at dictum consectetur,
-                      mi risus auctor eros, id interdum nisl velit et ante.
-                    </p>
-                    <ul className="list-style-one">
-                      <li>
-                        pellentesque, ex fringilla consectetur iaculis, turpis
-                        odio sollicitudin nibh
-                      </li>
-                      <li>
-                        lorem ex ultricies mi, nec pellentesque est erat quis
-                        diam
-                      </li>
-                      <li>
-                        Donec a felis et orci facilisis eleifend eu vitae orci.
-                      </li>
-                      <li>
-                        Pellentesque ut pretium augue. Vivamus vel lorem justo.
-                        Vivamus sit amet porttitor mauris.
-                      </li>
-                    </ul>
+
+              {faqData.map((item,index) => (
+                <div className="panel panel-default" key={index}>
+                  <div className="panel-heading" role="tab" id={`heading${index}`}>
+                    <h3 className="panel-title">
+                      <a
+                        className="collapsed"
+                        role="button"
+                        title=""
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#collapse${index}`}
+                        aria-expanded="false"
+                        aria-controls={`collapse${index}`}
+                      >
+                        {item.question}
+                      </a>
+                    </h3>
                   </div>
-                </div>
-              </div>
+                  <div
+                    id={`collapse${index}`}
+                    className="panel-collapse collapse"
+                    role="tabpanel"
+                    aria-labelledby={`heading${index}`}
+                    data-bs-parent="#accordion"
+                  >
+                    <div className="panel-body list-style-one" dangerouslySetInnerHTML={{ __html: item.answer }}>
+                    </div>
+                  </div>
+                </div>                
+              ))}
 
               {/* Panel 2 */}
-              <div className="panel panel-default">
+              {/* <div className="panel panel-default">
                 <div className="panel-heading" role="tab" id="heading1">
                   <h3 className="panel-title">
                     <a
@@ -112,10 +110,10 @@ export default function Faq() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Panel 3 */}
-              <div className="panel panel-default">
+              {/* <div className="panel panel-default">
                 <div className="panel-heading" role="tab" id="heading2">
                   <h3 className="panel-title">
                     <a
@@ -146,10 +144,10 @@ export default function Faq() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Panel 4 */}
-              <div className="panel panel-default">
+              {/* <div className="panel panel-default">
                 <div className="panel-heading" role="tab" id="heading3">
                   <h3 className="panel-title">
                     <a
@@ -186,7 +184,7 @@ export default function Faq() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

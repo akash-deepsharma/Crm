@@ -4,16 +4,46 @@ export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
+export async function agentGetApi() {
+  try {
+    const res = await apiClient.get(`/becomeseller `);
+    return res.data;
+  } catch (error) {
+    console.error("❌ Error during GET /agent:", error.response?.data || error.message);
+    return {
+      status: "error",
+      message: error.response?.data?.message || "Something went wrong while fetching data.",
+    };
+  }
+}
+
+
 // ✅ Agent Registration
 export async function agentPostApi(formData) {
   try {
     const res = await apiClient.post(`/agent`, formData);
     return res.data;
   } catch (error) {
-    console.error("Error during agent submit:", error.response?.data || error);
-    return { status: "false", message: "Something went wrong" };
+
+    if (error.response?.status === 409) {
+      return {
+        status: false,
+        message:
+          error.response?.data?.message ||
+          "This agent is already registered. Please try with different details.",
+      };
+    }
+
+    // Generic fallback for all other errors
+    return {
+      status: false,
+      message:
+        error.response?.data?.message ||
+        "Something went wrong while submitting your request.",
+    };
   }
 }
+
 
 // ✅ Send Email OTP
 export async function sentEmailOtpApi(email) {

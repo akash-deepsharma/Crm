@@ -13,7 +13,7 @@ export default function BlogHome() {
   useEffect(() => {
     async function fetchData() {
       const data = await getBlogs();
-      console.log("✅ First  blogdata:", data);
+      // console.log("✅ First  blogdata:", data);
       if (data?.status === "success") {
         setblogPosts(data.data || []);
       }

@@ -33,7 +33,7 @@ export default function page() {
             </div>
             <div className="row clearfix no-gutters dc-features-group mt-lg-5">
               <div className="col-lg-4 col-md-6 dc-features-item">
-                <a href="#">
+                <a href="/features/slug-any">
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
@@ -63,7 +63,7 @@ export default function page() {
                 </a>
               </div>
               <div className="col-lg-4 col-md-6 dc-features-item">
-                <a href="#">
+                <a href="/features/slug-any">
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
@@ -93,7 +93,7 @@ export default function page() {
                 </a>
               </div>
               <div className="col-lg-4 col-md-6 dc-features-item">
-                <a href="#">
+                <a href="/features/slug-any">
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
@@ -123,7 +123,7 @@ export default function page() {
                 </a>
               </div>
               <div className="col-lg-4 col-md-6 dc-features-item">
-                <a href="#">
+                <a href="/features/slug-any">
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
