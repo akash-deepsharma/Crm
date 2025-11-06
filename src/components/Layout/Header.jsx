@@ -167,7 +167,7 @@ export default function Header() {
                 <ul className="sub-menu"> 
                   {featureHeader?.headers?.map((item,index) => (
                     <li className="menu-item" key={index}>
-                        <Link href={item.slug}>{item?.title}</Link>
+                        <Link href={`features/${item.slug}`}>{item?.title}</Link>
                     </li>
                   ))}
                 </ul>
