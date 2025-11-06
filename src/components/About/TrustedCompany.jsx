@@ -4,7 +4,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function TrustedCompany() {
+export default function TrustedCompany( data) {
+const trustdata = data || [];
+    // console.log( "trusted company data" , trustdata)
+
+   const content = trustdata?.data?.heading;
+    const words = content.split(" ");  
+    const a = words.slice(0, 3).join(" ");
+    const b = words.slice(3, 4).join(" ");
+    const c = words.slice(4).join(" ");
+
   const settings = {
     dots: false,
     infinite: true,
@@ -30,13 +39,15 @@ export default function TrustedCompany() {
     ],
   };
 
-  const logos = [
-    "images/company-logo-1.png",
-    "images/company-logo-2.png",
-    "images/company-logo-3.png",
-    "images/company-logo-4.png",
-    "images/company-logo-5.png",
-  ];
+ const logos = trustdata?.data?.images
+// console.log("logos", logos)
+  // const logos = [
+  //   "images/company-logo-1.png",
+  //   "images/company-logo-2.png",
+  //   "images/company-logo-3.png",
+  //   "images/company-logo-4.png",
+  //   "images/company-logo-5.png",
+  // ];
 
   return (
     <div className="companies-section section-padding">
@@ -45,13 +56,11 @@ export default function TrustedCompany() {
           <div className="col-lg-8">
             <div className="heading-wrapper text-center with-separator">
               <h2 className="h1">
-                Trusted by many <span>companies</span>
+                {a} <span>{b} </span> {c}
               </h2>
               <div className="lead-text">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                  finibus mi id elit gravida, quis tincidunt purus fringilla.
-                  Aenean convallis a neque non pellentesque.
+                  {trustdata?.data?.sub_heading}
                 </p>
               </div>
             </div>
@@ -66,7 +75,7 @@ export default function TrustedCompany() {
                 <div key={index} className="item text-center">
                   <div className="logo-wrapper p-3">
                     <img
-                      src={logo}
+                      src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${logo?.image_path}`}
                       alt={`Company ${index + 1}`}
                       className="img-fluid"
                       style={{ maxHeight: "80px", margin: "0 auto" }}

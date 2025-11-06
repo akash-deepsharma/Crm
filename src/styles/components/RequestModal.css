@@ -1,4 +1,4 @@
-.request_modal .modal-content .request_content{
+.request_modal .modal-body{
     background-color: #aac3e9;
 }
 .request_demo_close{
@@ -6,4 +6,8 @@
     top: 15px;
     right: 15px;
     z-index: 10;
+}
+.request_modal .modal-dialog-scrollable .modal-body {
+    /* overflow-y: auto; */
+    overflow: hidden !important;
 }

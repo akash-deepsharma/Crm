@@ -4,11 +4,10 @@ export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
-export async function getFaq(slug) {
+export async function getHowCrmWorks() {
   try {
-    // console.log("page slug", slug)
-    const res = await apiClient.get(`/faq/${slug}`);
-    // console.log( "pages data", res.data)
+    const res = await apiClient.get(`/how-crm-works`);
+    console.log( "how-crm-works api data", res.data)
     return res.data;
   } catch (error) {
     console.error("Error fetching Pages data:", error);

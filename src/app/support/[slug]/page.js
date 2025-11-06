@@ -1,52 +1,18 @@
+import { getSingleSupport } from "@/ApiCall/supportApi";
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import Link from "next/link";
 
-export default async function page({ params }) {
-  const { slug } = params;
+export default async function Page({ params }) {
+  const { slug } = await params;
 
-  const faqData = {
-    "setting-options": {
-      title: "Setting Options",
-      faqs: [
-        {
-          q: "How do I enable or disable payment gateway?",
-          a: "You can enable or disable payment gateways in your admin settings under Payments > Gateway Options.",
-        },
-        {
-          q: "Can I reset all settings to default?",
-          a: "Yes, go to Settings → Reset → Restore Defaults. Make sure to backup data before resetting.",
-        },
-      ],
-    },
-    "social-share": {
-      title: "Social Share",
-      faqs: [
-        {
-          q: "How to connect my social media accounts?",
-          a: "Navigate to Profile > Social Links and connect your accounts by following the prompts.",
-        },
-        {
-          q: "Can users share posts automatically?",
-          a: "Yes, enable auto-sharing from Settings → Social → Auto Share.",
-        },
-      ],
-    },
-    "user-login": {
-      title: "User Login",
-      faqs: [
-        {
-          q: "How do I reset my password?",
-          a: "Click on 'Forgot Password' on the login page and follow the instructions.",
-        },
-        {
-          q: "Can I log in using Google or Facebook?",
-          a: "Yes, we support social logins via Google and Facebook under Sign-In Options.",
-        },
-      ],
-    },
-  };
+  // ✅ Fetch server-side
+  const faqData = await getSingleSupport(slug);
+  // console.log("slug", slug);
+  // console.log("support data", faqData);
 
-  const supportItem = faqData[slug];
+
+
+  const supportItem = faqData;
   if (!supportItem) {
     return <div className="text-center py-5">Support topic not found.</div>;
   }
@@ -64,18 +30,22 @@ export default async function page({ params }) {
           <div className="row">
             <div className="col-lg-12">
               <div className="heading-wrapper with-separator">
-                <h2 className="h1">
-                  {supportItem.title} <span>FAQs</span>
+                <h2 className="h1 text-capitalize">
+                  {supportItem.faq[0].page} <span>FAQs</span>
                 </h2>
               </div>
             </div>
 
             <div className="col-lg-12">
               <div className="panel-group" id="accordion" role="tablist">
-                {supportItem.faqs.map((faq, i) => (
+                {supportItem?.faq.map((faq, i) => (
                   <div className="panel panel-default" key={i}>
-                    <div className="panel-heading" role="tab" id={`heading${i}`}>
-                      <h3 className="panel-title">{faq.q}</h3>
+                    <div
+                      className="panel-heading"
+                      role="tab"
+                      id={`heading${i}`}
+                    >
+                      <h3 className="panel-title">{faq.question}</h3>
                     </div>
                     <div
                       id={`collapse${i}`}
@@ -83,8 +53,7 @@ export default async function page({ params }) {
                       role="tabpanel"
                       aria-labelledby={`heading${i}`}
                     >
-                      <div className="panel-body">
-                        <p>{faq.a}</p>
+                      <div className="panel-body  list-style-one" dangerouslySetInnerHTML={{ __html: faq.answer }}>
                       </div>
                     </div>
                   </div>

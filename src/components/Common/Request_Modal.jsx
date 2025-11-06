@@ -12,21 +12,62 @@ export default function Request_Modal({ onClose }) {
     message: "",
   });
 
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [demoRequests, setDemoRequests] = useState([]); // state for GET data
+  const [demoRequests, setDemoRequests] = useState([]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    const { id, value } = e.target;
+
+    // ✅ Allow only numbers for phone_number field
+    if (id === "phone_number") {
+      const numericValue = value.replace(/\D/g, ""); // remove all non-numeric characters
+      setFormData({ ...formData, [id]: numericValue });
+    } else {
+      setFormData({ ...formData, [id]: value });
+    }
+
+    setErrors({ ...errors, [id]: "" }); // clear error when typing
+  };
+
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!formData.company_name.trim()) {
+      newErrors.company_name = "Company name is required.";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.work_email.trim()) {
+      newErrors.work_email = "Email is required.";
+    } else if (!emailRegex.test(formData.work_email)) {
+      newErrors.work_email = "Enter a valid email address.";
+    }
+
+    const phoneRegex = /^[6-9]\d{9}$/;
+    if (!formData.phone_number.trim()) {
+      newErrors.phone_number = "Phone number is required.";
+    } else if (!phoneRegex.test(formData.phone_number)) {
+      newErrors.phone_number = "Enter a valid 10-digit Indian phone number.";
+    }
+
+    if (!formData.industry_type) {
+      newErrors.industry_type = "Please select an industry type.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    if (!validateForm()) return;
 
+    setLoading(true);
     try {
-      console.log("Submitting form data:", formData);
+      // console.log("Submitting form data:", formData);
       const response = await requestPostApi(formData);
-      console.log("API Response:", response);
+      // console.log("API Response:", response);
 
       if (response.status === "success") {
         alert("✅ Demo request submitted successfully!");
@@ -42,22 +83,20 @@ export default function Request_Modal({ onClose }) {
     }
   };
 
- 
   useEffect(() => {
     async function fetchData() {
       const data = await requestGetApi();
-      console.log("✅ First get data:", data);
+      // console.log("✅ First get data:", data);
       if (data?.status === "success") {
         setDemoRequests(data?.data || []);
       }
     }
-
     fetchData();
   }, []);
 
   return (
-    <div className="modal request_modal show d-flex justify-content-center align-items-center bg-opacity-75 bg-dark">
-      <div className="modal-dialog modal-xl modal-dialog-centered w-100 px-3">
+    <div className="modal request_modal show d-flex justify-content-center align-items-center bg-opacity-75 bg-dark  position-fixed top-0 start-0 w-100 h-100">
+      <div className="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable w-100 px-3">
         <div className="modal-content p-0 rounded-4 overflow-hidden">
           <button
             type="button"
@@ -70,15 +109,20 @@ export default function Request_Modal({ onClose }) {
               <div className="row">
                 {/* Left Section */}
                 <div className="col-lg-6">
-                  <div className="request_content p-lg-5 p-md-2 p-0 h-100">
+                  <div className="request_content p-4 h-100">
                     <div className="about-section align-items-center h-100">
                       <div className="heading-wrapper with-separator">
                         <h2 className="h1">
-                          <span>{demoRequests?.heading}</span> {demoRequests?.sub_heading}
+                          <span>{demoRequests?.heading}</span>{" "}
+                          {demoRequests?.sub_heading}
                         </h2>
                       </div>
                       <div className="text-wrapper">
-                        <p dangerouslySetInnerHTML={{ __html: demoRequests?.content }}></p>
+                        <p
+                          dangerouslySetInnerHTML={{
+                            __html: demoRequests?.content,
+                          }}
+                        ></p>
                         <ul className="list-style-one">
                           <li>
                             <h2 className="h5">45,000+</h2>
@@ -99,12 +143,13 @@ export default function Request_Modal({ onClose }) {
                 </div>
 
                 {/* Right Section */}
-                <div className="col-lg-6 d-flex flex-column justify-content-center">
-                  <div className="request_form p-lg-5 p-md-2 p-0">
+                <div className="col-lg-6 d-flex flex-column justify-content-center bg-light">
+                  <div className="request_form p-4">
                     <div className="request-title">
                       <h4 className="fw-bold mb-4">Request a demo</h4>
                     </div>
                     <form onSubmit={handleSubmit}>
+                      {/* Company Name */}
                       <div className="mb-3">
                         <label htmlFor="company_name" className="form-label fw-semibold">
                           Company Name
@@ -116,10 +161,13 @@ export default function Request_Modal({ onClose }) {
                           placeholder="Enter your company name"
                           value={formData.company_name}
                           onChange={handleChange}
-                          required
                         />
+                        {errors.company_name && (
+                          <p className="text-danger small mt-1">{errors.company_name}</p>
+                        )}
                       </div>
 
+                      {/* Work Email */}
                       <div className="mb-3">
                         <label htmlFor="work_email" className="form-label fw-semibold">
                           Work Email
@@ -131,10 +179,13 @@ export default function Request_Modal({ onClose }) {
                           placeholder="Enter your email"
                           value={formData.work_email}
                           onChange={handleChange}
-                          required
                         />
+                        {errors.work_email && (
+                          <p className="text-danger small mt-1">{errors.work_email}</p>
+                        )}
                       </div>
 
+                      {/* Phone Number */}
                       <div className="mb-3">
                         <label htmlFor="phone_number" className="form-label fw-semibold">
                           Phone Number
@@ -146,10 +197,15 @@ export default function Request_Modal({ onClose }) {
                           placeholder="Enter your phone number"
                           value={formData.phone_number}
                           onChange={handleChange}
-                          required
+                          maxLength="10"
+                          inputMode="numeric"
                         />
+                        {errors.phone_number && (
+                          <p className="text-danger small mt-1">{errors.phone_number}</p>
+                        )}
                       </div>
 
+                      {/* Industry Type */}
                       <div className="mb-3">
                         <label htmlFor="industry_type" className="form-label fw-semibold">
                           Select Industry Type
@@ -159,7 +215,6 @@ export default function Request_Modal({ onClose }) {
                           id="industry_type"
                           value={formData.industry_type}
                           onChange={handleChange}
-                          required
                         >
                           <option value="" disabled>
                             Select an option
@@ -169,8 +224,12 @@ export default function Request_Modal({ onClose }) {
                           <option value="partnership_opportunities">Partnership Opportunities</option>
                           <option value="other">Other</option>
                         </select>
+                        {errors.industry_type && (
+                          <p className="text-danger small mt-1">{errors.industry_type}</p>
+                        )}
                       </div>
 
+                      {/* Message */}
                       <div className="mb-3">
                         <textarea
                           id="message"
@@ -186,8 +245,6 @@ export default function Request_Modal({ onClose }) {
                         {loading ? "Submitting..." : "Submit Application"}
                       </button>
                     </form>
-
-                   
                   </div>
                 </div>
               </div>

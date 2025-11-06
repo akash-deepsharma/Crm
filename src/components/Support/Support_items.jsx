@@ -2,24 +2,25 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function Support_items() {
-  const supportList = [
-    {
-      title: "Setting Options",
-      icon: "/images/default-color/icon-9.svg",
-      slug: "setting-options",
-    },
-    {
-      title: "Social Share",
-      icon: "/images/default-color/icon-8.svg",
-      slug: "social-share",
-    },
-    {
-      title: "User Login",
-      icon: "/images/default-color/icon-10.svg",
-      slug: "user-login",
-    },
-  ];
+export default function Support_items(data) {
+  // console.log("support page section", data)
+  // const supportList = [
+  //   {
+  //     title: "Setting Options",
+  //     icon: "/images/default-color/icon-9.svg",
+  //     slug: "setting-options",
+  //   },
+  //   {
+  //     title: "Social Share",
+  //     icon: "/images/default-color/icon-8.svg",
+  //     slug: "social-share",
+  //   },
+  //   {
+  //     title: "User Login",
+  //     icon: "/images/default-color/icon-10.svg",
+  //     slug: "user-login",
+  //   },
+  // ];
 
   return (
     <div className="section-padding">
@@ -38,12 +39,12 @@ export default function Support_items() {
         </div>
 
         <div className="row clearfix">
-          {supportList.map((item, i) => (
+          {data?.data?.steps?.map((item, i) => (
             <div className="col-lg-4" key={i}>
               <Link href={`/support/${item.slug}`}>
                 <div className="icon-box theme-two wow fadeInUp text-center">
                   <div className="icon">
-                    <Image src={item.icon} alt={item.title} width={70} height={70} />
+                    <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item.image}`} alt={item.title} width={70} height={70} />
                   </div>
                   <div className="text">
                     <h4>{item.title}</h4>

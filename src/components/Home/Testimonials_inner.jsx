@@ -1,10 +1,14 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
+import { getTestimonial } from "@/ApiCall/testimonialApi";
 
 export default function Testimonials_inner() {
+
+
   const settings = {
     dots: false,
     arrows: false,
@@ -25,41 +29,32 @@ export default function Testimonials_inner() {
     ],
   };
 
-  // ✅ Dynamic Testimonials Data
-  const testimonials = [
-    {
-      id: 1,
-      name: "Emily R.,",
-      role: "Sales Manager",
-      message:
-        "Alpha Manpower  CRM has completely transformed how we manage leads and track progress. The automation tools save us hours every week, and our sales have grown by 40% since we started using them.!",
-      rating: 5,
-    },
-    {
-      id: 2,
-      name: "Darla John",
-      role: "IT Manager",
-      message:
-        "We switched to Alpha Manpower  after trying multiple CRMs, and the difference is incredible. The interface is so easy to use, and the analytics dashboard gives us clear insights into every customer interaction.",
-      rating: 5,
-    },
-    {
-      id: 3,
-      name: "Ken Lord",
-      role: "Team Manager",
-      message:
-        "What I love most about Alpha Manpower  CRM is how easily we could tailor it to our business needs. Their support team was responsive and guided us through every step of the setup process.",
-      rating: 5,
-    },
-    {
-      id: 4,
-      name: "Charlas Kris",
-      role: "CEO Consultant",
-      message:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur modi, sit blanditiis!",
-      rating: 5,
-    },
-  ];
+      const [testimonialData, setTestimonialData] = useState([]);
+    
+      useEffect(() => {
+        async function fetchData() {
+          const data = await getTestimonial();
+          // console.log("✅ Testimonial API data:", data);
+    
+          if (data?.status === true) {
+            setTestimonialData(data?.data);
+          }
+        }
+        fetchData();
+      }, []);
+
+//  console.log("✅ Testimonials data:", testimonialData);
+
+
+   const headingContent = testimonialData?.testimonial_content?.heading;
+  const words = headingContent?.split(" ");
+  const a = words?.slice(0, 2).join(" ");
+  const b = words?.slice(2, 4).join(" ");
+  const c = words?.slice(4).join(" ");
+
+
+const testimonials = testimonialData?.testimonials
+  
 
   return (
     <div className="testimonial-section section-padding">
@@ -68,14 +63,12 @@ export default function Testimonials_inner() {
           <div className="col-lg-8">
             <div className="heading-wrapper text-center with-separator">
               <h2 className="h1">
-                Happy Clients <span>Feedback</span>
+                {a} <span>{b}</span> {c}
               </h2>
-              <div className="lead-text">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                  finibus mi id elit gravida, quis tincidunt purus fringilla.
-                  Aenean convallis a neque non pellentesque.
-                </p>
+              <div className="lead-text" dangerouslySetInnerHTML={{
+                  __html: testimonialData?.testimonial_content?.content,
+                }}>
+               
               </div>
             </div>
           </div>
@@ -86,23 +79,23 @@ export default function Testimonials_inner() {
             <div className="client-testimonial theme-one">
               <div className="testimonial-slider">
                 <Slider {...settings}>
-                  {testimonials.map((item) => (
+                  {testimonials?.map((item) => (
                     <div className="item" key={item.id}>
                       <div className="testimonial-text">
-                        <blockquote>{item.message}</blockquote>
+                        <blockquote  dangerouslySetInnerHTML={{ __html: item?.message }}></blockquote>
                       </div>
                       <div className="client-info-wrapper">
                         <div className="client-img">
                           <Image
-                            src="/images/team-4-square.jpg"
-                            alt="client"
+                            src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item.image}`}
+                            alt={item.name}
                             className="img-fluid"
                             width={600} height={600}
                           />
                         </div>
                         <div className="client-info">
                           <h5>{item.name}</h5>
-                          <p>{item.role}</p>
+                          <p>{item.designation}</p>
                         </div>
                       </div>
                     </div>

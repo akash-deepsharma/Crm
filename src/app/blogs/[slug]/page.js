@@ -5,7 +5,7 @@ import { getSingleBlog, getBlogs } from "@/ApiCall/blogApi";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
-  const slug = params.slug;
+  const slug = await params.slug;
   const blog = await getSingleBlog(slug);
 
   if (!blog || !blog.data) {

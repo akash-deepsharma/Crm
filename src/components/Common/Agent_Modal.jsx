@@ -16,27 +16,42 @@ export default function Agent_Modal({ onClose }) {
     phone: "",
     location: "",
     message: "",
+    emailVerified:"",
+    phoneVerified:''
   });
 
   const [showOtpPopup, setShowOtpPopup] = useState(false);
-  const [otpType, setOtpType] = useState(""); // "email" or "phone"
+  const [otpType, setOtpType] = useState("");
   const [emailVerified, setEmailVerified] = useState(false);
   const [phoneVerified, setPhoneVerified] = useState(false);
 
+  // ✅ Handle Change with phone number restriction
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    const { id, value } = e.target;
+
+    if (id === "phone") {
+      // Allow only digits
+      const numericValue = value.replace(/\D/g, "");
+      setFormData({ ...formData, phone: numericValue });
+    } else {
+      setFormData({ ...formData, [id]: value });
+    }
   };
+
+  // ✅ Email Validation Function
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  // ✅ Phone Validation Function
+  const isValidPhone = (phone) => /^[0-9]{10}$/.test(phone);
 
   // ✅ Send Email OTP
   const handleSendEmailOtp = async () => {
     const email = formData.email.trim();
-    if (!email) return alert("Please enter email");
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) return alert("Please enter a valid email");
+    if (!email) return alert("Please enter your email");
+    if (!isValidEmail(email)) return alert("Please enter a valid email address");
 
     try {
-      const res = await sentEmailOtpApi(email); // Pass value directly
+      const res = await sentEmailOtpApi(email);
       if (res.status === true) {
         setOtpType("email");
         setShowOtpPopup(true);
@@ -51,11 +66,12 @@ export default function Agent_Modal({ onClose }) {
 
   // ✅ Send Phone OTP
   const handleSendPhoneOtp = async () => {
-    const phone = formData.phone.replace(/\D/g, "");
-    if (!phone) return alert("Please enter phone number");
+    const phone = formData.phone;
+    if (!phone) return alert("Please enter your phone number");
+    if (!isValidPhone(phone)) return alert("Please enter a valid 10-digit phone number");
 
     try {
-      const res = await sentPhoneOtpApi(phone); // Pass value directly
+      const res = await sentPhoneOtpApi(phone);
       if (res.status === true) {
         setOtpType("phone");
         setShowOtpPopup(true);
@@ -68,42 +84,47 @@ export default function Agent_Modal({ onClose }) {
     }
   };
 
-  // ✅ Verify OTP Callback
-  const handleVerifyOtp = async (enteredOtp) => {
-    try {
-      let res;
-      if (otpType === "email") {
-        res = await verifyEmailOtpApi(formData.email, enteredOtp); // Pass two arguments
-        if (res.status === true) {
-          setEmailVerified(true);
-          alert("✅ Email verified successfully!");
-        } else {
-          alert(res.message || "Invalid Email OTP.");
-          return;
-        }
-      } else if (otpType === "phone") {
-        res = await verifyPhoneOtpApi(formData.phone, enteredOtp); // Pass two arguments
-        if (res.status === true) {
-          setPhoneVerified(true);
-          alert("✅ Phone verified successfully!");
-        } else {
-          alert(res.message || "Invalid Phone OTP.");
-          return;
-        }
+ // ✅ Verify OTP Callback
+const handleVerifyOtp = async (enteredOtp) => {
+  try {
+    let res;
+    if (otpType === "email") {
+      res = await verifyEmailOtpApi(formData.email, enteredOtp);
+      if (res.status === true) {
+        setEmailVerified(true);
+        setFormData({ ...formData, emailVerified: true }); // update formData
+        alert("✅ Email verified successfully!");
+      } else {
+        alert(res.message || "Invalid Email OTP.");
+        return;
       }
-
-      setShowOtpPopup(false);
-    } catch (err) {
-      console.error(err);
-      alert("Error verifying OTP.");
+    } else if (otpType === "phone") {
+      res = await verifyPhoneOtpApi(formData.phone, enteredOtp);
+      if (res.status === true) {
+        setPhoneVerified(true);
+        setFormData({ ...formData, phoneVerified: true }); // update formData
+        alert("✅ Phone verified successfully!");
+      } else {
+        alert(res.message || "Invalid Phone OTP.");
+        return;
+      }
     }
-  };
+
+    setShowOtpPopup(false);
+  } catch (err) {
+    console.error(err);
+    alert("Error verifying OTP.");
+  }
+};
 
 // ✅ Submit Form (only if verified)
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  if (!emailVerified || !phoneVerified) {
+  if (!isValidEmail(formData.email)) return alert("Invalid email format");
+  if (!isValidPhone(formData.phone)) return alert("Phone number must be 10 digits");
+
+  if (!formData.emailVerified || !formData.phoneVerified) {
     alert("Please verify your Email and Phone before submitting.");
     return;
   }
@@ -114,18 +135,18 @@ const handleSubmit = async (e) => {
     phone_number: formData.phone,
     location: formData.location,
     message: formData.message,
+    emailVerified: formData.emailVerified, 
+    phoneVerified: formData.phoneVerified, 
   };
+  console.log("Form Data to submit:", formattedData);
 
   try {
     const res = await agentPostApi(formattedData);
-
     if (res.status === true || res.status === "true") {
       alert("✅ Agent request submitted successfully!");
       onClose();
-    } else if (res.status === false || res.status === "false") {
-      alert(res.message || "⚠️ Request failed. Please try again.");
     } else {
-      alert("⚠️ Unexpected response from server.");
+      alert(res.message || "⚠️ Request failed. Please try again.");
     }
   } catch (error) {
     console.error("Error submitting form:", error);
@@ -171,7 +192,7 @@ const handleSubmit = async (e) => {
                     <input
                       type="email"
                       id="email"
-                      className="form-control "
+                      className="form-control"
                       placeholder="Enter your email"
                       value={formData.email}
                       onChange={handleChange}
@@ -203,11 +224,12 @@ const handleSubmit = async (e) => {
                       type="tel"
                       id="phone"
                       className="form-control"
-                      placeholder="Enter your phone number"
+                      placeholder="Enter your 10-digit phone number"
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                       disabled={phoneVerified}
+                      disabled={phoneVerified}
+                      maxLength={10}
                     />
                     {phoneVerified ? (
                       <span className="text-success fw-bold fs-5">✔</span>

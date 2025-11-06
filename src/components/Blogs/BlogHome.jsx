@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from 'react'
 import BlogCard from './BlogCard'
 import Link from 'next/link'

@@ -2,37 +2,32 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function AboutSection() {
+export default function AboutSection(data) {
+  // console.log( "about section", data)
+
+    const content = data?.data?.sub_heading2;
+    const words = content.split(" ");  
+    const a = words.slice(0, 2).join(" ");
+    const b = words.slice(2, 4).join(" ");
+    const c = words.slice(4).join(" ");
   return (
     <div className="about-section section-padding">
       <div className="container">
         <div className="row">
           <div className="col-lg-6 wow fadeInLeft">
             <div className="image-wrapper">
-              <Image src="/images/default-color/user-interface-img.png" alt=""  width={700} height={700} />
+              <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${data?.data?.image}`} alt=""  width={700} height={700} />
             </div>
           </div>
           <div className="col-lg-6">
             <div className="heading-wrapper with-separator">
-              <span className="sub-title">About CRM</span>
+              <span className="sub-title">{data?.data?.sub_heading3}</span>
               <h2 className="h1">
-                Why the best choose to <span>work with us</span>
+                {a} <span>{b}</span> {c}
               </h2>
             </div>
-            <div className="text-wrapper">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                sodales dictum viverra. Nam gravida dignissim eros. Vivamus
-                congue erat ante, volutpat dictum neque dignissim eget.
-              </p>
-              <ul className="list-style-one">
-                <li>Nullam placerat nunc id ornare convallis.</li>
-                <li>
-                  Mauris id dui aliquam, dapibus felis vel, iaculis risus.
-                </li>
-                <li>Integer dapibus lorem in nisl hendrerit dictum.</li>
-              </ul>
-            </div>
+            <div className="text-wrapper list-style-one" dangerouslySetInnerHTML={{ __html: data?.data?.content }}/>
+
             <div className="btn-wrapper">
               <Link className="btn btn-primary" href="/pricing">
                 Purchase Now

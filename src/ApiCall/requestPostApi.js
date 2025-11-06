@@ -7,7 +7,7 @@ export const apiClient = axios.create({
 export async function requestPostApi(formData) {
   try {
     const res = await apiClient.post(`/demo-request`, formData);
-    console.log("request submit Response:", res.data);
+    // console.log("request submit Response:", res.data);
     return res.data;
   } catch (error) {
     console.error("Error during request submit:", error);
@@ -18,7 +18,7 @@ export async function requestPostApi(formData) {
 export async function requestGetApi() {
   try {
     const res = await apiClient.get(`/get-demorequest `);
-    console.log("✅ Request GET Response:", res.data);
+    // console.log("✅ Request GET Response:", res.data);
     return res.data;
   } catch (error) {
     console.error("❌ Error during GET /get-demorequest:", error.response?.data || error.message);

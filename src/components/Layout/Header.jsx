@@ -4,10 +4,24 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Request_Modal from '../Common/Request_Modal'
+import { getHeaderFeatures } from '@/ApiCall/headersApi'
 
 export default function Header() {
   
   const pathname = usePathname();
+
+  const [featureHeader, setfeatureHeader] = useState([]);
+   useEffect(() => {
+     async function fetchData() {
+       const data = await getHeaderFeatures();
+         setfeatureHeader(data || []);
+     }
+     fetchData();
+   }, []);
+ 
+   console.log( "featureHeader",featureHeader)
+
+
 
   useEffect(() => {
     const loadScripts = async () => {
@@ -21,7 +35,7 @@ export default function Header() {
           if (viewportWidth <= 992) {
             $(".navbar-right").appendTo("#navigation");
             if ($("#navigation .close-btn").length === 0) {
-              $('<span className="close-btn"></span>').prependTo("#navigation");
+              $('<span class="close-btn"></span>').prependTo("#navigation");
             }
           } else {
             $(".navbar-right").appendTo(".container-fluid");
@@ -56,7 +70,7 @@ export default function Header() {
         });
 
         $("#navigation ul li.menu-item-has-children > a").after(
-          '<span className"child-link"><i className"fas fa-chevron-down"></i></span>'
+          '<span class="child-link"><i class="fas fa-chevron-down"></i></span>'
         );
 
         $("span.child-link").click(function () {
@@ -149,23 +163,21 @@ export default function Header() {
               <Link href="/">Home</Link>
             </li> */}
             <li className={`menu-item ${pathname === '/about' ? 'active' : ''}`}><Link href="/about">About</Link></li>
-            <li className={`menu-item ${pathname === '/features' ? 'active' : ''}`}><Link href="/features">Features</Link></li>
+            <li className={`menu-item menu-item-has-children`}><Link href="/features">Features</Link>
+                <ul className="sub-menu"> 
+                  {featureHeader?.headers?.map((item,index) => (
+                    <li className="menu-item" key={index}>
+                        <Link href={item.slug}>{item?.title}</Link>
+                    </li>
+                  ))}
+                </ul>
+            </li>
             <li className="menu-item"><Link href="/contact" onClick={handleOpenModal}>Book a Session</Link></li>
             <li className="menu-item"><Link href="/pricing">Pricing</Link></li>
-            {/* <li className="menu-item"><Link href="/contact">Demo</Link></li> */}
             <li className="menu-item"><Link href="/login">Free Trial</Link></li>
             <li className="menu-item menu-item-has-children mega-menu">
               <Link href="#">Quick View</Link>
               <ul className="sub-menu mega-menu-inner">
-                <li className="menu-item col-title">
-                  <Link href="services">Features</Link>
-                  <ul className="sub-menu">
-                    <li className="menu-item"><Link href="#!">Features Software</Link></li>
-                    <li className="menu-item"><Link href="#!">Features</Link></li>
-                    <li className="menu-item"><Link href="#!">Features</Link></li>
-                    <li className="menu-item"><Link href="#!">Features</Link></li>
-                  </ul>
-                </li>
                 <li className="menu-item col-title">
                   <Link href="#">Inner Pages</Link>
                   <ul className="sub-menu">
@@ -205,7 +217,7 @@ export default function Header() {
           </div>
           <div className="search-option style-dark">
             <div className="search-btn">
-              <Link href="#"><i className="fa-regular fa-user"></i></Link>
+              <Link href="/profile"><i className="fa-regular fa-user"></i></Link>
             </div>
           </div>
         </div>

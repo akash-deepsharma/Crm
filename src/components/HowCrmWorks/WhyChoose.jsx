@@ -1,7 +1,16 @@
 import Image from "next/image";
 import React from "react";
 
-export default function WhyChoose() {
+export default function WhyChoose({data}) {
+  const howCrmWorkData = data || [];
+
+   const content = howCrmWorkData?.extra_data?.title;
+    const words = content.split(" ");  
+    const a = words.slice(0, 2).join(" ");
+    const b = words.slice(2, 4).join(" ");
+    const c = words.slice(4).join(" ");
+
+
   return (
     <div className="light-bg section-padding">
       <div className="container">
@@ -9,58 +18,30 @@ export default function WhyChoose() {
           <div className="col-lg-10">
             <div className="heading-wrapper text-center with-separator">
               <h2 className="h1">
-                Why Choose <span>Our CRM</span>
+                {a} <span> {b} </span> {c}
               </h2>
               <div className="lead-text">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                  finibus mi id elit gravida, quis tincidunt purus fringilla.
-                  Aenean convallis a neque non pellentesque.
+                  {howCrmWorkData?.extra_data?.description}
                 </p>
               </div>
             </div>
           </div>
         </div>
         <div className="row clearfix">
-          <div className="col-lg-4">
-            <div className="icon-box theme-two wow fadeInUp">
-              <div className="icon">
-                <Image src="/images/default-color/icon-9.svg" alt="" width={80} height={80}/>
-              </div>
-              <div className="text">
-                <h4>Fast & Reliable</h4>
-                <p>Lightning-fast CRM with 99.9% uptime and real-time sync.</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4">
-            <div className="icon-box theme-two wow fadeInLeft">
-              <div className="icon">
-                <Image src="/images/default-color/icon-8.svg" alt="" width={80} height={80}/>
-              </div>
-              <div className="text">
-                <h4>Team Collaboration</h4>
-                <p>
-                  Collaborate with your sales, support, and marketing teams
-                  easily
-                </p>
+          {howCrmWorkData?.extra_data?.steps.map((item,index)=>(
+            <div className="col-lg-4" key={index}>
+              <div className="icon-box theme-two wow fadeInUp">
+                <div className="icon">
+                  <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item.image}`} alt={item.alt_text} width={80} height={80}/>
+                </div>
+                <div className="text">
+                  <h4>{item.title}</h4>
+                  <p>{item.Description}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="col-lg-4">
-            <div className="icon-box theme-two wow fadeInRight">
-              <div className="icon">
-                <Image src="/images/default-color/icon-10.svg" alt="" width={80} height={80}/>
-              </div>
-              <div className="text">
-                <h4>Secure & Scalable</h4>
-                <p>
-                  Enterprise-grade data security and scalability for your
-                  business
-                </p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

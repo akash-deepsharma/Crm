@@ -11,7 +11,7 @@ export default function BlogCard( data) {
         <div className="inner-box">
             <div className="article-img">
                 <Link href={`/blogs/${data?.data?.slug}`}>
-                    <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${data?.data?.featured_image}`} alt="" width={370} height={250} />
+                    <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${data?.data?.featured_image}`} alt={data.data.title} width={370} height={250} />
                 </Link>
             </div>
             <div className="article-details">

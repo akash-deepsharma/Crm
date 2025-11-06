@@ -1857,6 +1857,9 @@ ul.three-col li{
 	-webkit-transition:all 400ms ease-in-out;  
 	transition:all 400ms ease-in-out;
 }
+.features-block.theme-one .inner-box:hover .icon img{
+	filter: invert(1) brightness(80);
+}
 .features-block.theme-one .icon img.hover{
 	display:none;
 }

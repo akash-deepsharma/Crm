@@ -6,9 +6,9 @@ export const apiClient = axios.create({
 
 export async function getPagesData(slug) {
   try {
-    console.log("page slug", slug)
+    // console.log("page slug", slug)
     const res = await apiClient.get(`/pages/${slug}`);
-    console.log( "pages data", res.data)
+    // console.log( "pages data", res.data)
     return res.data;
   } catch (error) {
     console.error("Error fetching Pages data:", error);

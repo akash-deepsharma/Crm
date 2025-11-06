@@ -30,7 +30,7 @@ export default function Testimonials() {
   useEffect(() => {
     async function fetchData() {
       const data = await getTestimonial();
-      console.log("✅ Testimonial API data:", data);
+      // console.log("✅ Testimonial API data:", data);
 
       if (data?.status === true) {
         setTestimonialData(data?.data);
@@ -39,7 +39,7 @@ export default function Testimonials() {
     fetchData();
   }, []);
 
-  console.log("✅ Testimonials data:", testimonialData);
+  // console.log("✅ Testimonials data:", testimonialData);
 
   const headingContent = testimonialData?.testimonial_content?.heading;
   const words = headingContent?.split(" ");
@@ -47,7 +47,7 @@ export default function Testimonials() {
   const b = words?.slice(1, 3).join(" ");
   const c = words?.slice(3).join(" ");
 
-  console.log("tilesa", headingContent);
+  // console.log("tilesa", headingContent);
 
   return (
     <div className="testimonial-section section-padding feedback-five">
@@ -90,12 +90,12 @@ export default function Testimonials() {
                             return (
                               <span
                                 key={i}
-                                className={`fa ${
+                                className={` ${
                                   isFull
-                                    ? "fa-star checked"
+                                    ? "fa fa-star checked"
                                     : isHalf
-                                    ? "fa-star-half-o checked"
-                                    : "fa-star-o"
+                                    ? "fa-solid fa-star-half-stroke"
+                                    : "fa-regular fa-star"
                                 }`}
                               ></span>
                             );

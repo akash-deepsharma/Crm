@@ -1,7 +1,13 @@
+import { getCallToAction } from "@/ApiCall/callToActionApi";
 import Link from "next/link";
 import React from "react";
 
-export default function CallToAction() {
+export default async function CallToAction() {
+
+  const dataCallToACtion = await getCallToAction()
+  const data = dataCallToACtion.main_content || [];
+
+
   return (
     <div className="cta-section section-padding style-dark">
       <div className="container">
@@ -9,8 +15,8 @@ export default function CallToAction() {
           <div className="col-lg-7">
             <div className="call-to-action-content i-text-center">
               <h2 className="h1">
-                Get a personalized demo, instantly.{" "}
-                <span className="special-fonts">Schedule a demo</span>
+                {data?.heading} {" "}
+                <span className="special-fonts">{data?.sub_heading}</span>
               </h2>
             </div>
           </div>

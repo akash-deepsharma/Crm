@@ -7,7 +7,7 @@ export const apiClient = axios.create({
 export async function getTestimonial() {
   try {
     const res = await apiClient.get(`/testimonial`);
-    console.log( "testimonial pages  data", res.data)
+    // console.log( "testimonial pages  data", res.data)
     return res.data;
   } catch (error) {
     console.error("Error fetching Pages data:", error);

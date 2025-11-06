@@ -5,7 +5,15 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function Screenshot() {
+export default function Screenshot({data}) {
+
+    const screenshotData = data || [];
+    // console.log( "screenshotData data set", screenshotData)
+
+
+
+
+
   const settings = {
     dots: false,
     arrows: true,
@@ -24,13 +32,9 @@ export default function Screenshot() {
         <div className="row justify-content-center clearfix style-dark">
           <div className="col-lg-8">
             <div className="heading-wrapper text-center">
-              <h2 className="h1">See Alpha Manpower  CRM in Action</h2>
-              <div className="lead-text">
-                <p>
-                  Take a glimpse into the intuitive and powerful interface of Alpha Manpower  CRM. Every screen is crafted for clarity, speed, and simplicity—so you can manage leads, track performance, and build lasting customer relationships with ease.
-                </p>
-                <p>Discover how smart design meets powerful functionality to make your workflow smoother and your business more connected.
-</p>
+              <h2 className="h1">{screenshotData?.heading}</h2>
+              <div className="lead-text" dangerouslySetInnerHTML={{ __html: screenshotData?.content }}>
+                
               </div>
             </div>
           </div>
@@ -41,37 +45,23 @@ export default function Screenshot() {
             <div className="ss-wrapper text-center relative">
               <Image
                 className="laptop-img-bg mx-auto"
-                src="/images/laptop-screen.png"
-                alt="Laptop Background"
+                src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${screenshotData?.image}`}
+                alt={screenshotData.image_all_text}
                 width={1400} height={1400}
               />
 
               <div className="screenshot-slider mt-5">
                 <Slider {...settings}>
-                  <div className="item">
+                  {screenshotData?.images.map((item, index)=>(
+                  <div className="item" key={index}>
                     <Image
-                      src="/images/ss-1.jpg"
-                      alt="Screenshot 1"
+                      src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item.image_path}`}
+                      alt={item.alt_text}
                       width={800}
                       height={700}
                     />
                   </div>
-                  <div className="item">
-                    <Image
-                      src="/images/ss-2.jpg"
-                      alt="Screenshot 2"
-                      width={800}
-                      height={700}
-                    />
-                  </div>
-                  <div className="item">
-                    <Image
-                      src="/images/ss-3.jpg"
-                      alt="Screenshot 3"
-                      width={800}
-                      height={700}
-                    />
-                  </div>
+                  ))}
                 </Slider>
               </div>
             </div>

@@ -3,7 +3,7 @@ import React from 'react'
 
 export default async function Steps_View(step_viewData) {
     const stap_data = await step_viewData?.data
-    console.log( "stap_data", stap_data)
+    // console.log( "stap_data", stap_data)
 
 
     const title = stap_data?.heading
@@ -12,7 +12,7 @@ export default async function Steps_View(step_viewData) {
     const b = words.slice(2, 4).join(" ");
     const c = words.slice(4).join(" ");
 
-    console.log("stap_data", stap_data)
+    // console.log("stap_data", stap_data)
 
   return (
     <div className="services-section section-padding light-bg">

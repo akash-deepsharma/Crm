@@ -8,7 +8,6 @@ export default function InnerPageBanner({ data }) {
   data = data || {};
 
   const pathParts = pathname.split("/").filter(Boolean);
-
   
   const breadcrumbs = pathParts.map((part, index) => {
     const link = "/" + pathParts.slice(0, index + 1).join("/");

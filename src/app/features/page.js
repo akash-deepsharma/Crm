@@ -1,13 +1,30 @@
+import { getFeature } from "@/ApiCall/featuresApi";
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import Subscriber from "@/components/Common/Subscriber";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function page() {
+export default async function page() {
+
+  const featureData = await getFeature();
+
+  const DataFeature = featureData || []
+
+  console.log("featureData", DataFeature)
+
+  const content = DataFeature?.section1?.extra_data?.title;
+
+    const words = content.split(" ");  
+    const a = words.slice(0, 1).join(" ");
+    const b = words.slice(1, 3).join(" ");
+    const c = words.slice(3).join(" ");
+
+
+
   const bannerData = {
-    pageName: "Features",
-    pageTitle: "Our Features That You Can Use In Your Business",
+    pageName: `${DataFeature.section1?.heading}` || "Features",
+    pageTitle: `${DataFeature.section1?.sub_heading}` || "Our Features That You Can Use In Your Business",
   };
   return (
     <>
@@ -20,195 +37,48 @@ export default function page() {
               <div className="col-lg-10">
                 <div className="heading-wrapper text-center with-separator">
                   <h2 className="h1">
-                    The <span>Key Features </span> of Our CRM
+                    {a} <span> {b} </span> {c}
                   </h2>
                   <div className="lead-text">
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Duis finibus mi id elit gravida, quis tincidunt purus
-                      fringilla. Aenean convallis a neque non pellentesque.
+                      {DataFeature?.section1?.extra_data?.description}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
             <div className="row clearfix no-gutters dc-features-group mt-lg-5">
-              <div className="col-lg-4 col-md-6 dc-features-item">
-                <Link href="/features/slug-any">
+              {DataFeature?.section1?.extra_data?.steps.map((item,index)=>(
+              <div className="col-lg-4 col-md-6 dc-features-item" key={index}>
+                <Link href={`features/${item?.slug}`}>
                   <div className="dc-features-item-front">
                     <div className="inner-box">
                       <div className="icon">
                         <Image
                           className="normal img-fluid"
-                          src="/images/default-color/Data-Management-Services.png"
-                          alt="" width={200} height={200}
+                          src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item?.image}`}
+                          alt={item?.alt_text} width={200} height={200}
                         />
                       </div>
                       <h3 className="dc-features-title">
-                        Data Management Services
+                        {item?.title}
                       </h3>
                     </div>
                   </div>
                   <div className="dc-features-item-hover">
                     <div className="inner-box">
                       <h3 className="dc-features-title">
-                        Data Management Services
+                        {item?.title}
                       </h3>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Etiam ut turpis in nunc faucibus cursus id at mauris. Ut
-                        sed mi neque. Donec aliquet, urna id accumsan hendrerit.
+                        {item?.Description}
                       </p>
                     </div>
                   </div>
                 </Link>
               </div>
-              <div className="col-lg-4 col-md-6 dc-features-item">
-                <Link href="/features/slug-any">
-                  <div className="dc-features-item-front">
-                    <div className="inner-box">
-                      <div className="icon">
-                        <Image
-                          className="normal img-fluid"
-                          src="/images/default-color/Data-Warehouse-Services.png"
-                          alt=""  width={200} height={200}
-                        />
-                      </div>
-                      <h3 className="dc-features-title">
-                        Data Warehouse Services
-                      </h3>
-                    </div>
-                  </div>
-                  <div className="dc-features-item-hover">
-                    <div className="inner-box">
-                      <h3 className="dc-features-title">
-                        Data Warehouse Services
-                      </h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Etiam ut turpis in nunc faucibus cursus id at mauris. Ut
-                        sed mi neque. Donec aliquet, urna id accumsan hendrerit.
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col-lg-4 col-md-6 dc-features-item">
-                <Link href="/features/slug-any">
-                  <div className="dc-features-item-front">
-                    <div className="inner-box">
-                      <div className="icon">
-                        <Image
-                          className="normal img-fluid"
-                          src="/images/default-color/Data-Quality-Assurance.png"
-                          alt=""  width={200} height={200}
-                        />
-                      </div>
-                      <h3 className="dc-features-title">
-                        Data Quality Assurance
-                      </h3>
-                    </div>
-                  </div>
-                  <div className="dc-features-item-hover">
-                    <div className="inner-box">
-                      <h3 className="dc-features-title">
-                        Data Quality Assurance
-                      </h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Etiam ut turpis in nunc faucibus cursus id at mauris. Ut
-                        sed mi neque. Donec aliquet, urna id accumsan hendrerit.
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col-lg-4 col-md-6 dc-features-item">
-                <Link href="/features/slug-any">
-                  <div className="dc-features-item-front">
-                    <div className="inner-box">
-                      <div className="icon">
-                        <Image
-                          className="normal img-fluid"
-                          src="/images/default-color/Data-Security.png"
-                          alt=""  width={200} height={200}
-                        />
-                      </div>
-                      <h3 className="dc-features-title">Data Security</h3>
-                    </div>
-                  </div>
-                  <div className="dc-features-item-hover">
-                    <div className="inner-box">
-                      <h3 className="dc-features-title">Data Security</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Etiam ut turpis in nunc faucibus cursus id at mauris. Ut
-                        sed mi neque. Donec aliquet, urna id accumsan hendrerit.
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col-lg-4 col-md-6 dc-features-item">
-                <Link href="#">
-                  <div className="dc-features-item-front">
-                    <div className="inner-box">
-                      <div className="icon">
-                        <Image
-                          className="normal img-fluid"
-                          src="/images/default-color/Training-and-Onboarding.png"
-                          alt=""  width={200} height={200}
-                        />
-                      </div>
-                      <h3 className="dc-features-title">
-                        Training and Onboarding
-                      </h3>
-                    </div>
-                  </div>
-                  <div className="dc-features-item-hover">
-                    <div className="inner-box">
-                      <h3 className="dc-features-title">
-                        Training and Onboarding
-                      </h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Etiam ut turpis in nunc faucibus cursus id at mauris. Ut
-                        sed mi neque. Donec aliquet, urna id accumsan hendrerit.
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col-lg-4 col-md-6 dc-features-item">
-                <Link href="#">
-                  <div className="dc-features-item-front">
-                    <div className="inner-box">
-                      <div className="icon">
-                        <Image
-                          className="normal img-fluid"
-                          src="/images/default-color/technology.png"
-                          alt=""  width={200} height={200}
-                        />
-                      </div>
-                      <h3 className="dc-features-title">
-                        Technology and Tools
-                      </h3>
-                    </div>
-                  </div>
-                  <div className="dc-features-item-hover">
-                    <div className="inner-box">
-                      <h3 className="dc-features-title">
-                        Technology and Tools
-                      </h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Etiam ut turpis in nunc faucibus cursus id at mauris. Ut
-                        sed mi neque. Donec aliquet, urna id accumsan hendrerit.
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
+
+              ))}
             </div>
           </div>
         </div>
