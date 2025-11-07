@@ -49,7 +49,7 @@ export default function page() {
                                             <li className="disabled">Reports & Billing</li>
                                             <li>100Mb Storage</li>
                                         </ul>
-                                        <a href="#" className="btn btn-secondary">Purchase Now</a>
+                                        <a href="#" className="btn btn-secondary">Active Soon</a>
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@ export default function page() {
                                             <li className="disabled">Reports & Billing</li>
                                             <li>2Gb Storage per user</li>
                                         </ul>
-                                        <a href="#" className="btn btn-primary">Purchase Now</a>
+                                        <a href="#" className="btn btn-primary">Active Soon</a>
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +101,7 @@ export default function page() {
                                             <li>Reports & Billing</li>
                                             <li>2Gb Storage per user</li>
                                         </ul>
-                                        <a href="#" className="btn btn-secondary">Purchase Now</a>
+                                        <a href="#" className="btn btn-secondary">Active Soon</a>
                                     </div>
                                 </div>
                             </div>

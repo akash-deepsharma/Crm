@@ -42,7 +42,7 @@ export default function Pricing() {
                                             <li className="disabled">Reports & Billing</li>
                                             <li>500Mb Storage</li>
                                         </ul>
-                                        <Link href="#" className="btn btn-secondary">Purchase Now</Link>
+                                        <Link href="#" className="btn btn-secondary">Active Soon</Link>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@ export default function Pricing() {
                                             <li>Reports & Billing</li>
                                             <li>2Gb Storage per user</li>
                                         </ul>
-                                        <Link href="#" className="btn btn-primary">Purchase Now</Link>
+                                        <Link href="#" className="btn btn-primary">Active Soon</Link>
                                     </div>
                                 </div>
                             </div>

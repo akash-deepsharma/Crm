@@ -9,6 +9,7 @@ import { getHeaderFeatures } from '@/ApiCall/headersApi'
 export default function Header() {
   
   const pathname = usePathname();
+  console.log( "pth name ", pathname)
 
   const [featureHeader, setfeatureHeader] = useState([]);
    useEffect(() => {
@@ -167,13 +168,13 @@ export default function Header() {
                 <ul className="sub-menu"> 
                   {featureHeader?.headers?.map((item,index) => (
                     <li className="menu-item" key={index}>
-                        <Link href={`features/${item.slug}`}>{item?.title}</Link>
+                        <Link href={`/features/${item.slug}`}>{item?.title}</Link>
                     </li>
                   ))}
                 </ul>
             </li>
             <li className="menu-item"><Link href="/contact" onClick={handleOpenModal}>Book a Session</Link></li>
-            <li className="menu-item"><Link href="/pricing">Pricing</Link></li>
+            <li className={`menu-item ${pathname === '/pricing' ? 'active' : ''}`}><Link href="/pricing">Pricing</Link></li>
             <li className="menu-item"><Link href="/login">Free Trial</Link></li>
             <li className="menu-item menu-item-has-children mega-menu">
               <Link href="#">Quick View</Link>
