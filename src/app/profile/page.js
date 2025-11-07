@@ -4,14 +4,28 @@ import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import Link from "next/link";
 import ProfileModal from "@/components/Common/ProfileModal";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const [showModal, setShowModal] = useState(false);
+
+
+  const router = useRouter();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    alert("You have been logged out successfully!");
+    router.push("/login");
+  };
+
 
   const bannerData = {
     pageName: "Profile",
     pageTitle: "Sub title for profile",
   };
+
+  
 
   // ✅ Store profile data in state so it can update dynamically
   const [profileData, setProfileData] = useState({
@@ -144,6 +158,15 @@ export default function Page() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div className=" mt-5 d-flex flex-wrap justify-content-between align-items-center mb-4">
+
+            <div className="d-flex">
+              <button onClick={handleLogout} className="btn btn-primary">
+                LogOut
+              </button>
             </div>
           </div>
         </div>

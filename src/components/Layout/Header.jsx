@@ -1,28 +1,32 @@
-'use client'
-import Image from 'next/image'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import { usePathname } from 'next/navigation'
-import Request_Modal from '../Common/Request_Modal'
-import { getHeaderFeatures } from '@/ApiCall/headersApi'
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Request_Modal from "../Common/Request_Modal";
+import { getHeaderFeatures } from "@/ApiCall/headersApi";
 
 export default function Header() {
-  
+
+  const [token, setToken] = useState(null);
   const pathname = usePathname();
-  console.log( "pth name ", pathname)
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedToken = localStorage.getItem("token");
+      setToken(storedToken);
+      console.log("User Token:", storedToken);
+    }
+  }, []);
 
   const [featureHeader, setfeatureHeader] = useState([]);
-   useEffect(() => {
-     async function fetchData() {
-       const data = await getHeaderFeatures();
-         setfeatureHeader(data || []);
-     }
-     fetchData();
-   }, []);
- 
-   console.log( "featureHeader",featureHeader)
-
-
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getHeaderFeatures();
+      setfeatureHeader(data || []);
+    }
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const loadScripts = async () => {
@@ -56,11 +60,15 @@ export default function Header() {
           $("body").addClass("navigation-in");
         });
 
-        $(document).on("click", "#navigation .close-btn, #navigation a", function () {
-          $(".menu-toggle-btn").removeClass("active");
-          $("#navigation").removeClass("open");
-          $("body").removeClass("navigation-in");
-        });
+        $(document).on(
+          "click",
+          "#navigation .close-btn, #navigation a",
+          function () {
+            $(".menu-toggle-btn").removeClass("active");
+            $("#navigation").removeClass("open");
+            $("body").removeClass("navigation-in");
+          }
+        );
 
         $(document).keydown(function (e) {
           if (e.keyCode === 27) {
@@ -87,11 +95,7 @@ export default function Header() {
             .slideUp(350);
 
           $(this).next("ul").slideToggle(350);
-          $(this)
-            .next("ul")
-            .children("li")
-            .find("ul")
-            .slideUp(350);
+          $(this).next("ul").children("li").find("ul").slideUp(350);
           $(this)
             .next("ul")
             .children("li")
@@ -129,102 +133,161 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
+  const [showModal, setShowModal] = useState(false);
 
+  const handleOpenModal = (e) => {
+    e.preventDefault();
+    setShowModal(true);
+  };
 
-      const [showModal, setShowModal] = useState(false);
-            
-            const handleOpenModal = (e) => {
-                e.preventDefault();
-                setShowModal(true);
-            };
-            
-            const handleCloseModal = () => {
-                setShowModal(false);
-            };
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <>
-
-    <header id="master-head" className="navbar menu-absolute menu-center">
-      <div className="container-fluid">
-        <div id="main-logo" className="logo-container">
-          <Link className="logo" href="/">
-            <Image src="/images/logo-d.png" className="logo-dark" alt="Crm" width={150} height={150} />
-            <Image src="/images/logo-d.png" className="logo-light" alt="Crm" width={150} height={150} />
-          </Link>
-        </div>
-        <div className="menu-toggle-btn">
-          <Link href="#" className="navbar-toggle">
-            <div className="burger-lines"></div>
-          </Link>
-        </div>
-        <div id="navigation" className="nav navbar-nav navbar-main">
-          <ul id="main-menu" className="menu-primary">
-            {/* <li className={`menu-item ${pathname === '/' ? 'active' : ''}`}>
+      <header id="master-head" className="navbar menu-absolute menu-center">
+        <div className="container-fluid">
+          <div id="main-logo" className="logo-container">
+            <Link className="logo" href="/">
+              <Image
+                src="/images/logo-d.png"
+                className="logo-dark"
+                alt="Crm"
+                width={150}
+                height={150}
+              />
+              <Image
+                src="/images/logo-d.png"
+                className="logo-light"
+                alt="Crm"
+                width={150}
+                height={150}
+              />
+            </Link>
+          </div>
+          <div className="menu-toggle-btn">
+            <Link href="#" className="navbar-toggle">
+              <div className="burger-lines"></div>
+            </Link>
+          </div>
+          <div id="navigation" className="nav navbar-nav navbar-main">
+            <ul id="main-menu" className="menu-primary">
+              {/* <li className={`menu-item ${pathname === '/' ? 'active' : ''}`}>
               <Link href="/">Home</Link>
             </li> */}
-            <li className={`menu-item ${pathname === '/about' ? 'active' : ''}`}><Link href="/about">About</Link></li>
-            <li className={`menu-item menu-item-has-children`}><Link href="/features">Features</Link>
-                <ul className="sub-menu"> 
-                  {featureHeader?.headers?.map((item,index) => (
+              <li
+                className={`menu-item ${pathname === "/about" ? "active" : ""}`}
+              >
+                <Link href="/about">About</Link>
+              </li>
+              <li className={`menu-item menu-item-has-children`}>
+                <Link href="/features">Features</Link>
+                <ul className="sub-menu">
+                  {featureHeader?.headers?.map((item, index) => (
                     <li className="menu-item" key={index}>
-                        <Link href={`/features/${item.slug}`}>{item?.title}</Link>
+                      <Link href={`/features/${item.slug}`}>{item?.title}</Link>
                     </li>
                   ))}
                 </ul>
-            </li>
-            <li className="menu-item"><Link href="/contact" onClick={handleOpenModal}>Book a Session</Link></li>
-            <li className={`menu-item ${pathname === '/pricing' ? 'active' : ''}`}><Link href="/pricing">Pricing</Link></li>
-            <li className="menu-item"><Link href="/login">Free Trial</Link></li>
-            <li className="menu-item menu-item-has-children mega-menu">
-              <Link href="#">Quick View</Link>
-              <ul className="sub-menu mega-menu-inner">
-                <li className="menu-item col-title">
-                  <Link href="#">Inner Pages</Link>
-                  <ul className="sub-menu">
-                    <li className="menu-item"><Link href="/about">About Us</Link></li>
-                    <li className="menu-item"><Link href="/features">Features</Link></li>
-                    <li className="menu-item"><Link href="/contact">Contact Us</Link></li>
-                    <li className="menu-item"><Link href="/login">Login/Register</Link></li>
-                  </ul>
-                </li>
-                <li className="menu-item col-title">
-                  <Link href="#">Elements</Link>
-                  <ul className="sub-menu">
-                    <li className="menu-item"><Link href="/how-crm-works">How Crm Works</Link></li>
-                    <li className="menu-item"><Link href="#!">Free Demo</Link></li>
-                    <li className="menu-item"><Link href="#!" onClick={handleOpenModal} >Book a Session</Link></li>
-                    <li className="menu-item"><Link href="/agent">Agent Or Seller </Link></li>
-                  </ul>
-                </li>
-                <li className="menu-item col-title">
-                  <Link href="#">Another Element</Link>
-                  <ul className="sub-menu">
-                    <li className="menu-item"><Link href="/support">Support</Link></li>
-                    <li className="menu-item"><Link href="/pricing">Pricing</Link></li>
-                    <li className="menu-item"><Link href="/blogs">Blog</Link></li>
-                    <li className="menu-item"><Link href="#!">Element 4</Link></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <div className="navbar-right">
-          <div className="menu-button">
-            <Link href="/login">
-              <div className="btn btn-outline-primary btn-light">sign in / sign up</div>
-            </Link>
+              </li>
+              <li className="menu-item">
+                <Link href="/contact" onClick={handleOpenModal}>
+                  Book a Session
+                </Link>
+              </li>
+              <li
+                className={`menu-item ${
+                  pathname === "/pricing" ? "active" : ""
+                }`}
+              >
+                <Link href="/pricing">Pricing</Link>
+              </li>
+              <li className="menu-item">
+                <Link href="/login">Free Trial</Link>
+              </li>
+              <li className="menu-item menu-item-has-children mega-menu">
+                <Link href="#">Quick View</Link>
+                <ul className="sub-menu mega-menu-inner">
+                  <li className="menu-item col-title">
+                    <Link href="#">Inner Pages</Link>
+                    <ul className="sub-menu">
+                      <li className="menu-item">
+                        <Link href="/about">About Us</Link>
+                      </li>
+                      <li className="menu-item">
+                        <Link href="/features">Features</Link>
+                      </li>
+                      <li className="menu-item">
+                        <Link href="/contact">Contact Us</Link>
+                      </li>
+                      <li className="menu-item">
+                        <Link href="/login">Login/Register</Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="menu-item col-title">
+                    <Link href="#">Elements</Link>
+                    <ul className="sub-menu">
+                      <li className="menu-item">
+                        <Link href="/how-crm-works">How Crm Works</Link>
+                      </li>
+                      <li className="menu-item">
+                        <Link href="#!">Free Demo</Link>
+                      </li>
+                      <li className="menu-item">
+                        <Link href="#!" onClick={handleOpenModal}>
+                          Book a Session
+                        </Link>
+                      </li>
+                      <li className="menu-item">
+                        <Link href="/agent">Agent Or Seller </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="menu-item col-title">
+                    <Link href="#">Another Element</Link>
+                    <ul className="sub-menu">
+                      <li className="menu-item">
+                        <Link href="/support">Support</Link>
+                      </li>
+                      <li className="menu-item">
+                        <Link href="/pricing">Pricing</Link>
+                      </li>
+                      <li className="menu-item">
+                        <Link href="/blogs">Blog</Link>
+                      </li>
+                      <li className="menu-item">
+                        <Link href="#!">Element 4</Link>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </div>
-          <div className="search-option style-dark">
-            <div className="search-btn">
-              <Link href="/profile"><i className="fa-regular fa-user"></i></Link>
-            </div>
+          <div className="navbar-right">
+            {token ? (
+              <div className="search-option style-dark">
+                <div className="search-btn">
+                  <Link href="/profile">
+                    <i className="fa-regular fa-user"></i>
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <div className="menu-button">
+                <Link href="/login">
+                  <div className="btn btn-outline-primary btn-light">
+                    sign in / sign up
+                  </div>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
-      </div>
-    </header>
-    {showModal && <Request_Modal onClose={handleCloseModal} />}
+      </header>
+      {showModal && <Request_Modal onClose={handleCloseModal} />}
     </>
-  )
+  );
 }

@@ -138,7 +138,7 @@ const handleSubmit = async (e) => {
     emailVerified: formData.emailVerified, 
     phoneVerified: formData.phoneVerified, 
   };
-  console.log("Form Data to submit:", formattedData);
+  // console.log("Form Data to submit:", formattedData);
 
   try {
     const res = await agentPostApi(formattedData);

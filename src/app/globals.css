@@ -4372,7 +4372,7 @@ blockquote::before {
 	.page-header.dc-ten {background-position: center  !important;}
 	.i-text-center{text-align:center !important;}
 	.i-hidden{display:none !important; }
-	.search-option{display: none;}
+	/* .search-option{display: none;} */
 	.container{max-width:720px;}
 	.page-header.dc-one{padding: 150px 0px 100px;}
 	.page-header.dc-one .image-wrapper{margin-top:30px;}

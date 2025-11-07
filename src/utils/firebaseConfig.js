@@ -1,3 +1,4 @@
+import { LoginApi, Signinwithgoogle } from "@/ApiCall/loginApi";
 import { initializeApp, getApps } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
@@ -11,17 +12,45 @@ const firebaseConfig = {
   measurementId: "G-YH92N4DKEJ"
 };
 
+
+
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
 export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();
 
+
 export const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
-    console.log("User Info:", result.user);
+    const user = result.user;
+
+    // console.log("User Info:", result.user);
     alert(`Welcome ${result.user.displayName}!`);
+
+    const payload = {
+      email: user.email,
+      name: user.displayName,
+      google_id: user.uid,
+      avatar: user.photoURL,
+    };
+
+      const signindata=  await Signinwithgoogle(payload)
+      // console.log("Google Login API Response:", signindata);
+      
+     if (signindata.status === "success") {
+      
+      localStorage.setItem("token", signindata.token);
+      localStorage.setItem("user", JSON.stringify(signindata.user));
+
+      window.location.href = "/profile";
+    } else {
+      alert(signindata.message || "❌ Failed to set password. Try again.");
+    }
   } catch (error) {
-    console.error("Google Sign-In Error:", error);
+    // console.error("Google Sign-In Error:", error);
     alert("Failed to sign in with Google.");
   }
 };
+
+
+

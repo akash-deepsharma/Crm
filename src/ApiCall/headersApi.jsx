@@ -7,7 +7,6 @@ export const apiClient = axios.create({
 export async function getHeaderFeatures() {
   try {
     const res = await apiClient.get("/featureheader");
-    console.log("Header features " , res)
     return res.data;
   } catch (error) {
     console.error("Error fetching blogs:", error);

@@ -23,7 +23,7 @@ export default function ContactForm({ onClose }) {
     setLoading(true);
 
     try {
-      console.log("Submitting form data:", formData);
+      // console.log("Submitting form data:", formData);
       const response = await contactPostApi(formData);
 
       if (response.status === "success") {

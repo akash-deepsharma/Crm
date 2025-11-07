@@ -6,10 +6,10 @@ import Counter from "../Common/Counter";
 export default async function About({data}) {
 
 const aboutData = await data || [];
-  console.log("about data set", aboutData);
+  // console.log("about data set", aboutData);
 
     const content = aboutData?.heading;
-    console.log( "content", content)
+    // console.log( "content", content)
     const words = content.split(" ");  
     const a = words.slice(0, 2).join(" ");
     const b = words.slice(2, 5).join(" ");

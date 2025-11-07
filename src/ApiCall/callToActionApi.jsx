@@ -7,7 +7,7 @@ export const apiClient = axios.create({
 export async function getCallToAction() {
   try {
     const res = await apiClient.get(`/call-to-action`);
-    console.log( "Call to action", res.data)
+    // console.log( "Call to action", res.data)
     return res.data;
   } catch (error) {
     console.error("Error fetching Pages data:", error);

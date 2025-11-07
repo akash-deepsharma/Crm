@@ -5,7 +5,7 @@ export default function UserTypes({data}) {
 
 const userTypeData = data || [];
 
-console.log( "userTypeData", userTypeData)
+// console.log( "userTypeData", userTypeData)
 
 
  const content = userTypeData?.heading;

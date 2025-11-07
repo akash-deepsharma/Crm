@@ -18,7 +18,7 @@ export default function NewsletterFooter() {
     setLoading(true);
 
     try {
-      console.log("Submitting form data:", formData);
+      // console.log("Submitting form data:", formData);
       const response = await requestPostApi(formData);
 
       if (response.status === "success") {
