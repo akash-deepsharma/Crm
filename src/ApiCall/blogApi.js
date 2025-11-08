@@ -15,6 +15,16 @@ export async function getBlogs(page = 1, perPage = 10) {
   }
 }
 
+export async function getAllBlogs() {
+  try {
+    const res = await apiClient.get("/all-blog");
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    throw new Error(error.response?.data?.message || "Failed to fetch blogs");
+  }
+}
+
 export async function getSingleBlog(slug) {
   try {
     const res = await apiClient.get(`/showsingleblog/${slug}`);

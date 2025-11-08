@@ -1,13 +1,32 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import Link from "next/link";
 import ProfileModal from "@/components/Common/ProfileModal";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { GetProfile, UpdateProfile } from "@/ApiCall/profileApi";
 
 export default function Page() {
   const [showModal, setShowModal] = useState(false);
+   const [profileData, setProfileData] = useState([]);
+
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await GetProfile();
+      // console.log("✅ First  Profile data:", data);
+      if (data?.status === "success") {
+        setProfileData(data.data || []);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+
+  // console.log( "profile data", profileData)
+
 
 
   const router = useRouter();
@@ -25,25 +44,7 @@ export default function Page() {
     pageTitle: "Sub title for profile",
   };
 
-  
 
-  // ✅ Store profile data in state so it can update dynamically
-  const [profileData, setProfileData] = useState({
-    companyName: "Tech Alphonic Pvt Ltd",
-    gst: "36ABCDE1234F1Z5",
-    pan: "ABCDE1234F",
-    address: "Plot No. 12, Industrial Area",
-    city: "Hyderabad",
-    state: "Telangana",
-    zip: "500001",
-    country: "India",
-    phone: "+91 9876543210",
-    email: "info@techalphonic.com",
-    // about:
-    //   "We are a software development company specializing in web and mobile solutions.",
-    description:
-      "Tech Alphonic is known for its innovative approach and client satisfaction.",
-  });
 
   // Modal controls
   const handleOpenModal = () => setShowModal(true);
@@ -68,8 +69,7 @@ export default function Page() {
                 Welcome to <span>your</span> profile
               </h2>
             </div>
-
-            <div className="d-flex">
+            <div className="d-flex"> 
               <button
                 className="btn btn-outline-primary px-3 me-2"
                 onClick={handleOpenModal}
@@ -85,17 +85,18 @@ export default function Page() {
           {/* Profile Section */}
           <div className="profile-view card p-4 shadow-md rounded-4 border-1">
             <div className="row g-4">
-              {/* Profile Image */}
               <div className="col-lg-4 text-center">
                 <div className="user-profile">
-                  <Image
-                    src="/images/person2.webp"
+                  <div className="User-profile-img">
+                    <Image
+                    src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${profileData?.user?.profile_photo}`}
                     alt="Profile"
                     width={250}
                     height={250}
-                    className="rounded-circle border border-3 border-primary shadow-sm"
+                    className="rounded-circle border border-3 border-primary shadow-sm object-fit-cover"
                   />
-                  <h3 className="mt-3 mb-0">{profileData.companyName}</h3>
+                  </div>
+                  <h3 className="mt-3 mb-0">{profileData?.profile?.company_name}</h3>
                 </div>
               </div>
 
@@ -103,17 +104,23 @@ export default function Page() {
               <div className="col-lg-8">
                 <div className="profile-data">
                   <div className="row g-3">
+                    <div className="col-md-12">
+                      <div className="info-box p-3 bg-light rounded">
+                        <strong>User Name:</strong>
+                        <p className="mb-0">{profileData?.user?.name}</p>
+                      </div>
+                    </div>
                     <div className="col-md-6">
                       <div className="info-box p-3 bg-light rounded">
                         <strong>GST:</strong>
-                        <p className="mb-0">{profileData.gst}</p>
+                        <p className="mb-0">{profileData?.profile?.gst_number}</p>
                       </div>
                     </div>
 
                     <div className="col-md-6">
                       <div className="info-box p-3 bg-light rounded">
                         <strong>PAN:</strong>
-                        <p className="mb-0">{profileData.pan}</p>
+                        <p className="mb-0">{profileData?.profile?.pan_number}</p>
                       </div>
                     </div>
 
@@ -121,9 +128,9 @@ export default function Page() {
                       <div className="info-box p-3 bg-light rounded">
                         <strong>Address:</strong>
                         <p className="mb-0">
-                          {profileData.address}, {profileData.city},{" "}
-                          {profileData.state} - {profileData.zip},{" "}
-                          {profileData.country}
+                          {profileData?.profile?.address}, {profileData?.profile?.city},{" "}
+                          {profileData?.profile?.state} - {profileData?.profile?.zip},{" "}
+                          {profileData?.profile?.country}
                         </p>
                       </div>
                     </div>
@@ -131,28 +138,21 @@ export default function Page() {
                     <div className="col-md-6">
                       <div className="info-box p-3 bg-light rounded">
                         <strong>Email:</strong>
-                        <p className="mb-0">{profileData.email}</p>
+                        <p className="mb-0">{profileData?.user?.email}</p>
                       </div>
                     </div>
 
                     <div className="col-md-6">
                       <div className="info-box p-3 bg-light rounded">
                         <strong>Phone:</strong>
-                        <p className="mb-0">{profileData.phone}</p>
+                        <p className="mb-0">{profileData?.user?.number}</p>
                       </div>
                     </div>
-
-                    {/* <div className="col-md-12">
-                      <div className="info-box p-3 bg-light rounded">
-                        <strong>About the Company:</strong>
-                        <p className="mb-0">{profileData.about}</p>
-                      </div>
-                    </div> */}
 
                     <div className="col-md-12">
                       <div className="info-box p-3 bg-light rounded">
                         <strong>Description:</strong>
-                        <p className="mb-0">{profileData.description}</p>
+                        <p className="mb-0">{profileData?.profile?.company_overview}</p>
                       </div>
                     </div>
                   </div>
@@ -178,6 +178,7 @@ export default function Page() {
           onClose={handleCloseModal}
           onSave={handleSaveProfile}
           initialData={profileData}
+
         />
       )}
     </>

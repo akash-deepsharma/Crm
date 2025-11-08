@@ -1,9 +1,18 @@
-import { getAllBlogs, getAllServices } from "@/lib/api";
+import { getAllBlogs } from "@/ApiCall/blogApi";
+import { getFeature } from "@/ApiCall/featuresApi";
+import { headers } from "next/headers";
 
 export async function GET() {
-  const baseUrl = "http://localhost:3000";
-  const blogs = await getAllBlogs();
-  const services = await getAllServices();  
+  // const baseUrl = "http://localhost:3000";
+
+  const host = headers().get("host");
+  const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+  const baseUrl = `${protocol}://${host}`;
+
+
+  const features = await getFeature();  
+  const blogsdata = await getAllBlogs();
+
 
   // Static routes based on actual app directory
   const staticPages = [
@@ -30,23 +39,25 @@ export async function GET() {
   }));
 
   // Dynamic blog URLs
-  const blogPages = blogs.map((post) => ({
-    url: `${baseUrl}/blogs/${post.slug || post.id}`,
-    lastModified: post.updatedAt ? new Date(post.updatedAt).toISOString() : new Date().toISOString(),
+
+  const blogPages = blogsdata?.data?.map((post) => ({
+    url: `${baseUrl}/blogs/${post.slug}`,
+    lastModified: post.created_at ? new Date(post.created_at).toISOString() : new Date().toISOString(),
     changeFrequency: "weekly",
     priority: 0.7,
   }));
 
   // Dynamic service URLs
-  const servicePages = services.map((service) => ({
-    url: `${baseUrl}/services/${service.slug || service.id}`,
-    lastModified: service.updatedAt ? new Date(service.updatedAt).toISOString() : new Date().toISOString(),
+
+  const servicePages = features?.section1?.extra_data?.steps.map((features) => ({
+    url: `${baseUrl}/features/${features.slug}`,
+    lastModified: features.updated_at ? new Date(features.updated_at).toISOString() : new Date().toISOString(),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
   // Combine all pages
-  const allPages = [...staticPages, ...blogPages, ...servicePages];
+  const allPages = [...staticPages, ...servicePages, ...blogPages];
 
   // Generate XML
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
