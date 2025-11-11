@@ -20,6 +20,22 @@ export async function GetProfile() {
 }
 
 
+export async function TakeProfile() {
+  try {
+     const storedToken =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    const res = await apiClient.get("/user-profile", {
+    headers: {
+      Authorization: `Bearer ${storedToken}`,
+    },
+  });
+    return res.data;
+  } catch (error) {
+    return { status: "error", message: "Something went wrong" };
+  }
+}
+
+
 
 export async function UpdateProfile(payload) {
   try {

@@ -5,7 +5,7 @@ import { getFaq } from "@/ApiCall/faqApi";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export default function Faq() {
-   const slug = "home-page";
+   const slug = "home";
   const [faqData, setFaqData] = useState([]);
 
   useEffect(() => {

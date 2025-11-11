@@ -2,6 +2,59 @@ import React from 'react'
 import Layout from '@/app/layout'
 import InnerPageBanner from '@/components/Common/InnerPageBanner'
 import Subscriber from '@/components/Common/Subscriber';
+import { getMetas } from '@/ApiCall/getMetasApi';
+
+export async function generateMetadata() {
+  // Static slug for Become a seller page
+  const slug = "pricing";
+  const meta = await getMetas(slug);
+
+  const page = await meta?.data?.[0];
+  console.log( `${slug} page meta found then show`, page)
+
+  if (!page) {
+    return {
+      title: "Pricing | My Website",
+      description: "Explore our flexible pricing plans designed to suit businesses of all sizes. Choose the plan that fits your needs and start growing with My Website today.",
+    };
+  }
+
+
+  return {
+    title: page.meta_title || "Pricing | My Website",
+    description:
+      page.meta_description ||
+      "Explore our flexible pricing plans designed to suit businesses of all sizes. Choose the plan that fits your needs and start growing with My Website today.",
+    keywords:
+      page.meta_keywords ||
+      "pricing plans, subscription, packages, business plans, affordable pricing, My Website pricing",
+    openGraph: {
+      title: page.meta_title || "Pricing | My Website",
+      description:
+        page.meta_description ||
+        "Discover transparent and flexible pricing plans to get the most out of our platform. Find the plan that fits your business goals.",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_MEDIA_PATH}/${page.page_image}`,
+          width: 1200,
+          height: 630,
+          alt: page.title || "Pricing | My Website",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: page.meta_title || "Pricing | My Website",
+      description:
+        page.meta_description ||
+        "Check out our pricing plans and choose the best package for your business. Get started with My Website today.",
+      images: [`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${page.page_image}`],
+    },
+  };
+}
+
+
 
 export default function page() {
   const bannerData = {

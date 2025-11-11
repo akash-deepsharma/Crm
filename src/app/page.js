@@ -1,7 +1,7 @@
 
-// "use client";
+
+import { getMetas } from "@/ApiCall/getMetasApi";
 import { getHome } from "@/ApiCall/homeApi";
-// import { getFAQData } from "@/ApiCall/pagesApi";
 import BlogHome from "@/components/Blogs/BlogHome";
 import Faq from "@/components/Common/Faq";
 import About from "@/components/Home/About";
@@ -11,6 +11,59 @@ import Pricing from "@/components/Home/Pricing";
 import Screenshot from "@/components/Home/Screenshot";
 import Testimonials from "@/components/Home/Testimonials";
 import UserTypes from "@/components/Home/UserTypes";
+
+
+export async function generateMetadata() {
+  // Static slug for Become a seller page
+  const slug = "home";
+  const meta = await getMetas(slug);
+
+  const page = await meta?.data?.[0];
+  console.log( `${slug} page meta found then show`, page)
+
+  if (!page) {
+    return {
+      title: "Home  | My Website",
+      description: "Welcome to My Website! Discover our services, latest updates, and explore how we can help you achieve your goals.",
+    };
+  }
+
+
+  return {
+    title: page.meta_title || "Home  | My Website",
+    description:
+      page.meta_description ||
+      "Welcome to My Website! Discover our services, latest updates, and explore how we can help you achieve your goals.",
+    keywords:
+      page.meta_keywords ||
+      "home, services, updates, My Website, explore, goals",
+    openGraph: {
+      title: page.meta_title || "Home  | My Website",
+      description:
+        page.meta_description ||
+        "Welcome to My Website! Discover our services, latest updates, and explore how we can help you achieve your goals.",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_MEDIA_PATH}/${page.page_image}`,
+          width: 1200,
+          height: 630,
+          alt: page.title || "Home  | My Website",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: page.meta_title || "Home  | My Website",
+      description:
+        page.meta_description ||
+        "Welcome to My Website! Discover our services, latest updates, and explore how we can help you achieve your goals.",
+      images: [`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${page.page_image}`],
+    },
+  };
+}
+
+
 
 export default async function Home() {
 

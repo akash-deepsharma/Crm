@@ -1,9 +1,64 @@
 import { getFeature } from "@/ApiCall/featuresApi";
+import { getMetas } from "@/ApiCall/getMetasApi";
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import Subscriber from "@/components/Common/Subscriber";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
+
+
+export async function generateMetadata() {
+  // Static slug for Become a seller page
+  const slug = "features";
+  const meta = await getMetas(slug);
+
+  const page = await meta?.data?.[0];
+  console.log( `${slug} page meta found then show`, page)
+
+  if (!page) {
+    return {
+      title: "Features | My Website",
+      description: "Discover the powerful features of My Website that help you manage, scale, and optimize your online business with ease.",
+    };
+  }
+
+
+  return {
+    title: page.meta_title || "Features | My Website",
+    description:
+      page.meta_description ||
+      "Discover the powerful features of My Website that help you manage, scale, and optimize your online business with ease.",
+    keywords:
+      page.meta_keywords ||
+      "features, platform capabilities, tools, solutions, business growth, online platform features, My Website features",
+    openGraph: {
+      title: page.meta_title || "Features | My Website",
+      description:
+        page.meta_description ||
+        "Explore innovative tools and capabilities designed to simplify your business operations and enhance performance.",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_MEDIA_PATH}/${page.page_image}`,
+          width: 1200,
+          height: 630,
+          alt: page.title || "Features | My Website",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: page.meta_title || "Features | My Website",
+      description:
+        page.meta_description ||
+        "Learn more about the advanced features and solutions My Website offers to help your business grow online.",
+      images: [`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${page.page_image}`],
+    },
+  };
+}
+
+
 
 export default async function page() {
 
@@ -11,7 +66,7 @@ export default async function page() {
 
   const DataFeature = featureData || []
 
-  console.log("featureData", DataFeature)
+  // console.log("featureData", DataFeature)
 
   const content = DataFeature?.section1?.extra_data?.title;
 

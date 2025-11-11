@@ -6,10 +6,14 @@ import { usePathname } from "next/navigation";
 import Request_Modal from "../Common/Request_Modal";
 import { getHeaderFeatures } from "@/ApiCall/headersApi";
 
+
+
 export default function Header() {
 
-  const [token, setToken] = useState(null);
   const pathname = usePathname();
+
+
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -146,6 +150,8 @@ export default function Header() {
 
   return (
     <>
+   
+    
       <header id="master-head" className="navbar menu-absolute menu-center">
         <div className="container-fluid">
           <div id="main-logo" className="logo-container">
@@ -241,7 +247,7 @@ export default function Header() {
                         </Link>
                       </li>
                       <li className="menu-item">
-                        <Link href="/agent">Agent Or Seller </Link>
+                        <Link href="/become-a-seller">Agent Or Seller </Link>
                       </li>
                     </ul>
                   </li>

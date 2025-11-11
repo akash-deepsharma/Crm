@@ -1,4 +1,5 @@
 // "use client";
+import { getMetas } from "@/ApiCall/getMetasApi";
 import { getHowCrmWorks } from "@/ApiCall/howCrmWorksApi";
 import CallToAction from "@/components/Common/CallToAction";
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
@@ -7,6 +8,59 @@ import Testimonials_inner from "@/components/Home/Testimonials_inner";
 import HowCrmWorks from "@/components/HowCrmWorks/HowCrmWorks";
 import VisualWorkflow from "@/components/HowCrmWorks/VisualWorkflow";
 import WhyChoose from "@/components/HowCrmWorks/WhyChoose";
+
+
+
+export async function generateMetadata() {
+  // Static slug for Become a seller page
+  const slug = "how-crm-works";
+  const meta = await getMetas(slug);
+
+  const page = await meta?.data?.[0];
+  console.log( `${slug} page meta found then show`, page)
+
+  if (!page) {
+    return {
+      title: "How CRM Works | My Website",
+      description: "Learn how Customer Relationship Management (CRM) helps streamline your business processes, manage customer interactions, and boost growth efficiently.",
+    };
+  }
+
+
+  return {
+    title: page.meta_title || "How CRM Works | My Website",
+    description:
+      page.meta_description ||
+      "Learn how Customer Relationship Management (CRM) helps streamline your business processes, manage customer interactions, and boost growth efficiently.",
+    keywords:
+      page.meta_keywords ||
+      "CRM, how CRM works, customer relationship management, CRM features, business tools, My Website CRM",
+    openGraph: {
+      title: page.meta_title || "How CRM Works | My Website",
+      description:
+        page.meta_description ||
+        "Discover the benefits of CRM systems and how they can help your business manage customer interactions, sales, and relationships effectively.",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_MEDIA_PATH}/${page.page_image}`,
+          width: 1200,
+          height: 630,
+          alt: page.title || "How CRM Works | My Website",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: page.meta_title || "How CRM Works | My Website",
+      description:
+        page.meta_description ||
+        "Understand how CRM tools can streamline your business processes, manage leads, and improve customer relationships.",
+      images: [`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${page.page_image}`],
+    },
+  };
+}
+
 
 export default async function page() {
 
