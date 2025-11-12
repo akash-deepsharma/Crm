@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 export default function robots() {
   const baseUrl =
-    process.env.NEXT_PUBLIC_baseUrl;
+    process.env.NEXT_PUBLIC_baseUrl || "https://alphonic-crm.vercel.app";
 
 
 
