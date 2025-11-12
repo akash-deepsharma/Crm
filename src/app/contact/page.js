@@ -29,6 +29,10 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "contact us, customer support, help center, get in touch, inquiry, feedback, My Website contact",
+      robots:
+      page.robotstatus === "true"
+        ? "index, follow"
+        : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "Contact Us | My Website",
       description:
@@ -56,8 +60,14 @@ export async function generateMetadata() {
 }
 
 export default async function page() {
+  const slug = "contact";
+  // const ContactContent = await contactGetApi();
+  const [ContactContent, metaData] = await Promise.all([contactGetApi(), getMetas(slug)]);
+  
+       const meta = metaData?.data?.[0];
+  
+    console.log( "data how contact" , meta)
 
-  const ContactContent = await contactGetApi();
   // console.log("contactGetApi",ContactContent)
 
   const bannerData = {
@@ -68,6 +78,12 @@ export default async function page() {
 
   return (
       <>
+      {meta?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: meta.schema_page }}
+        />
+      )}
         <InnerPageBanner data={bannerData}/>
         <ContactDetails data={ContactContent}/>
         <ContactIframe data={ContactContent}/>

@@ -29,6 +29,10 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "privacy policy, data protection, user information, security, My Website privacy",
+      robots:
+      page.robotstatus === "true"
+        ? "index, follow"
+        : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "Privacy Policy | My Website",
       description:
@@ -56,10 +60,22 @@ export async function generateMetadata() {
 }
 
 
-export default function Page() {
+export default async function Page() {
+
+   const slug = "support";
+  const metaData = await getMetas(slug);
+
+  const meta = metaData?.data?.[0];
 
   return (
     <>
+    {meta?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: meta.schema_page }}
+        />
+      )}
+
       <SupportPageClient/>
     </>
   );

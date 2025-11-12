@@ -29,6 +29,10 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "privacy policy, data protection, user information, security, My Website privacy",
+      robots:
+      page.robotstatus === "true"
+        ? "index, follow"
+        : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "Privacy Policy | My Website",
       description:
@@ -63,7 +67,12 @@ export default async function Page() {
 
   const slug = "privacy-policy";
   
-  const response = await getPagesData(slug);
+  // const response = await getPagesData(slug);
+  const [response, metaData] = await Promise.all([getPagesData(slug), getMetas(slug)]);
+  
+       const meta = metaData?.data?.[0];
+  
+    console.log( "data how privacy-policy" , meta)
   const pageData = response?.data?.[0];
 
   const bannerData = {
@@ -73,6 +82,14 @@ export default async function Page() {
 
   return (
     <div>
+
+
+      {meta?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: meta.schema_page }}
+        />
+      )}
       <InnerPageBanner data={bannerData} />
       <div className="terms-and-conditions section-padding">
         <div className="container">

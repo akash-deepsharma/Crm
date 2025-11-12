@@ -37,6 +37,10 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "home, services, updates, My Website, explore, goals",
+      robots:
+      page.robotstatus === "true"
+        ? "index, follow"
+        : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "Home  | My Website",
       description:
@@ -51,6 +55,8 @@ export async function generateMetadata() {
           alt: page.title || "Home  | My Website",
         },
       ],
+      locale: "en_US",
+    type: "website",
     },
     twitter: {
       card: "summary_large_image",
@@ -63,13 +69,13 @@ export async function generateMetadata() {
   };
 }
 
-
-
 export default async function Home() {
-
-    const home_data = await getHome()
+ const slug = "home";
+    // const home_data = await getHome()
+    const [home_data, metaData] = await Promise.all([getHome(), getMetas(slug)]);
   const dataHome = home_data || []
-  // console.log( "data home" , dataHome)
+  const meta = metaData?.data?.[0];
+  // console.log( "data home" , meta)
 
    
 const bannerData = dataHome?.section1
@@ -81,15 +87,24 @@ const UserTypeData = dataHome?.section4
 
   return (
     <> 
-                <HeroBanner data={bannerData}/>
-                <Features/>
-                <About data={aboutData}/>
-                <Screenshot data={screenshotData}/>
-                <Pricing/>
-                <Testimonials/>
-                <UserTypes data={UserTypeData}/>
-                <BlogHome/>
-                <Faq/>
+
+     
+       {meta?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: meta.schema_page }}
+        />
+      )}    
+
+      <HeroBanner data={bannerData}/>
+      <Features/>
+      <About data={aboutData}/>
+      <Screenshot data={screenshotData}/>
+      <Pricing/>
+      <Testimonials/>
+      <UserTypes data={UserTypeData}/>
+      <BlogHome/>
+      <Faq/>
     </>
   );
 }

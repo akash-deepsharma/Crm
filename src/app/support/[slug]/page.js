@@ -2,15 +2,59 @@ import { getSingleSupport } from "@/ApiCall/supportApi";
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import Link from "next/link";
 
-export default async function Page({ params }) {
+
+
+export async function generateMetadata({ params }) {
+  const slug = await params.slug;
+  
+  const supportData = await getSingleSupport(slug);
+  
+  if (!supportData || !supportData.metas) {
+    return {
+      title: "Support Not Found | My Website",
+      description: "The requested Support post could not be found.",
+    };
+  }
+
+  const supportItem = supportData.metas;
+
+  return {
+    title: supportItem.meta_title || supportItem.title,
+    description: supportItem.meta_description || supportItem.excerpt || supportItem.title,
+    keywords: supportItem.meta_keywords || "feature, articles, news",
+    openGraph: {
+      title: supportItem.meta_title || supportItem.title,
+      description: supportItem.meta_description || supportItem.excerpt || "",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/features/${slug}`,
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_MEDIA_PATH}/${supportItem.featured_image}`,
+          width: 1200,
+          height: 630,
+          alt: supportItem.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: supportItem.meta_title || supportItem.title,
+      description: supportItem.meta_description || supportItem.excerpt || "",
+      images: [`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${supportItem.featured_image}`],
+    },
+  };
+}
+
+
+export default async function Page({ params }) {  
   const { slug } = await params;
 
   // ✅ Fetch server-side
   const faqData = await getSingleSupport(slug);
   // console.log("slug", slug);
-  // console.log("support data", faqData);
+  console.log("support data", faqData);
 
-
+const metas = faqData?.metas
+console.log("meta supprot detail" , metas)
 
   const supportItem = faqData;
   if (!supportItem) {
@@ -24,6 +68,14 @@ export default async function Page({ params }) {
 
   return (
     <div>
+
+
+       {metas?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: metas.schema_page }}
+        />
+      )}
       <InnerPageBanner data={bannerData} />
       <div className="faq-section section-padding">
         <div className="container">

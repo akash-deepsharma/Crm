@@ -50,11 +50,14 @@ export default async function Page({ params }) {
   const slug = params.slug;
   const blog = await getSingleBlog(slug);
 
-  if (!blog || !blog.data) return notFound();
 
+  
+  if (!blog || !blog.data) return notFound();
+  
   const blogItem = blog.data;
   const blogs = await getBlogs(); // For sidebar
-
+  
+  // console.log( "blogss datail data ", blogItem)
   const bannerData = {
     pageName: blogItem.title || "Blog Detail",
     pageTitle: "Latest News & Articles",
@@ -62,6 +65,14 @@ export default async function Page({ params }) {
 
   return (
     <>
+      {blogItem?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: blogItem.schema_page }}
+        />
+      )}
+
+
       <InnerPageBanner data={bannerData} />
 
       <div className="section-padding">

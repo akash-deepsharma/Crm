@@ -31,6 +31,10 @@ export async function generateMetadata() {
     title: page.meta_title || "About Us",
     description: page.meta_description || "Learn more about our company and our mission.",
     keywords: page.meta_keywords || "about, company, team, mission",
+    robots:
+      page.robotstatus === "true"
+        ? "index, follow"
+        : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "About Us",
       description: page.meta_description || "",
@@ -56,21 +60,34 @@ export async function generateMetadata() {
 
 export default async function page() {
 
+  const slug = "about";
 
-const data = await getAbout()
+// const data = await getAbout()
+  const [data, metaData] = await Promise.all([getAbout(), getMetas(slug)]);
+
 const aboutData = data?.section1
 const teamData = data?.section2
 const trustedCompany = data.section3
 
+const meta = metaData?.data?.[0];
 
+  // console.log( "data about" , meta)
 // console.log( "about  data ", aboutData)
 
   const bannerData = {
     pageName: aboutData?.heading || "About Us",
     pageTitle: aboutData?.sub_heading || "Know More About Our Company",
   };
+  
   return (
     <>
+
+    {meta?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: meta.schema_page }}
+        />
+      )} 
       <InnerPageBanner data={bannerData} />
       <AboutSection data={aboutData}/>
       <MissionVision data={aboutData?.extra_data?.steps} />

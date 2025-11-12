@@ -32,6 +32,10 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "features, platform capabilities, tools, solutions, business growth, online platform features, My Website features",
+      robots:
+      page.robotstatus === "true"
+        ? "index, follow"
+        : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "Features | My Website",
       description:
@@ -61,8 +65,15 @@ export async function generateMetadata() {
 
 
 export default async function page() {
+  const slug = "features";
 
-  const featureData = await getFeature();
+
+  // const featureData = await getFeature();
+  const [featureData, metaData] = await Promise.all([getFeature(), getMetas(slug)]);
+
+     const meta = metaData?.data?.[0];
+
+  console.log( "data how features" , meta)
 
   const DataFeature = featureData || []
 
@@ -83,6 +94,14 @@ export default async function page() {
   };
   return (
     <>
+
+
+     {meta?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: meta.schema_page }}
+        />
+      )}
       <InnerPageBanner data={bannerData} />
 
       <div id="main-wrapper" className="page-wrapper wow fadeInUp">

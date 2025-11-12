@@ -35,6 +35,10 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "CRM, how CRM works, customer relationship management, CRM features, business tools, My Website CRM",
+      robots:
+      page.robotstatus === "true"
+        ? "index, follow"
+        : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "How CRM Works | My Website",
       description:
@@ -63,9 +67,14 @@ export async function generateMetadata() {
 
 
 export default async function page() {
+const slug = "how-crm-works";
 
-  
-  const howCrmWorksData = await getHowCrmWorks()
+// const howCrmWorksData = await getHowCrmWorks()
+const [howCrmWorksData, metaData] = await Promise.all([getHowCrmWorks(), getMetas(slug)]);
+
+     const meta = metaData?.data?.[0];
+
+  console.log( "data how how-crm-works" , meta)
   console.log("howCrmWorksData", howCrmWorksData)
   
   const dataBanner = howCrmWorksData.section1[0] || [];

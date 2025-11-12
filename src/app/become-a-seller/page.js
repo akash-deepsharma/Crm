@@ -36,6 +36,10 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "become a seller, start selling online, vendor registration, marketplace sellers, grow business, ecommerce partner",
+      robots:
+      page.robotstatus === "true"
+        ? "index, follow"
+        : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "Become a Seller | My Website",
       description:
@@ -67,19 +71,35 @@ export async function generateMetadata() {
 
 
 export default async function page() {
-  const bannerData = {
-    pageName: "Partner with Us",
-    pageTitle: "Become a Guidde Partner",
-  };
+   const slug = "become-a-seller";
 
-  const agent_data = await agentGetApi()
+   
+  //  const agent_data = await agentGetApi()
+   const [agent_data, metaData] = await Promise.all([agentGetApi(), getMetas(slug)]);
+   
+   const banner_stepData = agent_data?.section1
+   const step_viewData = agent_data?.section2
 
-  const banner_stepData = agent_data?.section1
-  const step_viewData = agent_data?.section2
-  // console.log("cgent get data ", step_viewData)
- 
+   const meta = metaData?.data?.[0];
+
+  console.log( "data how crm works" , meta)
+   // console.log("cgent get data ", step_viewData)
+   
+   const bannerData = {
+     pageName: "Partner with Us",
+     pageTitle: "Become a Guidde Partner",
+   };
   return (
     <>
+
+        {meta?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: meta.schema_page }}
+        />
+      )}
+
+
       <InnerPageBanner data={bannerData}/>
 
       <Agent_Banner data={banner_stepData}/>

@@ -19,9 +19,16 @@ export async function getSupport() {
 
 export async function getSingleSupport(slug) {
     try {
-        const res = await apiClient.get(`/faq/${slug}`);
-        // console.log( "support pages  data", res.data)
-    return res.data;
+        // const res = await apiClient.get(`/faq/${slug}`);
+
+      if(slug === 'support'){
+          const res = await apiClient.get(`/faq/${slug}`);
+            return res.data;
+          }else{
+            const res = await apiClient.get(`/faq/${slug}`, {
+              params: { page: "support" },});
+              return res.data;
+      }
   } catch (error) {
     console.error("Error fetching blog:", error);
     return null;

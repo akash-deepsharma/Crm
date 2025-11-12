@@ -6,14 +6,60 @@ import Subscriber from '@/components/Common/Subscriber';
 import UserTypes from '@/components/Home/UserTypes';
 import React from 'react'
 
+
+export async function generateMetadata({ params }) {
+  const slug = await params.slug;
+
+
+  console.log("blog detail slug " , slug)
+  const featureData = await getSingleFeature(slug);
+
+  if (!featureData || !featureData.meta) {
+    return {
+      title: "Feature Not Found | My Website",
+      description: "The requested blog post could not be found.",
+    };
+  }
+
+  const featureItem = featureData.meta;
+
+  return {
+    title: featureItem.meta_title || featureItem.title,
+    description: featureItem.meta_description || featureItem.excerpt || featureItem.title,
+    keywords: featureItem.meta_keywords || "feature, articles, news",
+    openGraph: {
+      title: featureItem.meta_title || featureItem.title,
+      description: featureItem.meta_description || featureItem.excerpt || "",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/features/${slug}`,
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_MEDIA_PATH}/${featureItem.featured_image}`,
+          width: 1200,
+          height: 630,
+          alt: featureItem.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: featureItem.meta_title || featureItem.title,
+      description: featureItem.meta_description || featureItem.excerpt || "",
+      images: [`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${featureItem.featured_image}`],
+    },
+  };
+}
+
+
+
+
 export default async function page({ params }) {
 
   const slug = params.slug;
   const featureData = await getSingleFeature(slug);
-  console.log("featur data show", featureData)
   
   const aboutData = featureData?.section1
-const userTypeData = featureData?.featuresdetails
+  const metas = featureData?.meta
+  const userTypeData = featureData?.featuresdetails
 
 const Title = params.slug.replace(/\//g, ""); 
 const pathParts = Title.split("-");
@@ -27,6 +73,12 @@ const formattedTitle = pathParts.map((part) => part.charAt(0).toUpperCase() + pa
 
   return (
     <>
+    {metas?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: metas.schema_page }}
+        />
+      )}
 
     <InnerPageBanner data={bannerData} />
 

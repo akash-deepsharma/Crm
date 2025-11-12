@@ -26,6 +26,10 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "login, sign in, account, user access, My Website, profile, dashboard",
+      robots:
+      page.robotstatus === "true"
+        ? "index, follow"
+        : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "Login   | My Website",
       description:
@@ -55,9 +59,23 @@ export async function generateMetadata() {
 
 
 
-export default function Page() {
+export default async function Page() {
+  const slug = "login";
+  const metaData = await  getMetas(slug);
+
+     const meta = metaData?.data?.[0];
+
+  console.log( "data how login" , meta)
 
   return (
+    <>
+     {meta?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: meta.schema_page }}
+        />
+      )}
     <LoginRegisterPage/>
+    </>
   );
 }

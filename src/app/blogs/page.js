@@ -28,6 +28,10 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "blogs, articles, insights, news, updates, tips, guides, trends, My Website blogs",
+      robots:
+      page.robotstatus === "true"
+        ? "index, follow"
+        : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "Blogs | My Website",
       description:
@@ -55,8 +59,17 @@ export async function generateMetadata() {
 }
 
 export default async function Page({ searchParams }) {
+
+  const slug = "blogs";
   const page = searchParams?.page || 1;
-  const blogPosts = await getBlogs(page, 10);
+  // const blogPosts = await getBlogs(page, 10);
+     
+     const [blogPosts, metaData] = await Promise.all([getBlogs(page, 10), getMetas(slug)]);
+
+     const meta = metaData?.data?.[0];
+
+  console.log( "data how blogs" , meta)
+   // console.log("cgent get data ", step_viewData)
 
   const bannerData = {
     pageName: "Blogs",
@@ -65,6 +78,14 @@ export default async function Page({ searchParams }) {
 
   return (
     <>
+
+        {meta?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: meta.schema_page }}
+        />
+      )}
+
       <InnerPageBanner data={bannerData} />
 
       <div className="blog_home section-padding">

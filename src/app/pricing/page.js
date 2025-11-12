@@ -28,6 +28,10 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "pricing plans, subscription, packages, business plans, affordable pricing, My Website pricing",
+      robots:
+      page.robotstatus === "true"
+        ? "index, follow"
+        : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "Pricing | My Website",
       description:
@@ -56,13 +60,27 @@ export async function generateMetadata() {
 
 
 
-export default function page() {
+export default async function page() {
+  const slug = "pricing";
+
+const metaData = await getMetas(slug);
+
+  const meta = await metaData?.data?.[0];
+console.log( "data how pricing" , meta)
+
   const bannerData = {
     pageName: "Pricing",
     pageTitle: "Our Pricing Plans",
   };
   return (
       <div>
+
+        {meta?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: meta.schema_page }}
+        />
+      )}
         <InnerPageBanner data={bannerData}/>
 
 

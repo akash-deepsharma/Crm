@@ -28,6 +28,10 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "terms and conditions, user agreement, policies, rules, website terms, My Website terms",
+      robots:
+      page.robotstatus === "true"
+        ? "index, follow"
+        : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "Terms & Conditions | My Website",
       description:
@@ -59,7 +63,14 @@ export async function generateMetadata() {
 export default async function Page() {
 
     const slug = "terms-and-condition";
-      const response = await getPagesData(slug);
+      // const response = await getPagesData(slug);
+
+      const [response, metaData] = await Promise.all([getPagesData(slug), getMetas(slug)]);
+  
+       const meta = metaData?.data?.[0];
+  
+    console.log( "data how terms-and-condition" , meta)
+
       const pageData = response?.data?.[0];
 
   const bannerData = {
@@ -69,6 +80,12 @@ export default async function Page() {
 
   return (
     <>
+      {meta?.schema_page && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: meta.schema_page }}
+        />
+      )}
       <InnerPageBanner data={bannerData} />
 
       <div className="terms-and-conditions section-padding">
