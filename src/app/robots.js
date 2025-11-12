@@ -15,13 +15,35 @@ export default function robots() {
     rules: [
       {
         userAgent: "*",
-        allow: isProd ? "/" : "",
-        disallow: !isProd
-          ? ["/admin", "/search", "/rss", "/comments", "/comments/feed"]
-          : ["/"],
+        allow: [
+          "/uploads/",
+        ],
+        disallow: [
+          "/_private/",
+          "/admin/",
+          "/search/",
+          "/rss/",
+          "/comments/",
+          "/comments/feed",
+          "/*/comments/",
+          "/archives/",
+          "/tag/",
+          "/tag/*",
+          "/login/",
+          "/shopdetail/",
+        ],
       },
+      { userAgent: "GPTBot", allow: ["/"] },
+      { userAgent: "ClaudeBot", allow: ["/"] },
+      { userAgent: "Google-Extended", allow: ["/"] },
+      { userAgent: "PerplexityBot", allow: ["/"] },
+      { userAgent: "CCBot", allow: ["/"] },
+      { userAgent: "Amazonbot", allow: ["/"] },
+      { userAgent: "FacebookBot", allow: ["/"] },
+      { userAgent: "YouBot", allow: ["/"] },
+      { userAgent: "DuckAssistBot", allow: ["/"] },
     ],
-    sitemap: isProd ? `${baseUrl}/sitemap.xml` : undefined,
-    host: isProd ? baseUrl : undefined,
+    sitemap: `${baseUrl}/sitemap_index.xml`,
+    host: baseUrl,
   };
 }
