@@ -2,9 +2,7 @@ import { MetadataRoute } from "next";
 
 export default function robots() {
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-
-  const isProd = process.env.NODE_ENV === "production";
+    process.env.NEXT_PUBLIC_baseUrl || "http://localhost:3000";
 
 
 
@@ -43,7 +41,7 @@ export default function robots() {
       { userAgent: "YouBot", allow: ["/"] },
       { userAgent: "DuckAssistBot", allow: ["/"] },
     ],
-    sitemap: `${baseUrl}/sitemap_index.xml`,
+    sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,
   };
 }
