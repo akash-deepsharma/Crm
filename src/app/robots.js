@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 export default function robots() {
   const baseUrl =
-    process.env.NEXT_PUBLIC_baseUrl || "http://localhost:3000";
+    process.env.NEXT_PUBLIC_baseUrl;
 
 
 
