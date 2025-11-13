@@ -4,8 +4,10 @@ import React from 'react'
 export default async function Agent_Steps(banner_stepData) {
     const stepData = await banner_stepData?.data
 
+    console.log( "agent steps", stepData)
     const point = stepData?.[0]?.extra_data?.points ;
     const Img = stepData?.[0]?.image
+    const alt = stepData?.[0]?.image_all_text
     
     
     const content = stepData?.[0]?.content;
@@ -35,8 +37,7 @@ export default async function Agent_Steps(banner_stepData) {
                 </div>
                 <div className='col-lg-5'>
                     <div className='step_img'>
-                        <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${Img}`} alt={content} width={600} height={600} />
-
+                        <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${Img}`} alt={alt} width={600} height={600} />
                     </div>
                 </div>
             </div>

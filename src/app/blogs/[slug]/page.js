@@ -7,8 +7,9 @@ import { notFound } from "next/navigation";
 export async function generateMetadata({ params }) {
   const slug = await params.slug;
 
+const baseUrl = process.env.NEXT_PUBLIC_baseUrl || "https://yourdomain.com";
+   const canonicalUrl = `${baseUrl}/blogs/${slug}`;
 
-  console.log("blog detail slug " , slug)
   const blog = await getSingleBlog(slug);
 
   if (!blog || !blog.data) {
@@ -24,10 +25,13 @@ export async function generateMetadata({ params }) {
     title: blogItem.meta_title || blogItem.title,
     description: blogItem.meta_description || blogItem.excerpt || blogItem.title,
     keywords: blogItem.meta_keywords || "blog, articles, news",
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: blogItem.meta_title || blogItem.title,
       description: blogItem.meta_description || blogItem.excerpt || "",
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/blogs/${slug}`,
       images: [
         {
           url: `${process.env.NEXT_PUBLIC_MEDIA_PATH}/${blogItem.featured_image}`,

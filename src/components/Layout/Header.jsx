@@ -2,27 +2,63 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { permanentRedirect, usePathname, useRouter } from "next/navigation";
 import Request_Modal from "../Common/Request_Modal";
 import { getHeaderFeatures } from "@/ApiCall/headersApi";
+import ButtonHeader from "./ButtonHeader";
+import { getRedirection } from "@/ApiCall/redirectionApi";
 
 
 
 export default function Header() {
 
   const pathname = usePathname();
-
-
-  const [token, setToken] = useState(null);
-
+  const [redirectResp, setRedirectResp] = useState(null);
+// console.log( "redirection data ", redirectResp)
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedToken = localStorage.getItem("token");
-      setToken(storedToken);
-      console.log("User Token:", storedToken);
-    }
-  }, []);
+  //  let mounted = true;
+    async function fetchData() {
+      const data = await getRedirection({ path: pathname });
 
+      setRedirectResp(data);
+      if (data?.status === "redirect" && data.to) {
+        router.push(`/${data.to}`); 
+      }
+    }
+    fetchData();
+  }, [pathname]);
+
+// const pathname = usePathname();
+  // const router = useRouter();
+//   const [redirectResp, setRedirectResp] = useState(null);
+
+//   useEffect(() => {
+//     let mounted = true;
+//     async function fetchData() {
+//       const data = await getRedirection({ path: pathname });
+
+//       if (!mounted) return;
+//       setRedirectResp(data);
+
+//       if (data?.status === 'redirect' && data.to) {
+//         router.push(`/${data.to}`);
+//       }
+//     }
+
+//     fetchData();
+
+//     return () => {
+//       mounted = false;
+//     };
+//   }, []);
+
+  // console.log('redirection data' , redirectResp);
+
+
+
+if (redirectResp && redirectResp.status === "redirect" && redirectResp.to) {
+  permanentRedirect(`/${redirectResp.to}`);
+}
   
   const [featureHeader, setfeatureHeader] = useState([]);
   useEffect(() => {
@@ -161,15 +197,15 @@ export default function Header() {
                 src="/images/logo-d.png"
                 className="logo-dark"
                 alt="Crm"
-                width={150}
-                height={150}
+                width={172}
+                height={77}
               />
               <Image
                 src="/images/logo-d.png"
                 className="logo-light"
                 alt="Crm"
-                width={150}
-                height={150}
+                width={172}
+                height={77}
               />
             </Link>
           </div>
@@ -273,25 +309,7 @@ export default function Header() {
               </li>
             </ul>
           </div>
-          <div className="navbar-right">
-            {token ? (
-              <div className="search-option style-dark">
-                <div className="search-btn">
-                  <Link href="/profile">
-                    <i className="fa-regular fa-user"></i>
-                  </Link>
-                </div>
-              </div>
-            ) : (
-              <div className="menu-button">
-                <Link href="/login">
-                  <div className="btn btn-outline-primary btn-light">
-                    sign in / sign up
-                  </div>
-                </Link>
-              </div>
-            )}
-          </div>
+          <ButtonHeader/>
         </div>
       </header>
       {showModal && <Request_Modal onClose={handleCloseModal} />}

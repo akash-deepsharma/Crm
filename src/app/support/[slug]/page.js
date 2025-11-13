@@ -8,6 +8,8 @@ export async function generateMetadata({ params }) {
   const slug = await params.slug;
   
   const supportData = await getSingleSupport(slug);
+  const baseUrl = process.env.NEXT_PUBLIC_baseUrl || "https://yourdomain.com";
+   const canonicalUrl = `${baseUrl}/support/${slug}`;
   
   if (!supportData || !supportData.metas) {
     return {
@@ -22,10 +24,13 @@ export async function generateMetadata({ params }) {
     title: supportItem.meta_title || supportItem.title,
     description: supportItem.meta_description || supportItem.excerpt || supportItem.title,
     keywords: supportItem.meta_keywords || "feature, articles, news",
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: supportItem.meta_title || supportItem.title,
       description: supportItem.meta_description || supportItem.excerpt || "",
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/features/${slug}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/support/${slug}`,
       images: [
         {
           url: `${process.env.NEXT_PUBLIC_MEDIA_PATH}/${supportItem.featured_image}`,

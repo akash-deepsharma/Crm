@@ -7,7 +7,7 @@ export const apiClient = axios.create({
 export async function getMetas(slug) {
   try {    
     const res = await apiClient.get(`/metatitle/${slug}`);
-    console.log( `metas data ${slug}`, res)
+    // console.log( `metas data ${slug}`, res)
     return res.data;
 
   } catch (error) {

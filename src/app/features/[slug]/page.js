@@ -11,8 +11,9 @@ export async function generateMetadata({ params }) {
   const slug = await params.slug;
 
 
-  console.log("blog detail slug " , slug)
   const featureData = await getSingleFeature(slug);
+  const baseUrl = process.env.NEXT_PUBLIC_baseUrl || "https://yourdomain.com";
+   const canonicalUrl = `${baseUrl}/features/${slug}`;
 
   if (!featureData || !featureData.meta) {
     return {
@@ -27,6 +28,9 @@ export async function generateMetadata({ params }) {
     title: featureItem.meta_title || featureItem.title,
     description: featureItem.meta_description || featureItem.excerpt || featureItem.title,
     keywords: featureItem.meta_keywords || "feature, articles, news",
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: featureItem.meta_title || featureItem.title,
       description: featureItem.meta_description || featureItem.excerpt || "",

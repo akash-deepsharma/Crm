@@ -23,17 +23,17 @@ export default function Agent_Banner(banner_stepData) {
         <div className="content-liner">
           <Image
             src="https://cdn.prod.website-files.com/610004329b339defd1cf0578/646632d2d6469e83d4c856b5_Coin%20left.svg"
-            alt="" width={100} height={100}
+            alt="crm " width={100} height={100}
             className="coin-left"
           />
           <Image
             src="https://cdn.prod.website-files.com/610004329b339defd1cf0578/646632d3d6469e83d4c856e6_Coin%20right.svg"
-            alt="" width={100} height={100}
+            alt="crm" width={100} height={100}
             className="coin-right"
           />
           <Image
             src="https://cdn.prod.website-files.com/610004329b339defd1cf0578/66fa663cb6d33c088760af9b_Underline.svg"
-            alt="" width={180} height={180}
+            alt="crm" width={180} height={180}
             className="underline"
           />
           <h1 className="h1">{banner_data?.heading}</h1>

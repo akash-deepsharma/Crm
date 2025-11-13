@@ -47,7 +47,7 @@ export default function Screenshot({data}) {
                 className="laptop-img-bg mx-auto"
                 src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${screenshotData?.image}`}
                 alt={screenshotData.image_all_text}
-                width={1400} height={1400}
+                width={1600} height={855}
               />
 
               <div className="screenshot-slider mt-5">

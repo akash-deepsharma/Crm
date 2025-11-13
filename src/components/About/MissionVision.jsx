@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 export default function MissionVision({ data }) {
-  // console.log("Mission Data:", data);
+  console.log("Mission Data:", data);
 
   
   const steps = data || [];

@@ -31,15 +31,21 @@ export default function Testimonials_inner() {
 
       const [testimonialData, setTestimonialData] = useState([]);
     
-      useEffect(() => {
+       useEffect(() => {
         async function fetchData() {
+          const cached = sessionStorage.getItem("testimonialData");
+          if (cached) {
+            setTestimonialData(JSON.parse(cached));
+            return;
+          }
+      
           const data = await getTestimonial();
-          // console.log("✅ Testimonial API data:", data);
-    
           if (data?.status === true) {
             setTestimonialData(data?.data);
+            sessionStorage.setItem("testimonialData", JSON.stringify(data?.data));
           }
         }
+      
         fetchData();
       }, []);
 

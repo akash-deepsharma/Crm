@@ -6,7 +6,7 @@ import React from 'react'
 export default function OurTeam(data) {
 
     const temdata = data || [];
-    // console.log( "teams-data" , temdata)
+    console.log( "teams-data" , temdata)
     const profiles = temdata?.data?.profiles
     // console.log("profiles ", profiles)
     const content = temdata?.data?.heading;
@@ -62,59 +62,6 @@ export default function OurTeam(data) {
                                     </div>
                                 </div>
                             ))}
-                            {/* <div className="col-lg-3 col-md-6">
-                                <div className="st-team-member theme-one wow fadeInUp" data-wow-delay="0.2s">
-                                    <div className="team-member-wrapper">
-                                        <div className="st-team-image">
-                                            <Image src="/images/team-4-rect.jpg" alt=""  width={700} height={700}/>
-                                            <div className="team-social">
-                                                <Link href="#"><i className="fab fa-instagram"></i></Link>
-                                                <Link href="#"><i className="fab fa-linkedin-in"></i></Link>
-                                            </div>
-                                        </div>
-                                        <div className="st-team-member-detail">
-                                            <h3 className="member-name">Mr. Rajesh Kumar</h3>
-                                            <span className="member-position">Planer & Manager</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-3 col-md-6">
-                                <div className="st-team-member theme-one wow fadeInUp" data-wow-delay="0.4s">
-                                    <div className="team-member-wrapper">
-                                        <div className="st-team-image">
-                                            <Image src="/images/team-5-rect.jpg" alt=""  width={700} height={700}/>
-                                            <div className="team-social">
-                                                <Link href="#"><i className="fab fa-facebook-f"></i></Link>
-                                                <Link href="#"><i className="fab fa-twitter"></i></Link>
-                                                <Link href="#"><i className="fab fa-linkedin-in"></i></Link>
-                                            </div>
-                                        </div>
-                                        <div className="st-team-member-detail">
-                                            <h3 className="member-name">Saru Matt</h3>
-                                            <span className="member-position">Sales Head</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-3 col-md-6">
-                                <div className="st-team-member theme-one wow fadeInUp" data-wow-delay="0.6s">
-                                    <div className="team-member-wrapper">
-                                        <div className="st-team-image">
-                                            <Image src="/images/team-2-rect.jpg" alt="" width={700} height={700}/>
-                                            <div className="team-social">
-                                                <Link href="#"><i className="fab fa-facebook-f"></i></Link>
-                                                <Link href="#"><i className="fab fa-twitter"></i></Link>
-                                                <Link href="#"><i className="fab fa-instagram"></i></Link>
-                                            </div>
-                                        </div>
-                                        <div className="st-team-member-detail">
-                                            <h3 className="member-name">Shreyn S</h3>
-                                            <span className="member-position">Analytical Head</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
                         </div>
                     </div>
                 </div>

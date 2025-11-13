@@ -9,9 +9,10 @@ export async function generateMetadata() {
   // Static slug for Become a seller page
   const slug = "support";
   const meta = await getMetas(slug);
+  const baseUrl = process.env.NEXT_PUBLIC_baseUrl || "https://yourdomain.com";
+   const canonicalUrl = `${baseUrl}/${slug}`;
 
   const page = await meta?.data?.[0];
-  console.log( `${slug} page meta found then show`, page)
 
   if (!page) {
     return {
@@ -29,6 +30,9 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "privacy policy, data protection, user information, security, My Website privacy",
+      alternates: {
+      canonical: canonicalUrl,
+    },
       robots:
       page.robotstatus === "true"
         ? "index, follow"

@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 export default function AboutSection(data) {
-  // console.log( "about section", data)
+  console.log( "about section", data)
 
     const content = data?.data?.sub_heading2;
     const words = content.split(" ");  

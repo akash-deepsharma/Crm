@@ -15,9 +15,10 @@ export async function generateMetadata() {
   const slug = "about";
   //  const { slug } = params;
   const meta = await getMetas(slug);
+  const baseUrl = process.env.NEXT_PUBLIC_baseUrl || "https://yourdomain.com";
+   const canonicalUrl = `${baseUrl}/${slug}`;
 
   const page = await meta?.data?.[0];
-  console.log( `${slug} page meta found then show`, page)
 
   if (!page) {
     return {
@@ -31,6 +32,9 @@ export async function generateMetadata() {
     title: page.meta_title || "About Us",
     description: page.meta_description || "Learn more about our company and our mission.",
     keywords: page.meta_keywords || "about, company, team, mission",
+    alternates: {
+      canonical: canonicalUrl,
+    },
     robots:
       page.robotstatus === "true"
         ? "index, follow"
@@ -82,7 +86,7 @@ const meta = metaData?.data?.[0];
   return (
     <>
 
-    {meta?.schema_page && (
+      {meta?.schema_page && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: meta.schema_page }}

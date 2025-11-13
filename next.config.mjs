@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-// const nextConfig = {};
+
 const nextConfig = {
   images: {
     domains: [
@@ -10,3 +10,4 @@ const nextConfig = {
 
 
 export default nextConfig;
+

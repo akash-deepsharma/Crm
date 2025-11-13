@@ -8,9 +8,10 @@ export async function generateMetadata() {
   // Static slug for Become a seller page
   const slug = "return-cancellation";
   const meta = await getMetas(slug);
+  const baseUrl = process.env.NEXT_PUBLIC_baseUrl || "https://yourdomain.com";
+   const canonicalUrl = `${baseUrl}/${slug}`;
 
   const page = await meta?.data?.[0];
-  console.log( `${slug} page meta found then show`, page)
 
   if (!page) {
     return {
@@ -28,6 +29,9 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "return policy, cancellation policy, refunds, order returns, My Website support, product return",
+      alternates: {
+      canonical: canonicalUrl,
+    },
       robots:
       page.robotstatus === "true"
         ? "index, follow"
@@ -40,7 +44,7 @@ export async function generateMetadata() {
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_MEDIA_PATH}/${page.page_image}`,
+          url: `${process.env.NEXT_PUBLIC_MEDIA_PATH}/${page.page_image}`,  
           width: 1200,
           height: 630,
           alt: page.title || "Return & Cancellation Policy | My Website",

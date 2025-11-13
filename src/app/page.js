@@ -2,6 +2,7 @@
 
 import { getMetas } from "@/ApiCall/getMetasApi";
 import { getHome } from "@/ApiCall/homeApi";
+import { getRedirection } from "@/ApiCall/redirectionApi";
 import BlogHome from "@/components/Blogs/BlogHome";
 import Faq from "@/components/Common/Faq";
 import About from "@/components/Home/About";
@@ -11,15 +12,17 @@ import Pricing from "@/components/Home/Pricing";
 import Screenshot from "@/components/Home/Screenshot";
 import Testimonials from "@/components/Home/Testimonials";
 import UserTypes from "@/components/Home/UserTypes";
+import { permanentRedirect } from "next/navigation";
 
 
 export async function generateMetadata() {
   // Static slug for Become a seller page
   const slug = "home";
   const meta = await getMetas(slug);
+  const baseUrl = process.env.NEXT_PUBLIC_baseUrl || "https://yourdomain.com";
+   const canonicalUrl = `${baseUrl}/${slug}`;
 
   const page = await meta?.data?.[0];
-  console.log( `${slug} page meta found then show`, page)
 
   if (!page) {
     return {
@@ -37,6 +40,9 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "home, services, updates, My Website, explore, goals",
+       alternates: {
+      canonical: canonicalUrl,
+    },
       robots:
       page.robotstatus === "true"
         ? "index, follow"
@@ -70,6 +76,21 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
+
+// // const pathname = "/home";
+//  const pathname = '/' + (params.slug || []).join('/');
+//   console.log("Pathname:", pathname);
+
+
+//   const redirectResp = await getRedirection({ path: pathname });
+
+//   if (redirectResp && redirectResp.status === "redirect" && redirectResp.to) {
+//     permanentRedirect(`/${redirectResp.to}`);
+//   }
+
+
+
+
  const slug = "home";
     // const home_data = await getHome()
     const [home_data, metaData] = await Promise.all([getHome(), getMetas(slug)]);

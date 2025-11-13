@@ -4,10 +4,12 @@ import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import Link from "next/link";
 import ProfileModal from "@/components/Common/ProfileModal";
 import Image from "next/image";
+import { useAuth } from "@/utils/AuthContext";
 import { useRouter } from "next/navigation";
 import { GetProfile } from "@/ApiCall/profileApi";
 
 export default function UserProfile() {
+
   const [showModal, setShowModal] = useState(false);
    const [profileData, setProfileData] = useState([]);
 
@@ -24,15 +26,15 @@ export default function UserProfile() {
   }, []);
 
 
-  // console.log( "profile data", profileData)
+ 
 
 
 
+  const { logout } = useAuth();
   const router = useRouter();
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
 
+  const handleLogout = () => {
+    logout();
     alert("You have been logged out successfully!");
     router.push("/login");
   };

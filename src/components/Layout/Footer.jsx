@@ -18,7 +18,7 @@ const contactData = ContactContent?.data[0] || [];
                 <div className="container">
                     <div className="footer-logo">
                         <Link href="/"> 
-                            <Image src="/images/logo-w.png" alt="crm logo" width={150} height={80} style={{height:'auto', width:'auto'}} />
+                            <Image src="/images/logo-w.png" alt="crm logo" width={172 } height={77 } style={{height:'auto', width:'auto'}} />
                         </Link>
                     </div>
                     <div className="main-footer style-dark">
@@ -54,8 +54,7 @@ const contactData = ContactContent?.data[0] || [];
                                     <div className="text-widget">
                                         <div className="footer-nav">
                                             <ul>
-                                                <li><Link href="/demo-crm">Free Demo</Link></li>
-                                                <li><Link href="#">Trust & Safety</Link></li>
+                                                <li><Link href="/login">Free Trial</Link></li>
                                                 <li><Link href="/return-cancellation">Return &Cancellation</Link></li>
                                                 <li><Link href="/privacy-policy">Privacy Policy</Link></li>
                                                 <li><Link href="/terms-and-conditions">Terms of Service</Link></li>

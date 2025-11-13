@@ -27,17 +27,23 @@ export default function Testimonials() {
 
   const [testimonialData, setTestimonialData] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const data = await getTestimonial();
-      // console.log("✅ Testimonial API data:", data);
-
-      if (data?.status === true) {
-        setTestimonialData(data?.data);
-      }
+ useEffect(() => {
+  async function fetchData() {
+    const cached = sessionStorage.getItem("testimonialData");
+    if (cached) {
+      setTestimonialData(JSON.parse(cached));
+      return;
     }
-    fetchData();
-  }, []);
+
+    const data = await getTestimonial();
+    if (data?.status === true) {
+      setTestimonialData(data?.data);
+      sessionStorage.setItem("testimonialData", JSON.stringify(data?.data));
+    }
+  }
+
+  fetchData();
+}, []);
 
   // console.log("✅ Testimonials data:", testimonialData);
 

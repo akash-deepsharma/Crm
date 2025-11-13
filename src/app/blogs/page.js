@@ -1,24 +1,31 @@
 import BlogCard from "@/components/Blogs/BlogCard";
 import InnerPageBanner from "@/components/Common/InnerPageBanner";
 import { getBlogs } from "@/ApiCall/blogApi";
-import React from "react";
 import { getMetas } from "@/ApiCall/getMetasApi";
+import Link from "next/link";
+import React from "react";
+
+
+
+
+
 
 export async function generateMetadata() {
   // Static slug for Become a seller page
   const slug = "blogs";
   const meta = await getMetas(slug);
+  const baseUrl = process.env.NEXT_PUBLIC_baseUrl || "https://yourdomain.com";
+  const canonicalUrl = `${baseUrl}/${slug}`;
 
   const page = await meta?.data?.[0];
-  console.log( `${slug} page meta found then show`, page)
 
   if (!page) {
     return {
       title: "Become a seller | My Website",
-      description: "Explore insightful blogs and articles on the latest trends, tips, and updates. Stay informed and inspired with My Website.",
+      description:
+        "Explore insightful blogs and articles on the latest trends, tips, and updates. Stay informed and inspired with My Website.",
     };
   }
-
 
   return {
     title: page.meta_title || "Blogs | My Website",
@@ -28,10 +35,10 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "blogs, articles, insights, news, updates, tips, guides, trends, My Website blogs",
-      robots:
-      page.robotstatus === "true"
-        ? "index, follow"
-        : "noindex, nofollow",
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    robots: page.robotstatus === "true" ? "index, follow" : "noindex, nofollow",
     openGraph: {
       title: page.meta_title || "Blogs | My Website",
       description:
@@ -59,27 +66,38 @@ export async function generateMetadata() {
 }
 
 export default async function Page({ searchParams }) {
-
   const slug = "blogs";
-  const page = searchParams?.page || 1;
-  // const blogPosts = await getBlogs(page, 10);
-     
-     const [blogPosts, metaData] = await Promise.all([getBlogs(page, 10), getMetas(slug)]);
+  let page = parseInt(searchParams?.page || 1, 10); // current page
 
-     const meta = metaData?.data?.[0];
+  const [blogPosts, metaData] = await Promise.all([
+    getBlogs(page, 10),
+    getMetas(slug),
+  ]);
 
-  console.log( "data how blogs" , meta)
-   // console.log("cgent get data ", step_viewData)
+  const meta = metaData?.data?.[0];
+  const totalPages = blogPosts?.data?.last_page || 1;
+
+  // Clamp page between 1 and totalPages
+  page = Math.max(1, Math.min(page, totalPages));
+  console.log("totle pages", page);
 
   const bannerData = {
     pageName: "Blogs",
     pageTitle: "Latest News & Articles",
   };
 
+  // Sliding pagination: show current ±2 pages, clamped
+  const startPage = Math.max(page - 2, 1);
+  const endPage = Math.min(page + 2, totalPages);
+
+  const paginationNumbers = [];
+  for (let i = startPage; i <= endPage; i++) {
+    paginationNumbers.push(i);
+  }
+
   return (
     <>
-
-        {meta?.schema_page && (
+      {meta?.schema_page && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: meta.schema_page }}
@@ -100,8 +118,88 @@ export default async function Page({ searchParams }) {
                 <p className="text-center w-full">No blogs found.</p>
               )}
             </div>
+
+            <div className="pagination-wrapper text-center">
+              <ul className="pagination">
+                {/* Previous Page */}
+                <li className={`page-prev ${page <= 1 ? "d-none" : ""}`}>
+                  <Link
+                    href={`?page=${Math.max(page - 1, 1)}`}
+                    aria-disabled={page <= 1}
+                  >
+                    <i className="fa fa-chevron-left"></i>
+                  </Link>
+                </li>
+
+                {/* First page & leading dots */}
+                {startPage > 1 && (
+                  <>
+                    <li>
+                      <Link className="page-numbers" href={`?page=1`}>
+                        1
+                      </Link>
+                    </li>
+                    {startPage > 2 && (
+                      <li>
+                        <span className="dots">...</span>
+                      </li>
+                    )}
+                  </>
+                )}
+
+                {/* Sliding page numbers */}
+                {paginationNumbers.map((num) => (
+                  <li key={num}>
+                    {num === page ? (
+                      <span
+                        aria-current="page"
+                        className="page-numbers current"
+                      >
+                        {num}
+                      </span>
+                    ) : (
+                      <Link className="page-numbers" href={`?page=${num}`}>
+                        {num}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+
+                {/* Trailing dots & last page */}
+                {endPage < totalPages && (
+                  <>
+                    {endPage < totalPages - 1 && (
+                      <li>
+                        <span className="dots">...</span>
+                      </li>
+                    )}
+                    <li>
+                      <Link
+                        className="page-numbers"
+                        href={`?page=${totalPages}`}
+                      >
+                        {totalPages}
+                      </Link>
+                    </li>
+                  </>
+                )}
+
+                {/* Next Page */}
+                <li
+                  className={`page-next ${
+                    page >= totalPages ? "d-none" : ""
+                  }`}
+                >
+                  <Link
+                    href={`?page=${Math.min(page + 1, totalPages)}`}
+                    aria-disabled={page >= totalPages}
+                  >
+                    <i className="fa fa-chevron-right"></i>
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          
         </div>
       </div>
     </>

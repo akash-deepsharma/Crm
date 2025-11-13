@@ -15,9 +15,9 @@ export async function generateMetadata() {
   // Static slug for Become a seller page
   const slug = "how-crm-works";
   const meta = await getMetas(slug);
-
+const baseUrl = process.env.NEXT_PUBLIC_baseUrl || "https://yourdomain.com";
+   const canonicalUrl = `${baseUrl}/${slug}`;
   const page = await meta?.data?.[0];
-  console.log( `${slug} page meta found then show`, page)
 
   if (!page) {
     return {
@@ -35,6 +35,9 @@ export async function generateMetadata() {
     keywords:
       page.meta_keywords ||
       "CRM, how CRM works, customer relationship management, CRM features, business tools, My Website CRM",
+      alternates: {
+      canonical: canonicalUrl,
+    },
       robots:
       page.robotstatus === "true"
         ? "index, follow"
@@ -74,8 +77,8 @@ const [howCrmWorksData, metaData] = await Promise.all([getHowCrmWorks(), getMeta
 
      const meta = metaData?.data?.[0];
 
-  console.log( "data how how-crm-works" , meta)
-  console.log("howCrmWorksData", howCrmWorksData)
+  // console.log( "data how how-crm-works" , meta)
+  // console.log("howCrmWorksData", howCrmWorksData)
   
   const dataBanner = howCrmWorksData.section1[0] || [];
   const dataVisualWprkflow = howCrmWorksData.section2[0] || [];

@@ -5,10 +5,6 @@ export default function robots() {
     process.env.NEXT_PUBLIC_baseUrl || "https://alphonic-crm.vercel.app";
 
 
-
-
-
-
   return {
     rules: [
       {
