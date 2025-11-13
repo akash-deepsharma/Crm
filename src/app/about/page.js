@@ -19,6 +19,7 @@ export async function generateMetadata() {
    const canonicalUrl = `${baseUrl}/${slug}`;
 
   const page = await meta?.data?.[0];
+  console.log("about page meta data", page)
 
   if (!page) {
     return {
