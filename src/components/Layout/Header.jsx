@@ -276,7 +276,7 @@ if (redirectResp && redirectResp.status === "redirect" && redirectResp.to) {
                         <Link href="/how-crm-works">How Crm Works</Link>
                       </li>
                       <li className="menu-item">
-                        <Link href="/login">Free Triap</Link>
+                        <Link href="/login">Free Trial</Link>
                       </li>
                       <li className="menu-item">
                         <Link href="#!" onClick={handleOpenModal}>
