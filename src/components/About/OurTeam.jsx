@@ -34,7 +34,7 @@ export default function OurTeam(data) {
                                     <div className="st-team-member theme-one wow fadeInUp">
                                         <div className="team-member-wrapper">
                                             <div className="st-team-image">
-                                                <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item?.profile_picture}`} alt="" width={300} height={300}/>
+                                                <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item?.profile_picture}`} alt={item?.Image_all_text} width={300} height={300}/>
                                                 <div className="team-social">
 
                                                      {item?.facebook && item.facebook !== "null" && (

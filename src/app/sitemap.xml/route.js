@@ -1,5 +1,6 @@
 import { getAllBlogs } from "@/ApiCall/blogApi";
 import { getFeature } from "@/ApiCall/featuresApi";
+import { getSupport } from "@/ApiCall/supportApi";
 import { headers } from "next/headers";
 
 export async function GET() {
@@ -12,6 +13,7 @@ export async function GET() {
 
   const features = await getFeature();  
   const blogsdata = await getAllBlogs();
+   const Supportdata = await getSupport();
 
 
   // Static routes based on actual app directory
@@ -56,8 +58,16 @@ export async function GET() {
     priority: 0.7,
   }));
 
+
+  const SupportPages = Supportdata?.section1?.extra_data?.steps.map((support) => ({
+    url: `${baseUrl}/support/${support.slug}`,
+    lastModified: support.updated_at ? new Date(support.updated_at).toISOString() : new Date().toISOString(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
   // Combine all pages
-  const allPages = [...staticPages, ...servicePages, ...blogPages];
+  const allPages = [...staticPages, ...servicePages, ...blogPages,...SupportPages];
 
   // Generate XML
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>

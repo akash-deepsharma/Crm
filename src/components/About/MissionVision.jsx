@@ -19,8 +19,8 @@ export default function MissionVision({ data }) {
                   <div className="icon">
                     <Image
                       className="normal"
-                      src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item.image}`}
-                      alt={item.title}
+                      src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item?.image?.image_path}`}
+                      alt={item?.image?.alt_text}
                       width={50}
                       height={50}
                     />

@@ -16,7 +16,7 @@ export default function AboutSection(data) {
         <div className="row">
           <div className="col-lg-6 wow fadeInLeft">
             <div className="image-wrapper">
-              <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${data?.data?.image}`} alt=""  width={700} height={700} />
+              <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${data?.data?.image}`} alt={data?.data?.Image_all_text}  width={700} height={700} />
             </div>
           </div>
           <div className="col-lg-6">

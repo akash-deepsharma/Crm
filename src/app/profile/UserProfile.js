@@ -12,7 +12,7 @@ export default function UserProfile() {
 
   const [showModal, setShowModal] = useState(false);
    const [profileData, setProfileData] = useState([]);
-
+console.log( "profile data", profileData)
 
   useEffect(() => {
     async function fetchData() {

@@ -32,7 +32,7 @@ export default async function Steps_View(step_viewData) {
                             <div className="col-lg-4" key={index}>
                                 <div className="icon-box theme-one ">
                                     <div className="icon">
-                                        <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${items?.image}`} alt="" className="Image-fluid"  width={80} height={80} style={{height:'auto'}}/>
+                                        <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${items?.image?.image_path}`} alt={items?.image?.image_all_text} className="Image-fluid"  width={80} height={80} style={{height:'auto'}}/>
                                     </div>
                                     <div className="text">
                                         <h4>{items?.title}</h4>    

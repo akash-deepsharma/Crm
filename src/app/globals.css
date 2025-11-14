@@ -887,7 +887,7 @@ textarea.form-control{
 	-webkit-transition:all 0.4s ease-in-out; 
 	transition:all 0.4s ease-in-out;
 	padding: 5px 10px;
-	min-width:280px;
+	min-width:305px;
 	-webkit-transform: scaleY(0);
 	transform: scaleY(0);
 	-webkit-transform-origin: top;
@@ -4342,7 +4342,10 @@ blockquote::before {
 }
 @media only screen and (max-width:1199px) {
 	.container-fluid{padding-left:15px; padding-right:15px;}
-	.menu-primary > li.menu-item > a{padding: 0px 5px;}
+	.menu-primary > li.menu-item > a{
+		padding: 0px 5px;
+		font-size: 16px;
+	}
 	.container{max-width: 960px;}
 	.right-col-full .col-lg-6:first-child, .right-col-full .col-md-6:first-child {padding-left:calc(((100vw - (100vw - 100%)) - 930px) / 2);}
 	h1, .h1{font-size: 42px;}
@@ -4541,6 +4544,7 @@ blockquote::before {
 	.companies-logo.grid-view .item{flex: 0 0 50%; max-width: 50%;}
 	.signin-wrapper{padding: 0px 15px 30px; max-width:100%; margin:30px 15px;}
 	.dc-signin.theme-two .signin-wrapper{max-width:100%; margin:30px 15px; }
+	.dc-signin.theme-two{margin-top: 75px;}
 	.dc-signin.theme-two .intro-box{padding: 50px 15px 80px;}
 	.dc-signin.theme-two .form-box{padding: 30px 15px;}
 	.seo-rocket{display:none;}

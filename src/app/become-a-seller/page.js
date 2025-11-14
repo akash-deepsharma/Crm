@@ -86,7 +86,7 @@ export default async function page() {
 
    const meta = metaData?.data?.[0];
 
-  console.log( "data how crm works" , meta)
+  console.log( "data how crm works" , banner_stepData)
    console.log("cgent get data ", step_viewData)
    
    const bannerData = {

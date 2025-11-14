@@ -7,6 +7,7 @@ import Request_Modal from "../Common/Request_Modal";
 import { getHeaderFeatures } from "@/ApiCall/headersApi";
 import ButtonHeader from "./ButtonHeader";
 import { getRedirection } from "@/ApiCall/redirectionApi";
+import { requestGetApi } from "@/ApiCall/requestPostApi";
 
 
 
@@ -14,7 +15,8 @@ export default function Header() {
 
   const pathname = usePathname();
   const [redirectResp, setRedirectResp] = useState(null);
-// console.log( "redirection data ", redirectResp)
+   const [demoRequests, setDemoRequests] = useState([]);
+console.log( "request demo data ", demoRequests)
   useEffect(() => {
   //  let mounted = true;
     async function fetchData() {
@@ -184,6 +186,30 @@ if (redirectResp && redirectResp.status === "redirect" && redirectResp.to) {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+
+  
+ useEffect(() => {
+  
+    const saved = sessionStorage.getItem("demoRequests");
+    if (saved) {
+      setDemoRequests(JSON.parse(saved));
+    }
+
+ 
+  async function fetchData() {
+    const data = await requestGetApi();
+    console.log("✅ First get data:", data);
+
+    if (data?.status === "success") {
+      setDemoRequests(data || []);
+      sessionStorage.setItem("demoRequests", JSON.stringify(data?.data));
+
+    }
+  }
+
+  fetchData();
+}, []);
 
   return (
     <>

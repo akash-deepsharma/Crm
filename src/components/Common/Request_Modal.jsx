@@ -84,11 +84,16 @@ export default function Request_Modal({ onClose }) {
   };
 
   useEffect(() => {
+     const saved = sessionStorage.getItem("demoRequests");
+      if (saved) {
+        setDemoRequests(JSON.parse(saved));
+      }
     async function fetchData() {
       const data = await requestGetApi();
-      // console.log("✅ First get data:", data);
+      console.log("✅ First get data:", data);
       if (data?.status === "success") {
         setDemoRequests(data?.data || []);
+         sessionStorage.setItem("demoRequests", JSON.stringify(data?.data));
       }
     }
     fetchData();
@@ -113,29 +118,24 @@ export default function Request_Modal({ onClose }) {
                     <div className="about-section align-items-center h-100">
                       <div className="heading-wrapper with-separator">
                         <h2 className="h1">
-                          <span>{demoRequests?.heading}</span>{" "}
-                          {demoRequests?.sub_heading}
+                          <span>{demoRequests?.demodata?.heading}</span>{" "}
+                          {demoRequests?.demodata?.sub_heading}
                         </h2>
                       </div>
                       <div className="text-wrapper">
                         <p
                           dangerouslySetInnerHTML={{
-                            __html: demoRequests?.content,
+                            __html: demoRequests?.demodata?.content,
                           }}
                         ></p>
                         <ul className="list-style-one">
-                          <li>
-                            <h2 className="h5">45,000+</h2>
-                            <p>Helpful 1-on-1 demo sessions.</p>
-                          </li>
-                          <li>
-                            <h2 className="h5">75%</h2>
-                            <p>Reduction in processing time.</p>
-                          </li>
-                          <li>
-                            <h2 className="h5">50+</h2>
-                            <p>Unique industries served.</p>
-                          </li>
+                          {demoRequests?.sessions?.map((item, index)=>(
+                            <li key={index}>
+                              <h2 className="h5">{item.value}</h2>
+                              <p>{item.label}</p>
+                            </li>
+
+                          ))}
                         </ul>
                       </div>
                     </div>
@@ -219,10 +219,13 @@ export default function Request_Modal({ onClose }) {
                           <option value="" disabled>
                             Select an option
                           </option>
-                          <option value="product_demo">Product Demo</option>
-                          <option value="pricing_info">Pricing Information</option>
+                          {demoRequests?.industry_names?.map((item, index)=>(
+                            <option key={index} value={item.industry_name}>{item.industry_name}</option>
+
+                          ))}
+                          {/* <option value="pricing_info">Pricing Information</option>
                           <option value="partnership_opportunities">Partnership Opportunities</option>
-                          <option value="other">Other</option>
+                          <option value="other">Other</option> */}
                         </select>
                         {errors.industry_type && (
                           <p className="text-danger small mt-1">{errors.industry_type}</p>

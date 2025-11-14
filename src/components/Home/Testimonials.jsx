@@ -20,6 +20,10 @@ export default function Testimonials() {
     responsive: [
       {
         breakpoint: 992,
+        settings: { slidesToShow: 2 },
+      },
+      {
+        breakpoint: 425,
         settings: { slidesToShow: 1 },
       },
     ],

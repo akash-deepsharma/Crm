@@ -49,7 +49,7 @@ export default function Testimonials_inner() {
         fetchData();
       }, []);
 
-//  console.log("✅ Testimonials data:", testimonialData);
+ console.log("✅ Testimonials data:", testimonialData);
 
 
    const headingContent = testimonialData?.testimonial_content?.heading;
@@ -94,7 +94,7 @@ const testimonials = testimonialData?.testimonials
                         <div className="client-img">
                           <Image
                             src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item.image}`}
-                            alt={item.name}
+                            alt={item.Image_all_text}
                             className="img-fluid"
                             width={600} height={600}
                           />
