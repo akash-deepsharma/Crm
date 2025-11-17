@@ -103,6 +103,7 @@ const bannerData = dataHome?.section1
 const aboutData = dataHome?.section2
 const screenshotData = dataHome?.section3
 const UserTypeData = dataHome?.section4
+const featuresData= dataHome?.section5
 
 
 
@@ -118,7 +119,7 @@ const UserTypeData = dataHome?.section4
       )}    
 
       <HeroBanner data={bannerData}/>
-      <Features/>
+      <Features data={featuresData}/>
       <About data={aboutData}/>
       <Screenshot data={screenshotData}/>
       <Pricing/>
