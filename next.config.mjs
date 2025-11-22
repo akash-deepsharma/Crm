@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: [
       "snow-gnu-168731.hostingersite.com",
+      
     ],
   },
 };
