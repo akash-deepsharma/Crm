@@ -3,7 +3,7 @@
 const nextConfig = {
   images: {
     domains: [
-      "paleturquoise-gorilla-338181.hostingersite.com",
+      "snow-gnu-168731.hostingersite.com",
     ],
   },
 };
