@@ -39,8 +39,9 @@ export default function Subscriber() {
 
 const [dataNewsletter, setdataNewsletter] = useState([]);
 
-const dataNews = dataNewsletter[0]
-const alad = dataNews?.Image_all_text 
+// const dataNews = dataNewsletter[0]
+// const alad = dataNews?.Image_all_text  ?? "";
+const alad = dataNewsletter?.Image_all_text ?? "";
 
 console.log("datanewsletter", alad)
   useEffect(() => {
@@ -48,7 +49,7 @@ console.log("datanewsletter", alad)
       const data = await getnewsletterData();
       // console.log("✅ datanewsletter:", data);
       if (data?.status === "success") {
-        setdataNewsletter(data.data || []);
+        setdataNewsletter(data.data?.[0] || []);
       }
     }
 
