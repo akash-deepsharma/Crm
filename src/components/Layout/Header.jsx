@@ -273,7 +273,7 @@ if (redirectResp && redirectResp.status === "redirect" && redirectResp.to) {
                 <Link href="/pricing">Pricing</Link>
               </li>
               <li className="menu-item">
-                <Link href="https://main-crm-flax.vercel.app">Free Trial</Link>
+                <Link href="/login">Free Trial</Link>
               </li>
               <li className="menu-item menu-item-has-children mega-menu">
                 <Link href="#">Quick View</Link>
@@ -291,7 +291,7 @@ if (redirectResp && redirectResp.status === "redirect" && redirectResp.to) {
                         <Link href="/contact">Contact Us</Link>
                       </li>
                       <li className="menu-item">
-                        <Link href="https://main-crm-flax.vercel.app/">Login/Register</Link>
+                        <Link href="/login">Login/Register</Link>
                       </li>
                     </ul>
                   </li>
@@ -302,7 +302,7 @@ if (redirectResp && redirectResp.status === "redirect" && redirectResp.to) {
                         <Link href="/how-crm-works">How Crm Works</Link>
                       </li>
                       <li className="menu-item">
-                        <Link href="https://main-crm-flax.vercel.app">Free Trial</Link>
+                        <Link href="/login">Free Trial</Link>
                       </li>
                       <li className="menu-item">
                         <Link href="#!" onClick={handleOpenModal}>
