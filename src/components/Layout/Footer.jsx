@@ -54,7 +54,7 @@ const contactData = ContactContent?.data[0] || [];
                                     <div className="text-widget">
                                         <div className="footer-nav">
                                             <ul>
-                                                <li><Link href="/login">Free Trial</Link></li>
+                                                <li><Link href="https://main-crm-flax.vercel.app">Free Trial</Link></li>
                                                 <li><Link href="/return-cancellation">Return &Cancellation</Link></li>
                                                 <li><Link href="/privacy-policy">Privacy Policy</Link></li>
                                                 <li><Link href="/terms-and-conditions">Terms of Service</Link></li>
