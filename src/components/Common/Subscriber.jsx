@@ -37,9 +37,9 @@ export default function Subscriber() {
   };
 
 
-const [dataNewsletter, setdataNewsletter] = useState([]);
+const [dataNewsletter, setdataNewsletter] = useState([]); 
 
-// const dataNews = dataNewsletter[0]
+const dataNews = dataNewsletter[0]
 // const alad = dataNews?.Image_all_text  ?? "";
 const alad = dataNewsletter?.Image_all_text ?? "";
 
