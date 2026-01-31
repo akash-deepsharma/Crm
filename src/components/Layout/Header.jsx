@@ -302,7 +302,7 @@ if (redirectResp && redirectResp.status === "redirect" && redirectResp.to) {
                         <Link href="/how-crm-works">How Crm Works</Link>
                       </li>
                       <li className="menu-item">
-                        <Link href="/login">Free Trial</Link>
+                        <Link href="https://main-crm-flax.vercel.app/">Free Trial</Link>
                       </li>
                       <li className="menu-item">
                         <Link href="#!" onClick={handleOpenModal}>
