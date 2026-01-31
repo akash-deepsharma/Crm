@@ -17,9 +17,9 @@ export default function ButtonHeader() {
               </div>
             ) : (
               <div className="menu-button">
-                <Link href="/login">
+                <Link href="https://main-crm-flax.vercel.app/">
                   <div className="btn btn-outline-primary btn-light">
-                    sign in / sign up
+                    Sign in / Sign up
                   </div>
                 </Link>
               </div>

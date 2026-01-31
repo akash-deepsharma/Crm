@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Current Location with Address</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            background-color: #3b82f6;
+            color: white;
+        }
+        p {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+ 
+<h1>Get Current Location</h1>
+<button id="getLocationBtn">Get Location</button>
+ 
+<p id="location">Your location will appear here</p>
+ 
+<script>
+document.getElementById('getLocationBtn').addEventListener('click', function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+ 
+             
+                document.getElementById('location').innerText = `Latitude: ${lat}, Longitude: ${lon}\nFetching address...`;
+ 
+                // Reverse geocoding using OpenStreetMap Nominatim API
+                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const address = data.display_name; // full address
+                        document.getElementById('location').innerText = `Latitude: ${lat}, Longitude: ${lon}\nAddress: ${address}`;
+                    })
+                    .catch(error => {
+                        document.getElementById('location').innerText = `Latitude: ${lat}, Longitude: ${lon}\nCould not fetch address`;
+                        console.error('Error:', error);
+                    });
+ 
+            },
+            function(error) {
+                document.getElementById('location').innerText = `Error: ${error.message}`;
+            }
+        );
+    } else {
+        document.getElementById('location').innerText = "Geolocation is not supported by this browser.";
+    }
+});
+</script>
+ 
+</body>
+</html>
+ 
+ 

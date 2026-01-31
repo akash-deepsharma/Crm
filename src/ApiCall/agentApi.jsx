@@ -5,7 +5,7 @@ export const apiClient = axios.create({
 });
 
 export async function agentGetApi() {
-  try {
+  try { 
     const res = await apiClient.get(`/becomeseller `);
     return res.data;
   } catch (error) {
