@@ -12,7 +12,7 @@ export default async function Footer() {
 
 const contactData = ContactContent?.data[0] || [];
 // console.log("footer consolr ", contactData)
-  return (
+  return ( 
       <>
      <footer className="site-footer footer-theme-one">
                 <div className="container">
