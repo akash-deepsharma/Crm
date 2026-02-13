@@ -26,7 +26,7 @@ export default function MissionVision({ data }) {
                     />
                     <Image
                       className="hover"
-                      src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item.image}`}
+                      src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item?.image?.image_path}`}
                       alt={item.title}
                       width={50}
                       height={50}
