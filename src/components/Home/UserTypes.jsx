@@ -5,7 +5,7 @@ export default function UserTypes({data}) {
 
 const userTypeData = data || [];
 
-// console.log( "userTypeData", userTypeData)
+console.log( "userTypeData", userTypeData)
 
 
  const content = userTypeData?.heading;
@@ -42,7 +42,7 @@ const userTypeData = data || [];
                       <Image
                         className="normal"
                         src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item?.image}`}
-                        alt={item.alt_text} width={100} height={100}
+                        alt={item?.alt_text} width={100} height={100}
                       />
                     </div>
                     <div className="text">

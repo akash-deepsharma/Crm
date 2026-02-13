@@ -8,7 +8,7 @@ import React from 'react'
 
 
 export async function generateMetadata({ params }) {
-  const slug = await params.slug;
+  const { slug } = await params;
 
 
   const featureData = await getSingleFeature(slug);
@@ -57,15 +57,18 @@ export async function generateMetadata({ params }) {
 
 
 export default async function page({ params }) {
+ const { slug } = await params;
 
-  const slug = params.slug;
+  // console.log("Slug:", slug);
+  
   const featureData = await getSingleFeature(slug);
+  console.log("askdfamsldf form data", featureData)
   
   const aboutData = featureData?.section1
   const metas = featureData?.meta
   const userTypeData = featureData?.featuresdetails
 
-const Title = params.slug.replace(/\//g, ""); 
+const Title = slug.replace(/\//g, ""); 
 const pathParts = Title.split("-");
 const formattedTitle = pathParts.map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(" ");
   

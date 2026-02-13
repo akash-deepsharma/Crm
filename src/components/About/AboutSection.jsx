@@ -4,6 +4,8 @@ import React from "react";
 
 export default function AboutSection(data) {
   console.log( "about section", data)
+  const alt =  data?.data?.image_all_text
+  console.log("data data Image_all_text", alt)
 
     const content = data?.data?.sub_heading2;
     const words = content.split(" ");  
@@ -16,7 +18,7 @@ export default function AboutSection(data) {
         <div className="row">
           <div className="col-lg-6 wow fadeInLeft">
             <div className="image-wrapper">
-              <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${data?.data?.image}`} alt={data?.data?.Image_all_text}  width={700} height={700} />
+              <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${data?.data?.image}`} alt={`${alt}`}  width={700} height={700} />
             </div>
           </div>
           <div className="col-lg-6">

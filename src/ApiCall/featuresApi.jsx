@@ -7,7 +7,6 @@ export const apiClient = axios.create({
 export async function getFeature() {
   try {
     const res = await apiClient.get("/features-main");
-    // console.log("features-main " , res)
     return res.data;
   } catch (error) {
     console.error("Error fetching blogs:", error);
@@ -16,9 +15,12 @@ export async function getFeature() {
 }
 
 export async function getSingleFeature(slug) {
+  console.log("baseURL features", process.env.NEXT_PUBLIC_API_URL)
   try {
     const res = await apiClient.get(`/features/${slug}`);
-    return res.data;
+    
+    console.log("features-main " , res)
+    return res?.data;
   } catch (error) {
     console.error("Error fetching blog:", error);
     return null;

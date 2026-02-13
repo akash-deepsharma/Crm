@@ -8,6 +8,7 @@ export const apiClient = axios.create({
 export async function contactGetApi() {
   try {
     const res = await apiClient.get(`/contactpage `);
+    console.log(res)
     return res.data;
   } catch (error) {
     console.error("❌ Error during GET /contact:", error.response?.data || error.message);

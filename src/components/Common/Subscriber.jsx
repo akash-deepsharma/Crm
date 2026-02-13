@@ -39,7 +39,7 @@ export default function Subscriber() {
 
 const [dataNewsletter, setdataNewsletter] = useState([]); 
 
-const dataNews = dataNewsletter[0]
+const dataNews = dataNewsletter
 // const alad = dataNews?.Image_all_text  ?? "";
 const alad = dataNewsletter?.Image_all_text ?? "";
 
@@ -47,7 +47,7 @@ console.log("datanewsletter", alad)
   useEffect(() => {
     async function fetchData() {
       const data = await getnewsletterData();
-      // console.log("✅ datanewsletter:", data);
+      console.log("✅ datanewsletter:", data);
       if (data?.status === "success") {
         setdataNewsletter(data.data?.[0] || []);
       }
@@ -63,7 +63,7 @@ console.log("datanewsletter", alad)
           <div className="col-lg-6">
             <div className="image-wrapper">
               <Image src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${dataNews?.image}`}
-                alt={dataNews?.Image_all_text}
+                alt={alad}
                 className="img-fluid"
                 width={500}
                 height={500}
