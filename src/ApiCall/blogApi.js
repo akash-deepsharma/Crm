@@ -26,8 +26,10 @@ export async function getAllBlogs() {
 }
 
 export async function getSingleBlog(slug) {
+  console.log("get single bolg slug", slug)
   try {
-    const res = await apiClient.get(`/showsingleblog/${slug}`);
+    const res = await apiClient.get(`/showsingleblog/${slug}/`);
+    console.log("signle blog return", res)
     return res.data;
   } catch (error) {
     console.error("Error fetching blog:", error);

@@ -5,7 +5,7 @@ import { getSingleBlog, getBlogs } from "@/ApiCall/blogApi";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
-  const slug = await params.slug;
+  const { slug } = await params;
 
 const baseUrl = process.env.NEXT_PUBLIC_baseUrl || "https://yourdomain.com";
    const canonicalUrl = `${baseUrl}/blogs/${slug}`;
@@ -51,7 +51,7 @@ const baseUrl = process.env.NEXT_PUBLIC_baseUrl || "https://yourdomain.com";
 }
 
 export default async function Page({ params }) {
-  const slug = params.slug;
+   const { slug } = await params;
   const blog = await getSingleBlog(slug);
 
 

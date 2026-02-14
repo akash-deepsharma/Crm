@@ -245,20 +245,20 @@ if (redirectResp && redirectResp.status === "redirect" && redirectResp.to) {
               {/* <li className={`menu-item ${pathname === '/' ? 'active' : ''}`}>
               <Link href="/">Home</Link>
             </li> */}
-              <li
-                className={`menu-item ${pathname === "/about" ? "active" : ""}`}
-              >
-                <Link href="/about">About</Link>
-              </li>
-              <li className={`menu-item menu-item-has-children`}>
+              <li className={`menu-item menu-item-has-children ${pathname === "/features" ? "active" : ""}`}>
                 <Link href="/features">Features</Link>
                 <ul className="sub-menu">
                   {featureHeader?.headers?.map((item, index) => (
-                    <li className="menu-item" key={index}>
+                    <li className={`menu-item ${pathname === "/features" ? "active" : ""}`} key={index}>
                       <Link href={`/features/${item.slug}`}>{item?.title}</Link>
                     </li>
                   ))}
                 </ul>
+              </li> 
+              <li
+                className={`menu-item ${pathname === "/about" ? "active" : ""}`}
+              >
+                <Link href="/about">About</Link>
               </li>
               <li className="menu-item">
                 <Link href="/contact" onClick={handleOpenModal}>

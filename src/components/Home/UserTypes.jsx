@@ -39,7 +39,7 @@ console.log( "userTypeData", userTypeData)
                 <div className="features-block theme-five wow fadeInLeft">
                   <div className="inner-box">
                     <div className="icon">
-                      <Image
+                      <Image  
                         className="normal"
                         src={`${process.env.NEXT_PUBLIC_MEDIA_PATH}/${item?.image}`}
                         alt={item?.alt_text} width={100} height={100}
